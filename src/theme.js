@@ -36,8 +36,8 @@ const theme = createMuiTheme({
 		},
 	},
 	typography: {
-		font: "Montserrat",
-		fontDisplay: "Poppins",
+		fontFamily: "Montserrat",
+		fontFamilyDisplay: "Poppins",
 		fontWeightLight: 300,
 		fontWeightRegular: 400,
 		fontWeightMedium: 500,
