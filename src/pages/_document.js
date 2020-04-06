@@ -9,7 +9,7 @@ class MyDocument extends Document {
 				<Head>
 					<link
 						rel="preload"
-						href={`https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700|Poppins:400,500,600|Roboto:400,500,700&display=swap`}
+						href={`https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700|Poppins:400,500,600|Poppins:wght@300;400;500;600;700&display=swap`}
 						as="font"
 						crossOrigin=""
 					/>
