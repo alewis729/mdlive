@@ -7,7 +7,18 @@ import {
 	IconButton,
 	Typography,
 } from "@material-ui/core";
-import { MoreVert as IconDots } from "@material-ui/icons";
+import {
+	MoreVert as IconDots,
+	AddCircleOutlineRounded as IconNew,
+	CloudUploadRounded as IconUpload,
+	Brightness4Rounded as IconTheme,
+	LanguageRounded as IconLang,
+	AccountCircleRounded as IconUser,
+	EditRounded as IconEdit,
+	BackspaceRounded as IconEditRemove,
+	SupervisorAccountRounded as IconAdmin,
+	RemoveCircleRounded as IconRemove,
+} from "@material-ui/icons";
 
 import { useStyles } from "./style";
 
@@ -69,37 +80,42 @@ Menu.propTypes = {
 
 Menu.defaultProps = {
 	items: [
-		{ id: "new-room", name: "New room", icon: <IconDots fontSize="small" /> },
+		{ id: "new-room", name: "New room", icon: <IconNew fontSize="small" /> },
 		{
 			id: "upload-file",
 			name: "Upload a file",
-			icon: <IconDots fontSize="small" />,
+			icon: <IconUpload fontSize="small" />,
 		},
 		{
 			id: "toggle-theme",
 			name: "Toggle dark theme",
-			icon: <IconDots fontSize="small" />,
+			icon: <IconTheme fontSize="small" />,
 		},
 		{
 			id: "change-language",
 			name: "Change language",
-			icon: <IconDots fontSize="small" />,
+			icon: <IconLang fontSize="small" />,
 		},
-		{ id: "register", name: "Register", icon: <IconDots fontSize="small" /> },
+		{ id: "register", name: "Register", icon: <IconUser fontSize="small" /> },
 		{
 			id: "allow-editing",
 			name: "Allow editing",
-			icon: <IconDots fontSize="small" />,
+			icon: <IconEdit fontSize="small" />,
+		},
+		{
+			id: "disallow-editing",
+			name: "Disallow editing",
+			icon: <IconEditRemove fontSize="small" />,
 		},
 		{
 			id: "make-author",
 			name: "Make author",
-			icon: <IconDots fontSize="small" />,
+			icon: <IconAdmin fontSize="small" />,
 		},
 		{
 			id: "request-to-leave",
 			name: "Request to leave",
-			icon: <IconDots fontSize="small" />,
+			icon: <IconRemove fontSize="small" />,
 		},
 	],
 	activeItems: [
