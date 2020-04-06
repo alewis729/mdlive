@@ -1,11 +1,9 @@
 const express = require("express");
 const connectDB = require("./config/db");
-const connectGSS = require("./config/gss");
 const app = express();
 
 // connect databases
 connectDB();
-connectGSS();
 
 // init middlewares
 app.use(express.json({ extended: false }));
