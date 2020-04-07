@@ -13,8 +13,8 @@ export const RoundedButton = withStyles((theme) => ({
 		borderRadius: 100,
 		position: "relative",
 		overflow: "hidden",
-		padding: theme.spacing(1, 3),
-		transition: "all 0.35s ease",
+		padding: theme.spacing(1, 3.5),
+		transition: theme.helpers.transition,
 
 		"&:hover::before": {
 			opacity: "1",

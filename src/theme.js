@@ -35,9 +35,12 @@ const theme = createMuiTheme({
 			// "#f2f24c",
 		},
 	},
+	helpers: {
+		transition: "all 0.45s ease-out",
+	},
 	typography: {
-		fontFamily: "Montserrat",
-		fontFamilyDisplay: "Poppins",
+		fontFamily: "Poppins",
+		fontFamilyDisplay: "Montserrat",
 		fontWeightLight: 300,
 		fontWeightRegular: 400,
 		fontWeightMedium: 500,
