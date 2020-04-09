@@ -34,6 +34,11 @@ const theme = createMuiTheme({
 			// "#f2f24c",
 			// "#f2f24c",
 		},
+		text: {
+			primary: "#202020",
+			secondary: "#393939",
+			accent: "#0f8fef",
+		},
 	},
 	helpers: {
 		transition: "all 0.45s ease-out",
