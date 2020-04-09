@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { AppBar, Container, Toolbar } from "@material-ui/core";
+import { Container, Toolbar, AppBar, Box } from "@material-ui/core";
 
 import { useStyles } from "./style";
 
@@ -16,7 +16,7 @@ const Default = ({ header, footer, children }) => {
 				</AppBar>
 			</div>
 			<Container className={classes.main} component="main" maxWidth="xl">
-				{children}
+				<Box py={6}>{children}</Box>
 			</Container>
 			<div className={classes.footer}>
 				<Container maxWidth="xl">{footer}</Container>
