@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Grid, Typography, Link, IconButton } from "@material-ui/core";
+import { Grid, Typography, Tooltip, Link, IconButton } from "@material-ui/core";
 import {
 	GitHub as IconGithub,
 	LinkedIn as IconLinkedIn,
@@ -11,14 +11,26 @@ import { useStyles } from "./style";
 const Footer = ({ copy, links }) => {
 	const classes = useStyles();
 
+	const renderLinkIcon = ({ url, icon }) => (
+		<Link href={url} target="_blank" rel="noreferrer">
+			<IconButton>{icon}</IconButton>
+		</Link>
+	);
+
 	return (
 		<Grid justify="space-between" alignItems="center" container>
 			<Typography>{copy}</Typography>
 			<div className={classes.icons}>
 				{links.map((link) => (
-					<Link href={link.url} key={link.url} target="_blank" rel="noreferrer">
-						<IconButton>{link.icon}</IconButton>
-					</Link>
+					<div key={link.url}>
+						{!link.title ? (
+							renderLinkIcon(link)
+						) : (
+							<Tooltip title={link.title} placement="top">
+								{renderLinkIcon(link)}
+							</Tooltip>
+						)}
+					</div>
 				))}
 			</div>
 		</Grid>
@@ -38,7 +50,12 @@ Footer.propTypes = {
 Footer.defaultProps = {
 	copy: "© 2020 Alfred Lewis",
 	links: [
-		{ url: "https://github.com/alewis729", icon: <IconGithub /> },
+		{
+			url: "https://github.com/alewis729/md-live",
+			title: "Repo",
+			icon: <IconGithub />,
+		},
+		{ url: "https://github.com/alewis729", title: "Dev", icon: <IconGithub /> },
 		{ url: "https://www.linkedin.com/in/alewis729/", icon: <IconLinkedIn /> },
 	],
 };
