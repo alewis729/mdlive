@@ -15,7 +15,7 @@ const Default = ({ header, footer, children }) => {
 					<Container maxWidth="xl">{header}</Container>
 				</AppBar>
 			</div>
-			<Container className={classes.main} component="main" maxWidth={false}>
+			<Container className={classes.main} component="main" maxWidth="xl">
 				{children}
 			</Container>
 			<div className={classes.footer}>
