@@ -35,13 +35,13 @@ const theme = createMuiTheme({
 			// "#f2f24c",
 		},
 		text: {
-			primary: "#202020",
+			primary: "#303030",
 			secondary: "#393939",
 			accent: "#0f8fef",
 		},
 	},
 	helpers: {
-		transition: "all 0.45s ease-out",
+		transitionQuick: "all 0.25s ease-out",
 	},
 	typography: {
 		fontFamily: "Poppins",

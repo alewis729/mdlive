@@ -1,5 +1,6 @@
 import { withStyles } from "@material-ui/core/styles";
 import { Button } from "@material-ui/core";
+import { rgb } from "@/helpers/styleHelpers";
 
 export const RoundedButton = withStyles((theme) => ({
 	root: {
@@ -14,12 +15,16 @@ export const RoundedButton = withStyles((theme) => ({
 		position: "relative",
 		overflow: "hidden",
 		padding: theme.spacing(1, 3.5),
-		transition: theme.helpers.transition,
-
+		transition: theme.helpers.transitionQuick,
+		"&:hover": {
+			boxShadow: `0 3px 5px 2px rgba(${rgb(
+				theme.palette.primary.light,
+				true
+			)}, .25)`,
+		},
 		"&:hover::before": {
 			opacity: "1",
 		},
-
 		"&:before": {
 			opacity: "0",
 			content: "''",
@@ -36,7 +41,6 @@ export const RoundedButton = withStyles((theme) => ({
 				${theme.palette.primary.light}
 			)`,
 		},
-
 		"& > .MuiButton-label": {
 			display: "inline-block",
 			position: "relative",
