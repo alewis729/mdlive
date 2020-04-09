@@ -31,6 +31,4 @@ Default.propTypes = {
 	children: PropTypes.any.isRequired,
 };
 
-Default.displayName = "DefaultTemplate";
-
 export default Default;
