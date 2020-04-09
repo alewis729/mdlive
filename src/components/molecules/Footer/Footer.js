@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Container, Typography, Link, IconButton } from "@material-ui/core";
+import { Grid, Typography, Link, IconButton } from "@material-ui/core";
 import {
 	GitHub as IconGithub,
 	LinkedIn as IconLinkedIn,
@@ -12,23 +12,16 @@ const Footer = ({ copy, links }) => {
 	const classes = useStyles();
 
 	return (
-		<div className={classes.root}>
-			<Container maxWidth="xl" className={classes.content}>
-				<Typography>{copy}</Typography>
-				<div className={classes.icons}>
-					{links.map((link) => (
-						<Link
-							href={link.url}
-							key={link.url}
-							target="_blank"
-							rel="noreferrer"
-						>
-							<IconButton>{link.icon}</IconButton>
-						</Link>
-					))}
-				</div>
-			</Container>
-		</div>
+		<Grid justify="space-between" alignItems="center" container>
+			<Typography>{copy}</Typography>
+			<div className={classes.icons}>
+				{links.map((link) => (
+					<Link href={link.url} key={link.url} target="_blank" rel="noreferrer">
+						<IconButton>{link.icon}</IconButton>
+					</Link>
+				))}
+			</div>
+		</Grid>
 	);
 };
 
