@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { AppBar, Container, Toolbar } from "@material-ui/core";
-import { Button } from "@components/atoms";
-import { Menu } from "@components/molecules";
+import { AppBar, Container, Toolbar, Box } from "@material-ui/core";
 
 import { useStyles } from "./style";
+import { Button } from "@components/atoms";
+import { Menu } from "@components/molecules";
 
 const Navigation = ({ onNavigate, onMainButtonClick }) => {
 	const classes = useStyles();
@@ -13,10 +13,15 @@ const Navigation = ({ onNavigate, onMainButtonClick }) => {
 		<>
 			<Toolbar />
 			<AppBar className={classes.appBar}>
-				<Container>
-					<Toolbar>
+				<Container maxWidth="xl">
+					<Toolbar disableGutters>
+						<div className={classes.logo}>
+							<div></div>
+						</div>
 						<Menu onItemClick={onNavigate} />
-						<Button onClick={onMainButtonClick}>Sign in</Button>
+						<Box ml={3}>
+							<Button onClick={onMainButtonClick}>Sign in</Button>
+						</Box>
 					</Toolbar>
 				</Container>
 			</AppBar>
