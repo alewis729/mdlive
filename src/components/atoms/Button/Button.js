@@ -3,16 +3,11 @@ import PropTypes from "prop-types";
 
 import { RoundedButton } from "./style";
 
-const Button = ({ onClick, children, ...props }) => {
-	return (
-		<RoundedButton {...props} onClick={onClick}>
-			{children}
-		</RoundedButton>
-	);
-};
+const Button = ({ children, ...props }) => (
+	<RoundedButton {...props}>{children}</RoundedButton>
+);
 
 Button.propTypes = {
-	onClick: PropTypes.func.isRequired,
 	children: PropTypes.node.isRequired,
 };
 
