@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Toolbar, Box } from "@material-ui/core";
 
 import { useStyles } from "./style";
+import { IconLogo } from "@icons";
 import { Button } from "@/components/atoms";
 import { Menu } from "@/components/molecules";
 
@@ -12,7 +13,7 @@ const Navigation = ({ onNavigate, onMainButtonClick }) => {
 	return (
 		<Toolbar disableGutters>
 			<div className={classes.logo}>
-				<div></div>
+				<IconLogo />
 			</div>
 			<Menu onItemClick={onNavigate} />
 			<Box ml={3}>
