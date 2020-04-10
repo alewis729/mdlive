@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import { Toolbar, Box } from "@material-ui/core";
 
 import { useStyles } from "./style";
-import { Button } from "@components/atoms";
-import { Menu } from "@components/molecules";
+import { Button } from "@/components/atoms";
+import { Menu } from "@/components/molecules";
 
 const Navigation = ({ onNavigate, onMainButtonClick }) => {
 	const classes = useStyles();
