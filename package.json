@@ -4,8 +4,8 @@
 	"private": true,
 	"scripts": {
 		"server": "nodemon server.js",
-		"dev": "concurrently \"npm run server\" \"npm run dev:next\"",
-		"dev:next": "next dev",
+		"dev": "concurrently \"npm run server\" \"npm run next\"",
+		"next": "next dev",
 		"build": "next build",
 		"start": "next start",
 		"lint": "eslint . \"**/*.{js,jsx,ts,tsx}\""
