@@ -42,6 +42,7 @@ const theme = createMuiTheme({
 	},
 	helpers: {
 		transitionQuick: "all 0.25s ease-out",
+		transitionNormal: "all 0.45s ease-out",
 	},
 	typography: {
 		fontFamily: "Poppins",

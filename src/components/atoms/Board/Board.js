@@ -9,7 +9,9 @@ const Board = ({ children, ...props }) => {
 
 	return (
 		<Paper className={classes.root} {...props}>
-			<Box p={1}>{children}</Box>
+			<Box p={1} height="100%">
+				{children}
+			</Box>
 		</Paper>
 	);
 };
