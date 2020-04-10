@@ -1,9 +1,9 @@
 /**
  * Converts hex to rgb.
- * @param {string} hex hex string; e.g. #f3f3f3
- * @param {boolean} asString should return string instead of object result.
+ * @param {string} hex hex string; e.g. #0bb2f4 => 'rgba(11,178,244, 1)'
+ * @param {number} alpha alpha value
  */
-export const rgb = (hex, asString = false) => {
+export const rgba = (hex, alpha = 1) => {
 	const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
 	const obj = result
 		? {
@@ -12,7 +12,5 @@ export const rgb = (hex, asString = false) => {
 				b: parseInt(result[3], 16),
 		  }
 		: null;
-	if (obj && asString) return `${obj.r},${obj.g},${obj.b}`;
-	else if (obj) return obj;
-	return null;
+	return obj ? `rgba(${obj.r},${obj.g},${obj.b}, ${alpha})` : null;
 };

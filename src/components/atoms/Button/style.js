@@ -1,8 +1,8 @@
 import { withStyles } from "@material-ui/core/styles";
 import { Button } from "@material-ui/core";
-import { rgb } from "@/helpers/styleHelpers";
+import { rgba } from "@/helpers/styleHelpers";
 
-export const RoundedButton = withStyles((theme) => ({
+export const RoundedButton = withStyles(theme => ({
 	root: {
 		backgroundImage: `linear-gradient(
 			75deg,
@@ -17,10 +17,7 @@ export const RoundedButton = withStyles((theme) => ({
 		padding: theme.spacing(1, 3.5),
 		transition: theme.helpers.transitionQuick,
 		"&:hover": {
-			boxShadow: `0 3px 5px 2px rgba(${rgb(
-				theme.palette.primary.light,
-				true
-			)}, .25)`,
+			boxShadow: `0 3px 5px 2px ${rgba(theme.palette.primary.light, 0.25)}`,
 		},
 		"&:hover::before": {
 			opacity: "1",
