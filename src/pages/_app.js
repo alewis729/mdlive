@@ -11,8 +11,8 @@ const MyApp = ({ Component, pageProps }) => {
 	return (
 		<Fragment>
 			<Head>
-				<title>MarkDown Live •</title>
-				<link rel="icon" href="/favicon.ico" />
+				<title>● Markdown Live</title>
+				<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 			</Head>
 			<ThemeProvider theme={theme}>
 				<CssBaseline />
