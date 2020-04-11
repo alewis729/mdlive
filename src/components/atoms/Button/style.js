@@ -4,10 +4,10 @@ import { rgba } from "@/helpers/styleHelpers";
 
 export const RoundedButton = withStyles(theme => ({
 	root: {
-		backgroundImage: `linear-gradient(
+		backgroundImage: ({ color }) => `linear-gradient(
 			75deg,
-			${theme.palette.primary.light},
-			${theme.palette.primary.main}
+			${theme.palette[color].light},
+			${theme.palette[color].main}
 		)`,
 		color: theme.palette.white,
 		textTransform: "capitalize",
@@ -17,7 +17,8 @@ export const RoundedButton = withStyles(theme => ({
 		padding: theme.spacing(1, 3.5),
 		transition: theme.helpers.transitionQuick,
 		"&:hover": {
-			boxShadow: `0 3px 5px 2px ${rgba(theme.palette.primary.light, 0.25)}`,
+			boxShadow: ({ color }) =>
+				`0 3px 5px 2px ${rgba(theme.palette[color].light, 0.25)}`,
 		},
 		"&:hover::before": {
 			opacity: "1",
@@ -32,10 +33,10 @@ export const RoundedButton = withStyles(theme => ({
 			left: "50%",
 			transform: "translate(-50%, -50%)",
 			transition: "inherit",
-			backgroundImage: `linear-gradient(
+			backgroundImage: ({ color }) => `linear-gradient(
 				75deg,
-				${theme.palette.primary.main},
-				${theme.palette.primary.light}
+				${theme.palette[color].main},
+				${theme.palette[color].light}
 			)`,
 		},
 		"& > .MuiButton-label": {

@@ -18,21 +18,20 @@ const theme = createMuiTheme({
 			default: "#fff",
 		},
 		success: {
-			dark: "#2bba73",
-			main: "#33e28a",
+			main: "#2bba73",
+			light: "#33e28a",
 		},
 		danger: {
-			dark: "#bc4242",
-			main: "#f46969",
+			main: "#bc4242",
+			light: "#f46969",
 		},
 		warn: {
-			dark: "#fb9e12",
-			main: "#fbbf12",
-			// "#fb9e12",
-			// "#fbbf12",
-			// "#f8d64f",
-			// "#f2f24c",
-			// "#f2f24c",
+			main: "#f8d64f",
+			light: "#f2f24c",
+		},
+		info: {
+			main: "#202020",
+			light: "#393939",
 		},
 		text: {
 			primary: "#303030",
