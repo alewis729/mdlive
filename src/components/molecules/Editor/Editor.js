@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { TextareaAutosize } from "@material-ui/core";
+import { InputBase } from "@material-ui/core";
 
 import { useStyles } from "./style";
 import { Board } from "@/components/atoms";
@@ -17,10 +17,13 @@ const Editor = ({ defaultText, onChange, ...props }) => {
 
 	return (
 		<Board>
-			<TextareaAutosize
+			<InputBase
 				className={classes.textArea}
-				value={text}
 				onChange={handleTextChange}
+				value={text}
+				autoFocus // unreliable
+				fullWidth
+				multiline
 				{...props}
 			/>
 		</Board>

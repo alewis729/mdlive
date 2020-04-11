@@ -5,13 +5,12 @@ export const useStyles = makeStyles(theme => ({
 		backgroundColor: theme.palette.scale[5],
 		padding: theme.spacing(2),
 		color: theme.palette.text.primary,
-		fontSize: 14,
+		fontSize: 15,
 		lineHeight: "18px",
 		borderRadius: 5,
-		width: "100%",
-		height: "100% !important",
-		border: "none",
-		outline: "none",
-		resize: "none",
+		height: "100%",
+		"& > textarea": {
+			height: "100% !important",
+		},
 	},
 }));
