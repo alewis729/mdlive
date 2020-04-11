@@ -3,7 +3,13 @@ import { Box, Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { Default } from "@/components/templates";
-import { Navigation, Footer, Editor, Viewer } from "@/components/molecules";
+import {
+	Navigation,
+	Footer,
+	Editor,
+	Viewer,
+	ModalNewRoom,
+} from "@/components/molecules";
 import { Button } from "@/components/atoms";
 import { getRandomTextMd, downloadFile } from "@/helpers/functional";
 
@@ -24,9 +30,10 @@ const useStyles = makeStyles(theme => ({
 const defaultText = getRandomTextMd();
 
 const Index = () => {
-	const [text, setText] = useState("");
 	const [canSave, setCanSave] = useState(false);
 	const classes = useStyles({ canSave });
+	const [text, setText] = useState("");
+	const [openModal, setOpenModal] = useState(false);
 
 	useEffect(() => setText(defaultText), []);
 
@@ -46,8 +53,6 @@ const Index = () => {
 		else if (canSave && !hasEnoughText) setCanSave(false);
 	};
 
-	const handleSaveFile = () => downloadFile(text);
-
 	return (
 		<Default
 			header={
@@ -58,6 +63,11 @@ const Index = () => {
 			}
 			footer={<Footer />}
 		>
+			<ModalNewRoom
+				open={openModal}
+				onCreate={() => console.log("create new room")}
+				onClose={() => setOpenModal(false)}
+			/>
 			<Box className={classes.root} textAlign="center">
 				<Typography variant="h3" gutterBottom>
 					<Box
@@ -91,12 +101,12 @@ const Index = () => {
 					</Box>
 				</Typography>
 				<Box mt={2}>
-					<Button onClick={() => console.log("new room")}>New room</Button>
+					<Button onClick={() => setOpenModal(true)}>New room</Button>
 				</Box>
 				<Box mt={2} mx="auto" maxWidth={1640}>
 					<Box mb={2} textAlign="left" height={42}>
 						<div className={classes.saveButton}>
-							<Button onClick={handleSaveFile} color="success">
+							<Button onClick={() => downloadFile(text)} color="success">
 								Save
 							</Button>
 						</div>
