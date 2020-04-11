@@ -1,4 +1,5 @@
 import { createMuiTheme } from "@material-ui/core/styles";
+import { rgba } from "@/helpers/styleHelpers";
 
 const theme = createMuiTheme({
 	palette: {
@@ -40,6 +41,8 @@ const theme = createMuiTheme({
 		},
 	},
 	helpers: {
+		boxShadowLight: `0 2px 2px 0px ${rgba("#202020", 0.14)}`,
+		boxShadow: `0 3px 5px 2px ${rgba("#202020", 0.1)}`,
 		transitionQuick: "all 0.25s ease-out",
 		transitionNormal: "all 0.45s ease-out",
 	},
