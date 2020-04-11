@@ -1,13 +1,8 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 export const useStyles = makeStyles(theme => ({
-	root: {
-		height: "100%",
-		width: "100%",
-		position: "relative",
-		backgroundColor: "orange",
-	},
-	openButton: {
+	root: {},
+	buttonOpen: {
 		...toolbarPadding(theme),
 		zIndex: 99,
 		border: "none",
@@ -31,13 +26,30 @@ export const useStyles = makeStyles(theme => ({
 			},
 		},
 	},
+
 	drawer: {
 		...toolbarPadding(theme),
 		zIndex: 100,
 	},
 	content: {
 		backgroundColor: theme.palette.background.paper,
-		width: 500,
+		width: 300,
+		[theme.breakpoints.down("md")]: {
+			width: 245,
+		},
+	},
+	tabs: {
+		"& .MuiTab-root": {
+			minWidth: "auto",
+			flexGrow: 1,
+		},
+	},
+	buttonClose: {
+		borderRadius: 0,
+		boxShadow: "none",
+		"&:hover": { boxShadow: "none" },
+		width: "100%",
+		height: "100%",
 	},
 }));
 

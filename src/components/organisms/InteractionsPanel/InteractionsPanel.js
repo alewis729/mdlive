@@ -7,6 +7,7 @@ import {
 	AppBar,
 	Tabs,
 	Tab,
+	Grid,
 	Typography,
 	Box,
 	Button as MuiButton,
@@ -38,7 +39,7 @@ const InteractionsPanel = ({ people, chat, onLeave }) => {
 	const classes = useStyles();
 	const theme = useTheme();
 	const [tab, setNewTab] = useState(0);
-	const [open, setOpen] = useState(false);
+	const [open, setOpen] = useState(true);
 
 	const handleChange = (_, newValue) => {
 		setNewTab(newValue);
@@ -49,20 +50,15 @@ const InteractionsPanel = ({ people, chat, onLeave }) => {
 	};
 
 	return (
-		<div className={classes.root}>
+		<>
 			<Drawer
 				open={true}
 				variant="permanent"
 				anchor="right"
-				classes={{ paper: classes.openButton }}
+				classes={{ paper: classes.buttonOpen }}
 				onClick={() => setOpen(true)}
 			>
-				<MuiButton
-					variant="contained"
-					color="info"
-					fullWidth
-					onClick={() => setOpen(true)}
-				>
+				<MuiButton variant="contained" fullWidth onClick={() => setOpen(true)}>
 					<IconArrowLeft />
 				</MuiButton>
 			</Drawer>
@@ -75,22 +71,28 @@ const InteractionsPanel = ({ people, chat, onLeave }) => {
 			>
 				<div className={classes.content}>
 					<AppBar position="static" color="default">
-						<Tabs value={tab} onChange={handleChange} indicatorColor="primary">
-							<Tab icon={<IconGroup />} />
-							<Tab icon={<IconChat />} />
-							{/* <Tab icon={<IconLeave />} onClick={() => setOpen(false)} /> */}
-							{/* <div
-							onClick={() => setOpen(false)}>
-							</div> */}
-							<MuiButton
-								variant="contained"
-								color="info"
-								fullWidth
-								onClick={() => setOpen(false)}
-							>
-								<IconArrowRight />
-							</MuiButton>
-						</Tabs>
+						<Grid container>
+							<Grid item xs={8}>
+								<Tabs
+									className={classes.tabs}
+									value={tab}
+									onChange={handleChange}
+									indicatorColor="primary"
+								>
+									<Tab icon={<IconGroup />} />
+									<Tab icon={<IconChat />} />
+								</Tabs>
+							</Grid>
+							<Grid item xs={4}>
+								<MuiButton
+									className={classes.buttonClose}
+									variant="contained"
+									onClick={() => setOpen(false)}
+								>
+									<IconArrowRight />
+								</MuiButton>
+							</Grid>
+						</Grid>
 					</AppBar>
 					<SwipeableViews
 						axis={theme.direction === "rtl" ? "x-reverse" : "x"}
@@ -103,13 +105,10 @@ const InteractionsPanel = ({ people, chat, onLeave }) => {
 						<TabPanel value={tab} index={1} dir={theme.direction}>
 							Item Two
 						</TabPanel>
-						<TabPanel value={tab} index={2} dir={theme.direction}>
-							Item Three
-						</TabPanel>
 					</SwipeableViews>
 				</div>
 			</Drawer>
-		</div>
+		</>
 	);
 };
 
