@@ -33,9 +33,12 @@ export const useStyles = makeStyles(theme => ({
 	},
 	content: {
 		backgroundColor: theme.palette.background.paper,
-		width: 300,
+		display: "flex",
+		flexDirection: "column",
+		height: "100%",
+		width: 350,
 		[theme.breakpoints.down("md")]: {
-			width: 245,
+			width: 300,
 		},
 	},
 	tabs: {
@@ -43,6 +46,10 @@ export const useStyles = makeStyles(theme => ({
 			minWidth: "auto",
 			flexGrow: 1,
 		},
+	},
+	main: {
+		flexGrow: 1,
+		"& > div": { height: "100%" },
 	},
 	buttonClose: {
 		borderRadius: 0,

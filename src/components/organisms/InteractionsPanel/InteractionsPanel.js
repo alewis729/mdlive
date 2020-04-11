@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import SwipeableViews from "react-swipeable-views";
@@ -20,17 +21,13 @@ import {
 } from "@material-ui/icons";
 
 import { useStyles } from "./style";
+import Chat from "./Chat";
 
 const TabPanel = ({ children, value, index, ...props }) => {
 	return (
-		<Typography
-			component="div"
-			role="tabpanel"
-			hidden={value !== index}
-			{...props}
-		>
-			{value === index && <Box p={3}>{children}</Box>}
-		</Typography>
+		<Box role="tabpanel" height="100%" hidden={value !== index} {...props}>
+			{value === index && children}
+		</Box>
 	);
 };
 
@@ -38,7 +35,7 @@ const TabPanel = ({ children, value, index, ...props }) => {
 const InteractionsPanel = ({ people, chat, onLeave }) => {
 	const classes = useStyles();
 	const theme = useTheme();
-	const [tab, setNewTab] = useState(0);
+	const [tab, setNewTab] = useState(1);
 	const [open, setOpen] = useState(true);
 
 	const handleChange = (_, newValue) => {
@@ -52,10 +49,9 @@ const InteractionsPanel = ({ people, chat, onLeave }) => {
 	return (
 		<>
 			<Drawer
-				open={true}
+				classes={{ paper: classes.buttonOpen }}
 				variant="permanent"
 				anchor="right"
-				classes={{ paper: classes.buttonOpen }}
 				onClick={() => setOpen(true)}
 			>
 				<MuiButton variant="contained" fullWidth onClick={() => setOpen(true)}>
@@ -64,10 +60,9 @@ const InteractionsPanel = ({ people, chat, onLeave }) => {
 			</Drawer>
 			<Drawer
 				classes={{ paper: classes.drawer }}
-				variant="persistent"
 				open={open}
+				variant="persistent"
 				anchor="right"
-				// onClose={}
 			>
 				<div className={classes.content}>
 					<AppBar position="static" color="default">
@@ -86,7 +81,6 @@ const InteractionsPanel = ({ people, chat, onLeave }) => {
 							<Grid item xs={4}>
 								<MuiButton
 									className={classes.buttonClose}
-									variant="contained"
 									onClick={() => setOpen(false)}
 								>
 									<IconArrowRight />
@@ -95,6 +89,7 @@ const InteractionsPanel = ({ people, chat, onLeave }) => {
 						</Grid>
 					</AppBar>
 					<SwipeableViews
+						className={classes.main}
 						axis={theme.direction === "rtl" ? "x-reverse" : "x"}
 						index={tab}
 						onChangeIndex={handleChangeIndex}
@@ -103,7 +98,7 @@ const InteractionsPanel = ({ people, chat, onLeave }) => {
 							Item One
 						</TabPanel>
 						<TabPanel value={tab} index={1} dir={theme.direction}>
-							Item Two
+							<Chat />
 						</TabPanel>
 					</SwipeableViews>
 				</div>
