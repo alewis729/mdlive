@@ -21,6 +21,7 @@ const ModalNewRoom = ({ open, onCreate, onClose }) => {
 				error: "Must be at least 3 characters long.",
 			});
 		} else {
+			setFormData({ ...formData, error: null });
 			onCreate(formData);
 		}
 	};
