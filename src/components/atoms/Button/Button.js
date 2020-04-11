@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { RoundedButton } from "./style";
 
 const Button = ({ color, children, ...props }) => (
-	<RoundedButton color={color} {...props}>
+	<RoundedButton displaycolor={color} {...props}>
 		{children}
 	</RoundedButton>
 );

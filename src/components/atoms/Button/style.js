@@ -4,7 +4,7 @@ import { rgba } from "@/helpers/styleHelpers";
 
 export const RoundedButton = withStyles(theme => ({
 	root: {
-		backgroundImage: ({ color }) => `linear-gradient(
+		backgroundImage: ({ displaycolor: color }) => `linear-gradient(
 			75deg,
 			${theme.palette[color].light},
 			${theme.palette[color].main}
@@ -17,7 +17,7 @@ export const RoundedButton = withStyles(theme => ({
 		padding: theme.spacing(1, 3.5),
 		transition: theme.helpers.transitionQuick,
 		"&:hover": {
-			boxShadow: ({ color }) =>
+			boxShadow: ({ displaycolor: color }) =>
 				`0 3px 5px 2px ${rgba(theme.palette[color].light, 0.25)}`,
 		},
 		"&:hover::before": {
@@ -33,7 +33,7 @@ export const RoundedButton = withStyles(theme => ({
 			left: "50%",
 			transform: "translate(-50%, -50%)",
 			transition: "inherit",
-			backgroundImage: ({ color }) => `linear-gradient(
+			backgroundImage: ({ displaycolor: color }) => `linear-gradient(
 				75deg,
 				${theme.palette[color].main},
 				${theme.palette[color].light}
