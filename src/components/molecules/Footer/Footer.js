@@ -43,6 +43,7 @@ Footer.propTypes = {
 	links: PropTypes.arrayOf(
 		PropTypes.shape({
 			url: PropTypes.string.isRequired,
+			title: PropTypes.string,
 			icon: PropTypes.element,
 		})
 	),
