@@ -5,18 +5,27 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Default } from "@/components/templates";
 import { Navigation, Footer, Editor, Viewer } from "@/components/molecules";
 import { Button } from "@/components/atoms";
+import { getRandomTextMd, downloadFile } from "@/helpers/functional";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
 	root: {
 		width: "100%",
 	},
-});
-
-const defaultText = "";
+	saveButton: {
+		visibility: ({ canSave }) => (canSave ? "visible" : "hidden"),
+		opacity: ({ canSave }) => (canSave ? "1" : "0"),
+		transition: theme.helpers.transitionQuick,
+	},
+	mainGrid: {
+		height: "100%",
+	},
+}));
 
 const Index = () => {
-	const classes = useStyles();
+	const defaultText = getRandomTextMd();
 	const [text, setText] = useState(defaultText);
+	const [canSave, setCanSave] = useState(false);
+	const classes = useStyles({ canSave });
 
 	const handleNagivation = val => {
 		console.log(val);
@@ -27,8 +36,14 @@ const Index = () => {
 	};
 
 	const handleEditorChange = val => {
+		const hasEnoughText = val.length > 5;
 		setText(val);
+
+		if (!canSave && hasEnoughText) setCanSave(true);
+		else if (canSave && !hasEnoughText) setCanSave(false);
 	};
+
+	const handleSaveFile = () => downloadFile(text);
 
 	return (
 		<Default
@@ -75,12 +90,19 @@ const Index = () => {
 				<Box mt={2}>
 					<Button onClick={() => console.log("new room")}>New room</Button>
 				</Box>
-				<Box mt={4} mx="auto" maxWidth={1640} height={600}>
+				<Box mt={2} mx="auto" maxWidth={1640}>
+					<Box mb={2} textAlign="left" height={42}>
+						<div className={classes.saveButton}>
+							<Button onClick={handleSaveFile} color="success">
+								Save
+							</Button>
+						</div>
+					</Box>
 					<Grid
-						justify="center"
+						className={classes.mainGrid}
 						container
 						spacing={3}
-						style={{ height: "100%" }}
+						justify="center"
 					>
 						<Grid item xs={6}>
 							<Editor defaultText={defaultText} onChange={handleEditorChange} />

@@ -9,7 +9,7 @@ const Editor = ({ defaultText, onChange, ...props }) => {
 	const classes = useStyles();
 	const [text, setText] = useState(defaultText);
 
-	const handleTextChange = (e) => {
+	const handleTextChange = e => {
 		const { value } = e.target;
 		setText(value);
 		onChange && onChange(value);
