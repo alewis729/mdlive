@@ -1,17 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/router";
 import { Box, Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { Default } from "@/components/templates";
-import {
-	Navigation,
-	Footer,
-	Editor,
-	Viewer,
-	ModalNewRoom,
-} from "@/components/molecules";
 import { Button } from "@/components/atoms";
+import { Navigation, Footer, Editor, Viewer } from "@/components/molecules";
+import { InteractionsPanel } from "@/components/organisms";
 import { getRandomTextMd, downloadFile } from "@/helpers/functional";
 
 const useStyles = makeStyles(theme => ({
@@ -31,11 +25,9 @@ const useStyles = makeStyles(theme => ({
 const defaultText = getRandomTextMd();
 
 const Index = () => {
-	const router = useRouter();
 	const [canSave, setCanSave] = useState(false);
 	const classes = useStyles({ canSave });
 	const [text, setText] = useState("");
-	const [openModal, setOpenModal] = useState(false);
 
 	useEffect(() => setText(defaultText), []);
 
@@ -65,46 +57,18 @@ const Index = () => {
 			}
 			footer={<Footer />}
 		>
-			<ModalNewRoom
-				open={openModal}
-				onCreate={() => router.push("/room")}
-				onClose={() => setOpenModal(false)}
-			/>
+			<InteractionsPanel />
 			<Box className={classes.root} textAlign="center">
-				<Typography variant="h3" gutterBottom>
+				<Typography variant="h4" gutterBottom>
 					<Box
 						fontWeight="fontWeightSemibold"
 						component="span"
 						color="text.primary"
 					>
-						Welcome{" "}
-						<Box component="span" color="text.accent">
-							friend
-						</Box>
+						Welcome
 					</Box>
 				</Typography>
-				<Typography gutterBottom>
-					<Box component="span" color="text.primary">
-						Just start typing in{" "}
-						<Box
-							component="span"
-							color="text.accent"
-							fontWeight="fontWeightSemibold"
-						>
-							markdown
-						</Box>{" "}
-						and see a live preview.
-					</Box>
-				</Typography>
-				<Typography gutterBottom>
-					<Box component="span" color="text.primary">
-						You can also invite others to join and interact live by making a new
-						room.
-					</Box>
-				</Typography>
-				<Box mt={2}>
-					<Button onClick={() => setOpenModal(true)}>New room</Button>
-				</Box>
+
 				<Box mt={2} mx="auto" maxWidth={1640}>
 					<Box mb={2} textAlign="left" height={42}>
 						<div className={classes.saveButton}>
@@ -132,6 +96,6 @@ const Index = () => {
 	);
 };
 
-Index.displayName = "IndexPage";
+Index.displayName = "RoomPage";
 
 export default Index;
