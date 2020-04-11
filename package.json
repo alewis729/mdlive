@@ -8,6 +8,7 @@
 		"next": "next dev",
 		"build": "next build",
 		"start": "next start",
+		"format": "prettier \"src/**/*.{js,jsx,json}\" --write",
 		"lint": "eslint . \"**/*.{js,jsx,ts,tsx}\""
 	},
 	"lint-staged": {

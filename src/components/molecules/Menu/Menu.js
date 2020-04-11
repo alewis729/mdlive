@@ -17,7 +17,7 @@ const Menu = ({ activeItems, onItemClick }) => {
 	const [anchorEl, setAnchorEl] = useState(null);
 	const open = Boolean(anchorEl);
 
-	const handleItemClick = (id) => {
+	const handleItemClick = id => {
 		handleClose();
 		onItemClick(id);
 	};
@@ -28,7 +28,7 @@ const Menu = ({ activeItems, onItemClick }) => {
 
 	return (
 		<div>
-			<IconButton size="small" onClick={(e) => setAnchorEl(e.currentTarget)}>
+			<IconButton size="small" onClick={e => setAnchorEl(e.currentTarget)}>
 				<IconDots />
 			</IconButton>
 			<MuiMenu
@@ -39,7 +39,7 @@ const Menu = ({ activeItems, onItemClick }) => {
 				onClose={handleClose}
 			>
 				{items.map(
-					(item) =>
+					item =>
 						activeItems.includes(item.id) && (
 							<MenuItem key={item.id} onClick={() => handleItemClick(item.id)}>
 								<ListItemIcon className={classes.icon}>

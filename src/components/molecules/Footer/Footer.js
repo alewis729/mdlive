@@ -11,6 +11,7 @@ import { useStyles } from "./style";
 const Footer = ({ copy, links }) => {
 	const classes = useStyles();
 
+	// eslint-disable-next-line react/prop-types
 	const renderLinkIcon = ({ url, icon }) => (
 		<Link href={url} target="_blank" rel="noreferrer">
 			<IconButton>{icon}</IconButton>
@@ -21,7 +22,7 @@ const Footer = ({ copy, links }) => {
 		<Grid justify="space-between" alignItems="center" container>
 			<Typography>{copy}</Typography>
 			<div className={classes.icons}>
-				{links.map((link) => (
+				{links.map(link => (
 					<div key={link.url}>
 						{!link.title ? (
 							renderLinkIcon(link)
