@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -21,11 +21,14 @@ const useStyles = makeStyles(theme => ({
 	},
 }));
 
+const defaultText = getRandomTextMd();
+
 const Index = () => {
-	const defaultText = getRandomTextMd();
-	const [text, setText] = useState(defaultText);
+	const [text, setText] = useState("");
 	const [canSave, setCanSave] = useState(false);
 	const classes = useStyles({ canSave });
+
+	useEffect(() => setText(defaultText), []);
 
 	const handleNagivation = val => {
 		console.log(val);
