@@ -11,19 +11,6 @@
 		"format": "prettier \"src/**/*.{js,jsx,json}\" --write",
 		"lint": "eslint . \"**/*.{js,jsx,ts,tsx}\""
 	},
-	"lint-staged": {
-		"*.{js,jsx,ts,tsx}": [
-			"eslint --fix"
-		],
-		"*.{js,jsx,ts,tsx,json}": [
-			"prettier --write"
-		]
-	},
-	"husky": {
-		"hooks": {
-			"pre-commit": "lint-staged"
-		}
-	},
 	"dependencies": {
 		"@material-ui/core": "^4.9.9",
 		"@material-ui/icons": "^4.9.1",
@@ -36,7 +23,9 @@
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
 		"react-markdown": "^4.3.1",
-		"react-swipeable-views": "^0.13.9"
+		"react-swipeable-views": "^0.13.9",
+		"socket.io": "^2.3.0",
+		"socket.io-client": "^2.3.0"
 	},
 	"devDependencies": {
 		"babel-plugin-import": "^1.13.0",
