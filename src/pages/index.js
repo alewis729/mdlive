@@ -55,6 +55,14 @@ const Index = () => {
 		else if (canSave && !hasEnoughText) setCanSave(false);
 	};
 
+	const handleCreateNewRoom = data => {
+		console.log(data);
+		router.push({
+			pathname: "/room",
+			query: { room: data.room },
+		});
+	};
+
 	return (
 		<Default
 			header={
@@ -67,7 +75,7 @@ const Index = () => {
 		>
 			<ModalNewRoom
 				open={openModal}
-				onCreate={() => router.push("/room")}
+				onCreate={handleCreateNewRoom}
 				onClose={() => setOpenModal(false)}
 			/>
 			<Box className={classes.root} textAlign="center">
