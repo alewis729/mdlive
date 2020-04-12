@@ -11,7 +11,7 @@ export const RoundedButton = withStyles(theme => ({
 		)`,
 		color: theme.palette.white,
 		textTransform: "capitalize",
-		borderRadius: 100,
+		borderRadius: ({ fullWidth }) => (fullWidth ? 0 : 100),
 		position: "relative",
 		overflow: "hidden",
 		padding: theme.spacing(1, 3.5),
@@ -40,7 +40,7 @@ export const RoundedButton = withStyles(theme => ({
 			)`,
 		},
 		"& > .MuiButton-label": {
-			display: "inline-block",
+			display: "flex",
 			position: "relative",
 			zIndex: "inherit",
 		},
