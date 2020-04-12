@@ -38,7 +38,7 @@
 // });
 
 const initWSConnection = (io, socket) => {
-	console.log("hello socket world", socket.id);
+	console.log("👍 New socket connection; id:", socket.id);
 	socket.emit("message", "Welcome to the room.");
 	socket.broadcast.emit("message", "New user joined the room.");
 	socket.emit("disconnect", () => {

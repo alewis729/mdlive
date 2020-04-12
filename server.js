@@ -1,4 +1,3 @@
-// const connectDB = require("./config/db");
 const http = require("http");
 const express = require("express");
 const socketio = require("socket.io");
@@ -7,9 +6,6 @@ const initWSConnection = require("./socket/main");
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
-
-// connect databases
-// connectDB();
 
 // init middlewares
 app.use(express.json({ extended: false }));
