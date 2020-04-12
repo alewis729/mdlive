@@ -1,33 +1,11 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Grid, Box, TextField, IconButton } from "@material-ui/core";
 import { SendRounded as IconSend } from "@material-ui/icons";
-import { makeStyles } from "@material-ui/core/styles";
 
-const formHeight = 150;
+import { useStyles } from "./style";
 
-const useStyles = makeStyles(theme => ({
-	root: {
-		height: "100%",
-		overflow: "hidden",
-	},
-	chat: {
-		height: `calc(100% - ${formHeight}px)`,
-		overflowY: "auto",
-	},
-	form: {
-		backgroundColor: theme.palette.white,
-		zindex: 150,
-		position: "relative",
-		display: "block",
-		height: formHeight,
-		boxShadow: theme.helpers.boxShadow,
-		"& .MuiFormControl-root.MuiTextField-root": {
-			width: "100%",
-		},
-	},
-}));
-
-const Chat = () => {
+const InteractionChat = ({ renderChat }) => {
 	const classes = useStyles();
 
 	const handleSendMessasge = () => {
@@ -37,9 +15,9 @@ const Chat = () => {
 	return (
 		<div className={classes.root}>
 			<Box className={classes.chat} p={2.5}>
-				hello from the group chat
+				{renderChat()}
 			</Box>
-			<Box className={classes.form} p={2.5} height={formHeight}>
+			<Box className={classes.form} p={2.5}>
 				<Grid container justify="space-between">
 					<Grid item xs={10}>
 						<TextField
@@ -59,4 +37,8 @@ const Chat = () => {
 	);
 };
 
-export default Chat;
+InteractionChat.propTypes = {
+	renderChat: PropTypes.func.isRequired,
+};
+
+export default InteractionChat;

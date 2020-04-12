@@ -5,27 +5,11 @@ import {
 	ShareRounded as IconShare,
 	ExitToAppRounded as IconLeave,
 } from "@material-ui/icons";
-import { makeStyles } from "@material-ui/core/styles";
 
+import { useStyles } from "./style";
 import { Button } from "@/components/atoms";
 
-const settingsHeight = 100;
-
-const useStyles = makeStyles({
-	root: {
-		height: "100%",
-		overflow: "hidden",
-	},
-	settings: {
-		height: settingsHeight,
-	},
-	people: {
-		overflowY: "auto",
-		height: `calc(100% - ${settingsHeight}px)`,
-	},
-});
-
-const Share = ({ people, renderPerson }) => {
+const InteractionSettings = ({ people, renderPerson }) => {
 	const classes = useStyles();
 
 	return (
@@ -71,9 +55,9 @@ const Share = ({ people, renderPerson }) => {
 	);
 };
 
-Share.propTypes = {
+InteractionSettings.propTypes = {
 	people: PropTypes.array.isRequired,
 	renderPerson: PropTypes.func.isRequired,
 };
 
-export default Share;
+export default InteractionSettings;

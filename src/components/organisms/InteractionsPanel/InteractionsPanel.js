@@ -8,7 +8,6 @@ import {
 	Tabs,
 	Tab,
 	Grid,
-	Box,
 	Button as MuiButton,
 } from "@material-ui/core";
 import {
@@ -19,23 +18,13 @@ import {
 } from "@material-ui/icons";
 
 import { useStyles } from "./style";
-import Share from "./Share";
-import Chat from "./Chat";
+import TabPanel from "./TabPanel";
 
-const TabPanel = ({ children, value, index, ...props }) => {
-	return (
-		<Box role="tabpanel" height="100%" hidden={value !== index} {...props}>
-			{value === index && children}
-		</Box>
-	);
-};
-
-// eslint-disable-next-line
-const InteractionsPanel = ({ people, chat, onLeave }) => {
+const InteractionsPanel = ({ renderSettings, renderChat }) => {
 	const classes = useStyles();
 	const theme = useTheme();
-	const [tab, setNewTab] = useState(1);
-	const [open, setOpen] = useState(true);
+	const [tab, setNewTab] = useState(0);
+	const [open, setOpen] = useState(false);
 
 	const handleChange = (_, newValue) => {
 		setNewTab(newValue);
@@ -94,13 +83,10 @@ const InteractionsPanel = ({ people, chat, onLeave }) => {
 						onChangeIndex={handleChangeIndex}
 					>
 						<TabPanel value={tab} index={0} dir={theme.direction}>
-							<Share
-								people={[]}
-								renderPerson={person => <Box>{person.name}</Box>}
-							/>
+							{renderSettings()}
 						</TabPanel>
 						<TabPanel value={tab} index={1} dir={theme.direction}>
-							<Chat />
+							{renderChat()}
 						</TabPanel>
 					</SwipeableViews>
 				</div>
@@ -109,16 +95,9 @@ const InteractionsPanel = ({ people, chat, onLeave }) => {
 	);
 };
 
-TabPanel.propTypes = {
-	children: PropTypes.node,
-	index: PropTypes.number.isRequired,
-	value: PropTypes.number.isRequired,
-};
-
 InteractionsPanel.propTypes = {
-	people: PropTypes.object,
-	chat: PropTypes.object,
-	onLeave: PropTypes.func,
+	renderSettings: PropTypes.func.isRequired,
+	renderChat: PropTypes.func.isRequired,
 };
 
 export default InteractionsPanel;
