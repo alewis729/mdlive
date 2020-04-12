@@ -32,7 +32,7 @@ export const useStyles = makeStyles(theme => ({
 		zIndex: 100,
 	},
 	content: {
-		backgroundColor: theme.palette.background.paper,
+		overflow: "hidden",
 		display: "flex",
 		flexDirection: "column",
 		height: "100%",

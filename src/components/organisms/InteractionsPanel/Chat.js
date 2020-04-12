@@ -1,33 +1,25 @@
-/* eslint-disable */
 import React from "react";
-import {
-	Drawer,
-	AppBar,
-	Tabs,
-	Tab,
-	Grid,
-	Typography,
-	Box,
-	IconButton,
-	TextField,
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Grid, Box, TextField, IconButton } from "@material-ui/core";
 import { SendRounded as IconSend } from "@material-ui/icons";
+import { makeStyles } from "@material-ui/core/styles";
 
 const formHeight = 150;
 
 const useStyles = makeStyles(theme => ({
 	root: {
 		height: "100%",
+		overflow: "hidden",
 	},
 	chat: {
-		backgroundColor: theme.palette.scale[5],
-		// width: "100%",
 		height: `calc(100% - ${formHeight}px)`,
+		overflowY: "auto",
 	},
 	form: {
-		// backgroundColor: "orange",
-		// height: formHeight,
+		backgroundColor: theme.palette.white,
+		zindex: 150,
+		position: "relative",
+		display: "block",
+		height: formHeight,
 		boxShadow: theme.helpers.boxShadow,
 		"& .MuiFormControl-root.MuiTextField-root": {
 			width: "100%",
@@ -51,7 +43,6 @@ const Chat = () => {
 				<Grid container justify="space-between">
 					<Grid item xs={10}>
 						<TextField
-							id="remove-later"
 							multiline
 							rows="4"
 							placeholder="Send a message to everyone"

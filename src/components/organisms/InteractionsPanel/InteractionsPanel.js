@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import SwipeableViews from "react-swipeable-views";
@@ -9,7 +8,6 @@ import {
 	Tabs,
 	Tab,
 	Grid,
-	Typography,
 	Box,
 	Button as MuiButton,
 } from "@material-ui/core";
@@ -21,6 +19,7 @@ import {
 } from "@material-ui/icons";
 
 import { useStyles } from "./style";
+import Share from "./Share";
 import Chat from "./Chat";
 
 const TabPanel = ({ children, value, index, ...props }) => {
@@ -54,7 +53,7 @@ const InteractionsPanel = ({ people, chat, onLeave }) => {
 				anchor="right"
 				onClick={() => setOpen(true)}
 			>
-				<MuiButton variant="contained" fullWidth onClick={() => setOpen(true)}>
+				<MuiButton fullWidth onClick={() => setOpen(true)}>
 					<IconArrowLeft />
 				</MuiButton>
 			</Drawer>
@@ -95,7 +94,10 @@ const InteractionsPanel = ({ people, chat, onLeave }) => {
 						onChangeIndex={handleChangeIndex}
 					>
 						<TabPanel value={tab} index={0} dir={theme.direction}>
-							Item One
+							<Share
+								people={[]}
+								renderPerson={person => <Box>{person.name}</Box>}
+							/>
 						</TabPanel>
 						<TabPanel value={tab} index={1} dir={theme.direction}>
 							<Chat />
