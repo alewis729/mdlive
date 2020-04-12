@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Box, Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
+import { InteractionsContainer } from "@/containers";
 import { Default } from "@/components/templates";
 import { Button } from "@/components/atoms";
 import { Navigation, Footer, Editor, Viewer } from "@/components/molecules";
-import { InteractionsPanel } from "@/components/organisms";
 import { getRandomTextMd, downloadFile } from "@/helpers/functional";
 
+const defaultText = getRandomTextMd();
 const useStyles = makeStyles(theme => ({
 	root: {
 		width: "100%",
@@ -21,8 +22,6 @@ const useStyles = makeStyles(theme => ({
 		height: "100%",
 	},
 }));
-
-const defaultText = getRandomTextMd();
 
 const Index = () => {
 	const [canSave, setCanSave] = useState(false);
@@ -57,7 +56,7 @@ const Index = () => {
 			}
 			footer={<Footer />}
 		>
-			<InteractionsPanel />
+			<InteractionsContainer />
 			<Box className={classes.root} textAlign="center">
 				<Typography variant="h4" gutterBottom>
 					<Box
