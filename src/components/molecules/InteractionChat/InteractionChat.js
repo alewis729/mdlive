@@ -10,6 +10,7 @@ import {
 import { SendRounded as IconSend } from "@material-ui/icons";
 
 import { useStyles } from "./style";
+import { replaceSpaces, replaceWhiteSpaces } from "@/helpers/functional";
 
 const InteractionChat = ({ chatMessages, onMessageSubmit }) => {
 	const classes = useStyles();
@@ -20,11 +21,19 @@ const InteractionChat = ({ chatMessages, onMessageSubmit }) => {
 		setText(value);
 	};
 
+	const handleSubmit = () => {
+		if (replaceSpaces(text).length !== 0) {
+			onMessageSubmit(replaceWhiteSpaces(text));
+			// todo: scroll to bottom, focus input
+			setText("");
+		}
+	};
+
 	return (
 		<div className={classes.root}>
 			<Box className={classes.chat} p={2.5}>
-				{chatMessages.map(item => (
-					<Typography key={item.id} gutterBottom>
+				{chatMessages.map((item, index) => (
+					<Typography key={index} gutterBottom>
 						<Box
 							fontWeight="fontWeightSemibold"
 							component="span"
@@ -33,7 +42,7 @@ const InteractionChat = ({ chatMessages, onMessageSubmit }) => {
 							{`${item.user}: `}
 						</Box>
 						<Box component="span" color="text.primary">
-							{item.msg}
+							{item.message}
 						</Box>
 					</Typography>
 				))}
@@ -50,7 +59,7 @@ const InteractionChat = ({ chatMessages, onMessageSubmit }) => {
 						/>
 					</Grid>
 					<Grid item xs={2}>
-						<IconButton onClick={() => onMessageSubmit(text)}>
+						<IconButton onClick={handleSubmit}>
 							<IconSend />
 						</IconButton>
 					</Grid>
@@ -65,7 +74,7 @@ InteractionChat.propTypes = {
 		PropTypes.shape({
 			id: PropTypes.string.isRequired,
 			user: PropTypes.string.isRequired,
-			msg: PropTypes.string.isRequired,
+			message: PropTypes.string.isRequired,
 		})
 	).isRequired,
 	onMessageSubmit: PropTypes.func.isRequired,
