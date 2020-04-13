@@ -39,3 +39,19 @@ export const getRandomTextMd = () => {
 
 	return final;
 };
+
+/**
+ * Function that replaces all white spaces from a string.
+ */
+export const replaceWhiteSpaces = (str, replace = "") => {
+	if (typeof str !== "string") return str;
+	return str.replace(/^\s+|\s+$|\s+(?=\s)/g, replace);
+};
+
+/**
+ * Function that replaces all spaces from a string.
+ */
+export const replaceSpaces = (str, replace = "") => {
+	if (typeof str !== "string") return str;
+	return str.replace(/\s/g, replace);
+};
