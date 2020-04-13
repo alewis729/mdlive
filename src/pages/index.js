@@ -12,7 +12,7 @@ import {
 	ModalNewRoom,
 } from "@/components/molecules";
 import { Button } from "@/components/atoms";
-import { getRandomTextMd, downloadFile } from "@/helpers/functional";
+import { getRandomTextMd, downloadFile } from "@/helpers";
 
 const useStyles = makeStyles(theme => ({
 	root: {

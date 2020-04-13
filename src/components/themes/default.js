@@ -1,5 +1,5 @@
 import { createMuiTheme } from "@material-ui/core/styles";
-import { rgba } from "@/helpers/styleHelpers";
+import { rgba } from "@/helpers";
 
 const theme = createMuiTheme({
 	palette: {

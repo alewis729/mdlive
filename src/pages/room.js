@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import { Box, Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -6,7 +7,7 @@ import { InteractionsContainer } from "@/containers";
 import { Default } from "@/components/templates";
 import { Button } from "@/components/atoms";
 import { Navigation, Footer, Editor, Viewer } from "@/components/molecules";
-import { getRandomTextMd, downloadFile } from "@/helpers/functional";
+import { getRandomTextMd, downloadFile } from "@/helpers";
 
 const defaultText = getRandomTextMd();
 const useStyles = makeStyles(theme => ({
@@ -23,7 +24,8 @@ const useStyles = makeStyles(theme => ({
 	},
 }));
 
-const Index = () => {
+const Room = () => {
+	const router = useRouter();
 	const [canSave, setCanSave] = useState(false);
 	const classes = useStyles({ canSave });
 	const [text, setText] = useState("");
@@ -56,7 +58,7 @@ const Index = () => {
 			}
 			footer={<Footer />}
 		>
-			<InteractionsContainer />
+			{router.query.room && <InteractionsContainer room={router.query.room} />}
 			<Box className={classes.root} textAlign="center">
 				<Typography variant="h4" gutterBottom>
 					<Box
@@ -95,6 +97,6 @@ const Index = () => {
 	);
 };
 
-Index.displayName = "RoomPage";
+Room.displayName = "RoomPage";
 
-export default Index;
+export default Room;

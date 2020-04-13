@@ -1,6 +1,6 @@
 import { withStyles } from "@material-ui/core/styles";
 import { Button } from "@material-ui/core";
-import { rgba } from "@/helpers/styleHelpers";
+import { rgba } from "@/helpers";
 
 export const RoundedButton = withStyles(theme => ({
 	root: {

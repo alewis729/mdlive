@@ -10,7 +10,7 @@ import {
 import { SendRounded as IconSend } from "@material-ui/icons";
 
 import { useStyles } from "./style";
-import { replaceSpaces, replaceWhiteSpaces } from "@/helpers/functional";
+import { replaceSpaces, replaceWhiteSpaces } from "@/helpers";
 
 const InteractionChat = ({ chatMessages, onMessageSubmit }) => {
 	const classes = useStyles();
@@ -39,7 +39,7 @@ const InteractionChat = ({ chatMessages, onMessageSubmit }) => {
 							component="span"
 							color="text.primary"
 						>
-							{`${item.user}: `}
+							{`${item.name}: `}
 						</Box>
 						<Box component="span" color="text.primary">
 							{item.message}
@@ -73,7 +73,7 @@ InteractionChat.propTypes = {
 	chatMessages: PropTypes.arrayOf(
 		PropTypes.shape({
 			id: PropTypes.string.isRequired,
-			user: PropTypes.string.isRequired,
+			name: PropTypes.string.isRequired,
 			message: PropTypes.string.isRequired,
 		})
 	).isRequired,
