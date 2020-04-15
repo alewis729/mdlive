@@ -12,7 +12,7 @@ const { SERVER_URL } = publicRuntimeConfig;
 const socket = io(SERVER_URL);
 const user = { id: "0", name: "alfred" };
 
-const InteractionsContainer = ({ room }) => {
+const InteractionsContainer = ({ room, onLeave }) => {
 	const [chatMessages, setChatMessages] = useState([]);
 
 	useEffect(() => {
@@ -35,6 +35,8 @@ const InteractionsContainer = ({ room }) => {
 				<InteractionSettings
 					people={[]}
 					renderPerson={person => <Box>{person.name}</Box>}
+					onInvite={() => console.log("invite others")}
+					onLeave={onLeave}
 				/>
 			)}
 			renderChat={() => (
@@ -49,6 +51,7 @@ const InteractionsContainer = ({ room }) => {
 
 InteractionsContainer.propTypes = {
 	room: PropTypes.string.isRequired,
+	onLeave: PropTypes.func.isRequired,
 };
 
 export default InteractionsContainer;

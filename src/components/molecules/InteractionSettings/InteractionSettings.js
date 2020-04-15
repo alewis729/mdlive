@@ -9,7 +9,7 @@ import {
 import { useStyles } from "./style";
 import { Button } from "@/components/atoms";
 
-const InteractionSettings = ({ people, renderPerson }) => {
+const InteractionSettings = ({ people, renderPerson, onInvite, onLeave }) => {
 	const classes = useStyles();
 
 	return (
@@ -24,7 +24,7 @@ const InteractionSettings = ({ people, renderPerson }) => {
 					size="large"
 					color="info"
 					startIcon={<IconShare />}
-					onClick={() => console.log("invite others modal")}
+					onClick={onInvite}
 				>
 					<Box py={0.5}>Invite others</Box>
 				</Button>
@@ -33,7 +33,7 @@ const InteractionSettings = ({ people, renderPerson }) => {
 					size="large"
 					color="danger"
 					startIcon={<IconLeave />}
-					onClick={() => console.log("leave room")}
+					onClick={onLeave}
 				>
 					<Box py={0.5}>Leave room</Box>
 				</Button>
@@ -58,6 +58,8 @@ const InteractionSettings = ({ people, renderPerson }) => {
 InteractionSettings.propTypes = {
 	people: PropTypes.array.isRequired,
 	renderPerson: PropTypes.func.isRequired,
+	onInvite: PropTypes.func.isRequired,
+	onLeave: PropTypes.func.isRequired,
 };
 
 export default InteractionSettings;
