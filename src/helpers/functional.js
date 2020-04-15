@@ -55,3 +55,25 @@ export const replaceSpaces = (str, replace = "") => {
 	if (typeof str !== "string") return str;
 	return str.replace(/\s/g, replace);
 };
+
+/**
+ * Function that returns a random string.
+ * @param {arr} length [4, 2] => xxxx-xxxx
+ * @param {str} chars posible chars to consider
+ */
+export const getRandomAlphanumeric = (
+	length = [4, 2],
+	chars = "0123456789abcdefghijklmnopqrstuvwxyz"
+) => {
+	const randomChar = chars => chars[Math.floor(Math.random() * chars.length)];
+	let res = "";
+
+	for (let i = 0; i < length[1]; i++) {
+		for (let j = 0; j < length[0]; j++) {
+			res += randomChar(chars);
+		}
+		if (i !== length[1] - 1) res += "-";
+	}
+
+	return res;
+};

@@ -30,7 +30,9 @@ const Room = () => {
 	const classes = useStyles({ canSave });
 	const [text, setText] = useState("");
 
-	useEffect(() => setText(defaultText), []);
+	useEffect(() => {
+		setText(defaultText);
+	}, []);
 
 	const handleNagivation = val => {
 		console.log(val);

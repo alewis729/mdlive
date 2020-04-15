@@ -2,12 +2,10 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Dialog, Box, Grid, Typography, TextField } from "@material-ui/core";
 
-import { useStyles } from "./style";
 import { Button } from "@/components/atoms";
 
 const ModalNewRoom = ({ open, onCreate, onClose }) => {
-	const classes = useStyles();
-	const [formData, setFormData] = useState({ user: "", room: "", error: null });
+	const [formData, setFormData] = useState({ user: "", error: null });
 
 	const handleInputChange = (e, key) => {
 		const { value } = e.target;
@@ -42,43 +40,23 @@ const ModalNewRoom = ({ open, onCreate, onClose }) => {
 					</Typography>
 					<Typography gutterBottom>
 						<Box component="span" color="text.primary">
-							Just tell us how would you like others to call you and what the
-							room name should be.
+							Just tell us how would you like others to call you.
 						</Box>
 					</Typography>
 				</Box>
 				<Box my={4}>
-					<Grid
-						container
-						direction="column"
-						spacing={3}
-						className={classes.inputs}
-					>
-						<Grid item>
-							<TextField
-								placeholder="Your name"
-								label="Your name"
-								error={!!formData.error}
-								helperText={formData.error}
-								variant="outlined"
-								fullWidth
-								autoFocus
-								required
-								value={formData.user}
-								onChange={e => handleInputChange(e, "user")}
-							/>
-						</Grid>
-						<Grid item>
-							<TextField
-								placeholder="Room name"
-								label="Room name"
-								variant="outlined"
-								fullWidth
-								value={formData.room}
-								onChange={e => handleInputChange(e, "room")}
-							/>
-						</Grid>
-					</Grid>
+					<TextField
+						placeholder="Your name"
+						label="Your name"
+						error={!!formData.error}
+						helperText={formData.error}
+						variant="outlined"
+						fullWidth
+						autoFocus
+						required
+						value={formData.user}
+						onChange={e => handleInputChange(e, "user")}
+					/>
 				</Box>
 				<Grid container justify="center" spacing={2}>
 					<Grid item>

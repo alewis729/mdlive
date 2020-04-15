@@ -23,8 +23,8 @@ import TabPanel from "./TabPanel";
 const InteractionsPanel = ({ renderSettings, renderChat }) => {
 	const classes = useStyles();
 	const theme = useTheme();
-	const [tab, setNewTab] = useState(0);
-	const [open, setOpen] = useState(false);
+	const [tab, setNewTab] = useState(1);
+	const [open, setOpen] = useState(true);
 
 	const handleChange = (_, newValue) => {
 		setNewTab(newValue);

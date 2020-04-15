@@ -12,7 +12,11 @@ import {
 	ModalNewRoom,
 } from "@/components/molecules";
 import { Button } from "@/components/atoms";
-import { getRandomTextMd, downloadFile } from "@/helpers";
+import {
+	getRandomTextMd,
+	downloadFile,
+	getRandomAlphanumeric,
+} from "@/helpers";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -57,10 +61,9 @@ const Index = () => {
 
 	const handleCreateNewRoom = data => {
 		console.log(data);
-		router.push({
-			pathname: "/room",
-			query: { room: data.room },
-		});
+		const roomId = getRandomAlphanumeric();
+		const pathname = `/room/${roomId}`;
+		router.push({ pathname });
 	};
 
 	return (
