@@ -1,6 +1,8 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import Head from "next/head";
+import { Provider } from "react-redux";
+import store from "../store";
 import { CssBaseline } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/core/styles";
 
@@ -15,8 +17,10 @@ const MyApp = ({ Component, pageProps }) => {
 				<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 			</Head>
 			<ThemeProvider theme={theme}>
-				<CssBaseline />
-				<Component {...pageProps} />
+				<Provider store={store}>
+					<CssBaseline />
+					<Component {...pageProps} />
+				</Provider>
 			</ThemeProvider>
 		</Fragment>
 	);
