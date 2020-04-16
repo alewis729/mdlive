@@ -4,14 +4,16 @@ const initialState = {
 	name: null,
 };
 
-export default (state = initialState, action) => {
+const rootReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case SET_USERNAME:
 			return {
 				...state,
-				loading: true,
+				name: action.payload,
 			};
 		default:
 			return state;
 	}
 };
+
+export default rootReducer;
