@@ -66,17 +66,19 @@ const Room = () => {
 		>
 			<InteractionsContainer room={router.query.roomId} onLeave={handleLeave} />
 			<Box className={classes.root} textAlign="center">
-				<Typography variant="h4" gutterBottom>
-					<Box
-						fontWeight="fontWeightSemibold"
-						component="span"
-						color="text.primary"
-					>
-						Welcome
-					</Box>
-				</Typography>
-
-				<Box mt={2} mx="auto" maxWidth={1640}>
+				{router.query.roomId && (
+					<Typography variant="h6">
+						Room code:{" "}
+						<Box
+							fontWeight="fontWeightSemibold"
+							component="span"
+							color="text.primary"
+						>
+							{router.query.roomId}
+						</Box>
+					</Typography>
+				)}
+				<Box mt={1} mx="auto" maxWidth={1640}>
 					<Box mb={2} textAlign="left" height={42}>
 						<div className={classes.saveButton}>
 							<Button onClick={() => downloadFile(text)} color="success">
