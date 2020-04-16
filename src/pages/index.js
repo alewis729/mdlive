@@ -1,22 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/router";
+
 import { Box, Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
+import { RoomCreator } from "@/containers";
 import { Default } from "@/components/templates";
-import {
-	Navigation,
-	Footer,
-	Editor,
-	Viewer,
-	ModalNewRoom,
-} from "@/components/molecules";
+import { Navigation, Footer, Editor, Viewer } from "@/components/molecules";
 import { Button } from "@/components/atoms";
-import {
-	getRandomTextMd,
-	downloadFile,
-	getRandomAlphanumeric,
-} from "@/helpers";
+import { getRandomTextMd, downloadFile } from "@/helpers";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -35,7 +26,6 @@ const useStyles = makeStyles(theme => ({
 const defaultText = getRandomTextMd();
 
 const Index = () => {
-	const router = useRouter();
 	const [canSave, setCanSave] = useState(false);
 	const classes = useStyles({ canSave });
 	const [text, setText] = useState("");
@@ -59,13 +49,6 @@ const Index = () => {
 		else if (canSave && !hasEnoughText) setCanSave(false);
 	};
 
-	const handleCreateNewRoom = data => {
-		console.log(data);
-		const roomId = getRandomAlphanumeric();
-		const pathname = `/room/${roomId}`;
-		router.push({ pathname });
-	};
-
 	return (
 		<Default
 			header={
@@ -76,11 +59,7 @@ const Index = () => {
 			}
 			footer={<Footer />}
 		>
-			<ModalNewRoom
-				open={openModal}
-				onCreate={handleCreateNewRoom}
-				onClose={() => setOpenModal(false)}
-			/>
+			<RoomCreator open={openModal} onCloseModal={() => setOpenModal(false)} />
 			<Box className={classes.root} textAlign="center">
 				<Typography variant="h3" gutterBottom>
 					<Box
