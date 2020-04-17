@@ -5,6 +5,7 @@
  * @param {tring} name file name
  */
 export const downloadFile = (text, name = "md-live-draft") => {
+	if (!document) return null;
 	const id = "file-download-a-tag";
 	const file = new Blob([text], { type: "text/plain" });
 	let element = document.getElementById(id);

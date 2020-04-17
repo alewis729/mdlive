@@ -50,8 +50,6 @@ const Room = () => {
 		else if (canSave && !hasEnoughText) setCanSave(false);
 	};
 
-	const handleLeave = () => router.push("/");
-
 	if (!router.query.roomId) return <div>loading</div>;
 
 	return (
@@ -64,7 +62,7 @@ const Room = () => {
 			}
 			footer={<Footer />}
 		>
-			<InteractionsContainer room={router.query.roomId} onLeave={handleLeave} />
+			<InteractionsContainer room={router.query.roomId} />
 			<Box className={classes.root} textAlign="center">
 				{router.query.roomId && (
 					<Typography variant="h6">
