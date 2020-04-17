@@ -59,7 +59,7 @@ const Index = () => {
 			}
 			footer={<Footer />}
 		>
-			<RoomCreator open={openModal} onCloseModal={() => setOpenModal(false)} />
+			<RoomCreator openModal={openModal} onClose={() => setOpenModal(false)} />
 			<Box className={classes.root} textAlign="center">
 				<Typography variant="h3" gutterBottom>
 					<Box
