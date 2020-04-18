@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import Head from "next/head";
 import { Provider } from "react-redux";
@@ -13,12 +13,24 @@ import "@/markdown.css";
 
 const MyApp = ({ reduxStore, Component, pageProps }) => {
 	const persistor = persistStore(reduxStore);
+	console.log(Component);
+
+	useEffect(() => {
+		const jssStyles = document.querySelector("#jss-server-side");
+		if (jssStyles) {
+			jssStyles.parentElement.removeChild(jssStyles);
+		}
+	}, []);
 
 	return (
-		<Fragment>
+		<>
 			<Head>
 				<title>● Markdown Live</title>
 				<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+				<meta
+					name="viewport"
+					content="minimum-scale=1, initial-scale=1, width=device-width"
+				/>
 			</Head>
 			<ThemeProvider theme={theme}>
 				<Provider store={reduxStore}>
@@ -31,14 +43,18 @@ const MyApp = ({ reduxStore, Component, pageProps }) => {
 					</PersistGate>
 				</Provider>
 			</ThemeProvider>
-		</Fragment>
+		</>
 	);
 };
 
 MyApp.propTypes = {
 	reduxStore: PropTypes.object.isRequired,
-	Component: PropTypes.func.isRequired,
+	Component: PropTypes.elementType.isRequired,
 	pageProps: PropTypes.object,
+};
+
+MyApp.defaultProps = {
+	pageProps: {},
 };
 
 export default withReduxStore(MyApp);
