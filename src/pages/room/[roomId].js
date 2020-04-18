@@ -1,38 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useRouter } from "next/router";
-import { Box, Grid, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Box, Typography } from "@material-ui/core";
 
-import { InteractionsContainer } from "@/containers";
+import { InteractionsContainer, Previewer } from "@/containers";
 import { Default } from "@/components/templates";
-import { Button } from "@/components/atoms";
-import { Navigation, Footer, Editor, Viewer } from "@/components/molecules";
-import { getRandomTextMd, downloadFile } from "@/helpers";
-
-const defaultText = getRandomTextMd();
-const useStyles = makeStyles(theme => ({
-	root: {
-		width: "100%",
-	},
-	saveButton: {
-		visibility: ({ canSave }) => (canSave ? "visible" : "hidden"),
-		opacity: ({ canSave }) => (canSave ? "1" : "0"),
-		transition: theme.helpers.transitionQuick,
-	},
-	mainGrid: {
-		height: "100%",
-	},
-}));
+import { Navigation, Footer } from "@/components/molecules";
 
 const Room = () => {
 	const router = useRouter();
-	const [canSave, setCanSave] = useState(false);
-	const classes = useStyles({ canSave });
-	const [text, setText] = useState("");
-
-	useEffect(() => {
-		setText(defaultText);
-	}, []);
 
 	const handleNagivation = val => {
 		console.log(val);
@@ -40,14 +15,6 @@ const Room = () => {
 
 	const handleMainButtonClick = () => {
 		console.log("sign in");
-	};
-
-	const handleEditorChange = val => {
-		const hasEnoughText = val.length > 5;
-		setText(val);
-
-		if (!canSave && hasEnoughText) setCanSave(true);
-		else if (canSave && !hasEnoughText) setCanSave(false);
 	};
 
 	if (!router.query.roomId) return <div>loading</div>;
@@ -63,7 +30,7 @@ const Room = () => {
 			footer={<Footer />}
 		>
 			<InteractionsContainer room={router.query.roomId} />
-			<Box className={classes.root} textAlign="center">
+			<Box textAlign="center">
 				{router.query.roomId && (
 					<Typography variant="h6">
 						Room code:{" "}
@@ -76,28 +43,7 @@ const Room = () => {
 						</Box>
 					</Typography>
 				)}
-				<Box mt={1} mx="auto" maxWidth={1640}>
-					<Box mb={2} textAlign="left" height={42}>
-						<div className={classes.saveButton}>
-							<Button onClick={() => downloadFile(text)} color="success">
-								Save
-							</Button>
-						</div>
-					</Box>
-					<Grid
-						className={classes.mainGrid}
-						container
-						spacing={3}
-						justify="center"
-					>
-						<Grid item xs={6}>
-							<Editor defaultText={defaultText} onChange={handleEditorChange} />
-						</Grid>
-						<Grid item xs={6}>
-							<Viewer preview={text} />
-						</Grid>
-					</Grid>
-				</Box>
+				<Previewer />
 			</Box>
 		</Default>
 	);
