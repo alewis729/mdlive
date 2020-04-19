@@ -3,9 +3,8 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"server": "nodemon server.js",
-		"dev": "concurrently \"npm run server\" \"npm run next\"",
-		"next": "next dev",
+		"dev": "nodemon server.js",
+		"next:dev": "next dev",
 		"build": "next build",
 		"start": "next start",
 		"format": "prettier \"src/**/*.{js,jsx,json}\" --write",
