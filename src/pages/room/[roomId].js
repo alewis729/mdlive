@@ -1,13 +1,13 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { Box, Typography } from "@material-ui/core";
 
-import { InteractionsContainer, Previewer } from "@/containers";
+import { RoomHandler } from "@/containers";
 import { Default } from "@/components/templates";
 import { Navigation, Footer } from "@/components/molecules";
 
 const Room = () => {
 	const router = useRouter();
+	const { roomId } = router.query;
 
 	const handleNagivation = val => {
 		console.log(val);
@@ -16,8 +16,6 @@ const Room = () => {
 	const handleMainButtonClick = () => {
 		console.log("sign in");
 	};
-
-	if (!router.query.roomId) return <div>loading</div>;
 
 	return (
 		<Default
@@ -29,22 +27,14 @@ const Room = () => {
 			}
 			footer={<Footer />}
 		>
-			<InteractionsContainer room={router.query.roomId} />
-			<Box textAlign="center">
-				{router.query.roomId && (
-					<Typography variant="h6">
-						Room code:{" "}
-						<Box
-							fontWeight="fontWeightSemibold"
-							component="span"
-							color="text.primary"
-						>
-							{router.query.roomId}
-						</Box>
-					</Typography>
-				)}
-				<Previewer />
-			</Box>
+			{!roomId ? (
+				<div>
+					Something is wrong! There is no room id... verify that the url is
+					correct.
+				</div>
+			) : (
+				<RoomHandler roomId={roomId} />
+			)}
 		</Default>
 	);
 };
