@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import {
 	Grid,
@@ -15,6 +15,28 @@ import { replaceSpaces, replaceWhiteSpaces } from "@/helpers";
 const InteractionChat = ({ chatMessages, onMessageSubmit }) => {
 	const classes = useStyles();
 	const [text, setText] = useState("");
+	const [shouldScroll, setShouldScroll] = useState(true);
+	const chatRef = useRef(null);
+
+	useEffect(() => {
+		const { current: chat } = chatRef;
+		if (chat) {
+			chat.onscroll = () => {
+				// check if scroll position is not at the bottom
+				if (chat.scrollHeight !== chat.scrollTop + chat.clientHeight) {
+					setShouldScroll(false);
+				} else setShouldScroll(true); // @todo: add down arrow to scroll to bottom on new message
+			};
+		}
+	}, [chatRef]);
+
+	useEffect(() => {
+		const { current: chat } = chatRef;
+		if (chat.scrollHeight > chat.clientHeight && shouldScroll) {
+			scrollToBottom(chat);
+		}
+		// eslint-disable-next-line
+	}, [chatMessages]);
 
 	const handleTextChange = e => {
 		const { value } = e.target;
@@ -29,9 +51,15 @@ const InteractionChat = ({ chatMessages, onMessageSubmit }) => {
 		}
 	};
 
+	const handleKeyUp = e => {
+		if (e.keyCode === 13 && !e.shiftKey) handleSubmit();
+	};
+
+	const scrollToBottom = elm => elm.scrollTo(0, elm.scrollHeight);
+
 	return (
 		<div className={classes.root}>
-			<Box className={classes.chat} p={2.5}>
+			<Box ref={chatRef} className={classes.chat} p={2.5}>
 				{chatMessages.map((item, index) => (
 					<Typography key={index} gutterBottom>
 						<Box
@@ -56,6 +84,7 @@ const InteractionChat = ({ chatMessages, onMessageSubmit }) => {
 							rows="4"
 							value={text}
 							onChange={handleTextChange}
+							onKeyUp={handleKeyUp}
 						/>
 					</Grid>
 					<Grid item xs={2}>

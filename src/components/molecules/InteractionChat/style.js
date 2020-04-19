@@ -8,6 +8,7 @@ export const useStyles = makeStyles(theme => ({
 	chat: {
 		height: `calc(100% - ${formHeight}px)`,
 		overflowY: "auto",
+		wordWrap: "break-word;",
 	},
 	form: {
 		backgroundColor: theme.palette.white,
