@@ -4,7 +4,7 @@ import { Dialog, Box, Grid, Typography, TextField } from "@material-ui/core";
 
 import { Button } from "@/components/atoms";
 
-const ModalNewRoom = ({ open, onCreate, onClose }) => {
+const UsernameCollector = ({ open, textCommit, onCommit, onClose }) => {
 	const [formData, setFormData] = useState({ user: "", error: null });
 
 	const handleInputChange = (e, key) => {
@@ -21,7 +21,7 @@ const ModalNewRoom = ({ open, onCreate, onClose }) => {
 		} else {
 			const data = { ...formData, error: null };
 			setFormData(data);
-			onCreate(data);
+			onCommit(data);
 		}
 	};
 
@@ -40,7 +40,7 @@ const ModalNewRoom = ({ open, onCreate, onClose }) => {
 					</Typography>
 					<Typography gutterBottom>
 						<Box component="span" color="text.primary">
-							Just tell us how would you like others to call you.
+							Just tell us how you would like others to call you.
 						</Box>
 					</Typography>
 				</Box>
@@ -60,28 +60,32 @@ const ModalNewRoom = ({ open, onCreate, onClose }) => {
 				</Box>
 				<Grid container justify="center" spacing={2}>
 					<Grid item>
-						<Button onClick={handleSubmit}>Create room</Button>
+						<Button onClick={handleSubmit}>{textCommit}</Button>
 					</Grid>
-					<Grid item>
-						<Button onClick={onClose} color="info">
-							Cancel
-						</Button>
-					</Grid>
+					{onClose && (
+						<Grid item>
+							<Button onClick={onClose} color="info">
+								Cancel
+							</Button>
+						</Grid>
+					)}
 				</Grid>
 			</Box>
 		</Dialog>
 	);
 };
 
-ModalNewRoom.propTypes = {
+UsernameCollector.propTypes = {
 	open: PropTypes.bool,
-	onCreate: PropTypes.func.isRequired,
+	textCommit: PropTypes.string,
+	onCommit: PropTypes.func.isRequired,
 	onClose: PropTypes.func,
 };
 
-ModalNewRoom.defaultProps = {
+UsernameCollector.defaultProps = {
+	textCommit: "Create room",
 	open: false,
 	onClose: null,
 };
 
-export default ModalNewRoom;
+export default UsernameCollector;

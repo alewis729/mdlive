@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { Box, Typography } from "@material-ui/core";
+import { useRouter } from "next/router";
 
-import { Previewer, RoomCreator } from "@/containers";
+import { Previewer, UsernameSetter } from "@/containers";
 import { Default } from "@/components/templates";
 import { Navigation, Footer } from "@/components/molecules";
 import { Button } from "@/components/atoms";
+import { getRandomAlphanumeric } from "@/helpers";
 
 const Index = () => {
-	const [openModal, setOpenModal] = useState(false);
+	const router = useRouter();
+	const [shouldSaveNow, setShouldSaveNow] = useState(false);
 
 	const handleNagivation = val => {
 		console.log(val);
@@ -15,6 +18,11 @@ const Index = () => {
 
 	const handleMainButtonClick = () => {
 		console.log("sign in");
+	};
+
+	const handleCreateRoom = () => {
+		const roomId = getRandomAlphanumeric();
+		router.push("/room/[roomId]", `/room/${roomId}`);
 	};
 
 	return (
@@ -27,7 +35,11 @@ const Index = () => {
 			}
 			footer={<Footer />}
 		>
-			<RoomCreator openModal={openModal} onClose={() => setOpenModal(false)} />
+			<UsernameSetter
+				shouldSaveNow={shouldSaveNow}
+				onSetUsername={handleCreateRoom}
+				onClose={() => setShouldSaveNow(false)}
+			/>
 			<Box textAlign="center">
 				<Typography variant="h3" gutterBottom>
 					<Box
@@ -61,7 +73,7 @@ const Index = () => {
 					</Box>
 				</Typography>
 				<Box mt={2}>
-					<Button onClick={() => setOpenModal(true)}>New room</Button>
+					<Button onClick={() => setShouldSaveNow(true)}>New room</Button>
 				</Box>
 				<Previewer />
 			</Box>

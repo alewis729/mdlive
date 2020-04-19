@@ -22,7 +22,7 @@ const InteractionSettings = ({ people, renderPerson, onInvite, onLeave }) => {
 				<Button
 					fullWidth
 					size="large"
-					color="info"
+					color="success"
 					startIcon={<IconShare />}
 					onClick={onInvite}
 				>
