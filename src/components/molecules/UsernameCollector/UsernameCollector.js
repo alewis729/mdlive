@@ -55,6 +55,7 @@ const UsernameCollector = ({ open, textCommit, onCommit, onClose }) => {
 						autoFocus
 						required
 						value={formData.user}
+						onKeyDown={e => (e.keyCode === 13 ? handleSubmit() : null)}
 						onChange={e => handleInputChange(e, "user")}
 					/>
 				</Box>
