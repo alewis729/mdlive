@@ -38,9 +38,14 @@ const InteractionChat = ({ chatMessages, onMessageSubmit }) => {
 		// eslint-disable-next-line
 	}, [chatMessages]);
 
+	const handleKeyDown = e => {
+		if (e.keyCode === 13 && !e.shiftKey) handleSubmit();
+	};
+
 	const handleTextChange = e => {
 		const { value } = e.target;
-		setText(value);
+		const cleanValue = value.replace(/[\r\n\v]+/g, "");
+		setText(cleanValue);
 	};
 
 	const handleSubmit = () => {
@@ -49,10 +54,6 @@ const InteractionChat = ({ chatMessages, onMessageSubmit }) => {
 			// todo: scroll to bottom, focus input
 			setText("");
 		}
-	};
-
-	const handleKeyUp = e => {
-		if (e.keyCode === 13 && !e.shiftKey) handleSubmit();
 	};
 
 	const scrollToBottom = elm => elm.scrollTo(0, elm.scrollHeight);
@@ -83,8 +84,8 @@ const InteractionChat = ({ chatMessages, onMessageSubmit }) => {
 							multiline
 							rows="4"
 							value={text}
+							onKeyDown={handleKeyDown}
 							onChange={handleTextChange}
-							onKeyUp={handleKeyUp}
 						/>
 					</Grid>
 					<Grid item xs={2}>
