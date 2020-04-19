@@ -4,7 +4,7 @@ import thunkMiddleware from "redux-thunk";
 
 import reducers from "./reducers";
 
-const initialState = () => {
+export default initialState => {
 	const store = createStore(
 		reducers,
 		initialState,
@@ -21,5 +21,3 @@ const initialState = () => {
 
 	return store;
 };
-
-export default initialState;
