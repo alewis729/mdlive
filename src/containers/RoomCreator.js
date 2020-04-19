@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
@@ -16,8 +16,10 @@ const RoomCreator = ({ openModal, onClose, username, setUsername }) => {
 	}, [openModal]);
 
 	const handleCreateNewRoom = data => {
-		if (!username) setUsername(data.user);
-		onClose();
+		if (!username) {
+			setUsername(data.user);
+			onClose();
+		}
 		const roomId = getRandomAlphanumeric();
 		router.push(`/room/${roomId}`);
 	};
