@@ -1,12 +1,13 @@
 const {
 	bot,
 	joinUser,
-	// getUser,
+	getUser,
 	// getRoomUsers,
 	removeUserFromRoom,
 } = require("./utils/users");
 
 const initWSConnection = (io, socket) => {
+	// user connect & disconnect
 	socket.on("room-join", ({ username, room }) => {
 		const user = joinUser(socket.id, username, room);
 		socket.join(user.room);
@@ -16,26 +17,24 @@ const initWSConnection = (io, socket) => {
 		});
 	});
 
-	// socket.on("user-connect", ({ name, room }) => {
-	// 	users.push({ id: socket.id, name, room });
-	// 	console.log(users);
-	// });
-
-	// socket.on("message", ({ id, name, message }) => {
-	// 	io.emit("message", { id, name, message });
-	// });
-
 	socket.on("disconnect", () => {
 		const user = removeUserFromRoom(socket.id);
-
 		if (user) {
-			console.log(`${user.name} disconnected.`);
 			io.to(user.room).emit("message", {
 				...bot,
 				message: `${user.name} left the room.`,
 			});
 		}
 	});
+
+	// messaging
+	socket.on("message", ({ message }) => {
+		const user = getUser(socket.id);
+		const { id, name } = user;
+		io.to(user.room).emit("message", { id, name, message });
+	});
+
+	// md preview
 };
 
 module.exports = initWSConnection;

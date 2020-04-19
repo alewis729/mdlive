@@ -23,6 +23,16 @@ export const downloadFile = (text, name = "md-live-draft") => {
 };
 
 /**
+ * @param {string} domain http://localhost:3000
+ * @param {string} path /room/abc-def
+ */
+export const getFullUrl = (domain, path) => {
+	let url = domain + path;
+	url = url.substr(url.indexOf("//") + 2);
+	return url;
+};
+
+/**
  * Function that gets a random default text to display in .md
  */
 export const getRandomTextMd = () => {
