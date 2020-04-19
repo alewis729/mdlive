@@ -78,7 +78,7 @@ const Index = () => {
 				<Box mt={2}>
 					<Button onClick={() => setShouldSaveNow(true)}>New room</Button>
 				</Box>
-				<Previewer />
+				<Previewer role="author" />
 			</Box>
 		</Default>
 	);

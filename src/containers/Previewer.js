@@ -47,10 +47,10 @@ const Previewer = ({ role, ...props }) => {
 				{role !== "viewer" ? (
 					<>
 						<Grid item xs={6}>
-							<Editor defaultText={defaultText} onChange={handleEditorChange} />
+							<Viewer preview={text} />
 						</Grid>
 						<Grid item xs={6}>
-							<Viewer preview={text} />
+							<Editor defaultText={defaultText} onChange={handleEditorChange} />
 						</Grid>
 					</>
 				) : (
