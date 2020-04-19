@@ -1,4 +1,5 @@
 const http = require("http");
+const next = require("next");
 const express = require("express");
 const socketio = require("socket.io");
 const initWSConnection = require("./socket/main");
@@ -7,17 +8,19 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
-// init middlewares
-app.use(express.json({ extended: false }));
-
-// define routes
-app.use("/api/groups", require("./routes/groups"));
+const port = process.env.PORT || 3000;
+const dev = process.env.NODE_ENV !== "production";
+const nextApp = next({ dev });
+const nextHandler = nextApp.getRequestHandler();
 
 io.on("connection", socket => initWSConnection(io, socket));
 
-const PORT = process.env.PORT || 5000;
+nextApp.prepare().then(() => {
+	app.all("*", (req, res) => nextHandler(req, res));
 
-server.listen(PORT, () => {
-	console.log("---------- ---------- ---------- ---------- ----------");
-	console.log(`🚀 Server ready on port ${PORT}`);
+	server.listen(port, err => {
+		if (err) throw err;
+		console.log("---------- ---------- ---------- ---------- ----------");
+		console.log(`> 🚀 Ready on http://localhost:${port}`);
+	});
 });
