@@ -2,19 +2,20 @@ const {
 	bot,
 	joinUser,
 	getUser,
-	// getRoomUsers,
+	getRoomUsers,
 	removeUserFromRoom,
 } = require("./utils/users");
 
 const initWSConnection = (io, socket) => {
 	// user connect & disconnect
-	socket.on("room-join", ({ username, room }) => {
-		const user = joinUser(socket.id, username, room);
+	socket.on("room-join", ({ room, username, role }) => {
+		const user = joinUser(room, socket.id, username, role);
 		socket.join(user.room);
 		socket.broadcast.to(user.room).emit("message", {
 			...bot,
 			message: `${username} joined the room.`,
 		});
+		io.to(user.room).emit("room-users", { users: getRoomUsers(user.room) });
 	});
 
 	socket.on("disconnect", () => {
@@ -24,6 +25,7 @@ const initWSConnection = (io, socket) => {
 				...bot,
 				message: `${user.name} left the room.`,
 			});
+			io.to(user.room).emit("room-users", { users: getRoomUsers(user.room) });
 		}
 	});
 

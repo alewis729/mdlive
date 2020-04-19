@@ -12,12 +12,13 @@ const { APP_URL } = publicRuntimeConfig;
 const socket = io(APP_URL);
 
 const RoomHandler = ({ roomId }) => {
-	const { name: username } = useSelector(state => state.user);
+	const { name: username, role } = useSelector(state => state.user);
 	const [shouldSaveNow, setShouldSaveNow] = useState(!username);
 
 	useEffect(() => {
 		if (!shouldSaveNow && username) {
-			socket.emit("room-join", { username, room: roomId });
+			// @todo: fix: client can modify role in devtools
+			socket.emit("room-join", { room: roomId, username, role });
 		}
 		// eslint-disable-next-line
 	}, [username, shouldSaveNow]);
@@ -43,7 +44,7 @@ const RoomHandler = ({ roomId }) => {
 								{roomId}
 							</Box>
 						</Typography>
-						<Previewer />
+						<Previewer role={role} />
 					</Box>
 				</>
 			)}

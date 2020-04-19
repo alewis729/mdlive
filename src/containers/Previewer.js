@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { Box, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -17,9 +18,8 @@ const useStyles = makeStyles(theme => ({
 	},
 }));
 const defaultText = getRandomTextMd();
-const canEdit = true; // redux: get from user privilleges
 
-const Previewer = ({ ...props }) => {
+const Previewer = ({ role, ...props }) => {
 	const [canSave, setCanSave] = useState(false);
 	const [text, setText] = useState("");
 	const classes = useStyles({ canSave });
@@ -44,7 +44,7 @@ const Previewer = ({ ...props }) => {
 				</div>
 			</Box>
 			<Grid className={classes.mainGrid} container spacing={3} justify="center">
-				{canEdit ? (
+				{role !== "viewer" ? (
 					<>
 						<Grid item xs={6}>
 							<Editor defaultText={defaultText} onChange={handleEditorChange} />
@@ -54,7 +54,7 @@ const Previewer = ({ ...props }) => {
 						</Grid>
 					</>
 				) : (
-					<Grid item xs={12}>
+					<Grid item xs={8} md={10}>
 						<Viewer preview={text} />
 					</Grid>
 				)}
@@ -63,7 +63,12 @@ const Previewer = ({ ...props }) => {
 	);
 };
 
+Previewer.propTypes = {
+	role: PropTypes.oneOf(["author", "editor", "viewer"]).isRequired,
+};
+
 Previewer.defaultProps = {
+	role: "viewer",
 	mt: 2,
 	mx: "auto",
 	maxWidth: 1600,

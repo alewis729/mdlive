@@ -1,7 +1,8 @@
 import { SET_USERNAME } from "../types";
 
 const initialState = {
-	name: null,
+	name: "",
+	role: "viewer",
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -9,7 +10,8 @@ const rootReducer = (state = initialState, action) => {
 		case SET_USERNAME:
 			return {
 				...state,
-				name: action.payload,
+				name: action.payload.name,
+				role: action.payload.role,
 			};
 		default:
 			return state;

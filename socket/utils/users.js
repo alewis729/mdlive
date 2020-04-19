@@ -1,10 +1,9 @@
 const bot = { id: "0", name: "Bot" };
 const users = [bot];
 
-const joinUser = (id, name, room) => {
-	const user = { id, name, room };
+const joinUser = (room, id, name, role) => {
+	const user = { room, id, name, role };
 	users.push(user);
-	console.log(`socketio users:`, users);
 	return user;
 };
 

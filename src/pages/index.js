@@ -39,6 +39,7 @@ const Index = () => {
 		>
 			<UsernameSetter
 				shouldSaveNow={shouldSaveNow}
+				role="author"
 				onSetUsername={handleCreateRoom}
 				onClose={() => setShouldSaveNow(false)}
 			/>

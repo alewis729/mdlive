@@ -19,11 +19,16 @@ const initialModals = { leave: false, invite: false };
 
 const InteractionsContainer = ({ socket }) => {
 	const router = useRouter();
+	const [users, setUsers] = useState([]);
 	const [chatMessages, setChatMessages] = useState([]);
 	const [modals, setModals] = useState(initialModals);
 	const fullUrl = getFullUrl(APP_URL, router.asPath);
 
 	useEffect(() => {
+		socket.on("room-users", ({ users }) => {
+			console.log("room-users", users);
+			setUsers(users);
+		});
 		socket.on("message", ({ id, name, message }) => {
 			setChatMessages(chatMessages => [...chatMessages, { id, name, message }]);
 		});
