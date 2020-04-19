@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { Box, Typography } from "@material-ui/core";
@@ -7,11 +7,7 @@ import { UsernameSetter, InteractionsContainer, Previewer } from "@/containers";
 
 const RoomHandler = ({ roomId }) => {
 	const { name: username } = useSelector(state => state.user);
-	const [shouldSaveNow, setShouldSaveNow] = React.useState(!username);
-
-	React.useEffect(() => {
-		console.log(username);
-	}, [username]);
+	const [shouldSaveNow, setShouldSaveNow] = useState(!username);
 
 	return (
 		<>
