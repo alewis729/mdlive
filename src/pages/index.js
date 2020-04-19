@@ -63,7 +63,6 @@ const Index = () => {
 				<Box mt={2}>
 					<Button onClick={() => setOpenModal(true)}>New room</Button>
 				</Box>
-
 				<Previewer />
 			</Box>
 		</Default>
