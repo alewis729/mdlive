@@ -13,7 +13,7 @@ import {
 import {
 	ArrowBackRounded as IconArrowLeft,
 	ArrowForwardRounded as IconArrowRight,
-	GroupAddRounded as IconGroup,
+	SettingsRounded as IconSettings,
 	QuestionAnswerRounded as IconChat,
 } from "@material-ui/icons";
 
@@ -62,7 +62,7 @@ const InteractionsPanel = ({ renderSettings, renderChat }) => {
 									onChange={handleChange}
 									indicatorColor="primary"
 								>
-									<Tab icon={<IconGroup />} />
+									<Tab icon={<IconSettings />} />
 									<Tab icon={<IconChat />} />
 								</Tabs>
 							</Grid>
