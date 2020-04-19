@@ -1,13 +1,11 @@
-// [reference](https://github.com/zeit/next.js/blob/c57cdbb31de6143b86b9091afb8d4dc2a2f46cc5/examples/with-redux-persist/lib/with-redux-store.js)
 import React from "react";
-import { initializeStore } from "../store";
+import initializeStore from "../store";
 
-const isServer = typeof window === "undefined";
 const __NEXT_REDUX_STORE__ = "__NEXT_REDUX_STORE__";
 
 function getOrCreateStore(initialState) {
 	// Always make a new store if server, otherwise state is shared between requests
-	if (isServer) {
+	if (typeof window === "undefined") {
 		return initializeStore(initialState);
 	}
 
@@ -23,29 +21,22 @@ export default App => {
 		static async getInitialProps(appContext) {
 			// Get or Create the store with `undefined` as initialState
 			// This allows you to set a custom default initialState
-			const reduxStore = getOrCreateStore();
+			const store = getOrCreateStore();
 
 			// Provide the store to getInitialProps of pages
-			appContext.ctx.reduxStore = reduxStore;
-
-			let appProps = {};
-			if (typeof App.getInitialProps === "function") {
-				appProps = await App.getInitialProps(appContext);
-			}
+			appContext.ctx.store = store;
 
 			return {
-				...appProps,
-				initialReduxState: reduxStore.getState(),
+				...(App.getInitialProps ? await App.getInitialProps(appContext) : {}),
+				initialReduxState: store.getState(),
 			};
 		}
 
-		constructor(props) {
-			super(props);
-			this.reduxStore = getOrCreateStore(props.initialReduxState);
-		}
-
 		render() {
-			return <App {...this.props} reduxStore={this.reduxStore} />;
+			const { initialReduxState } = this.props;
+			return (
+				<App {...this.props} store={getOrCreateStore(initialReduxState)} />
+			);
 		}
 	};
 };
