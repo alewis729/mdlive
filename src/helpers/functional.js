@@ -33,41 +33,6 @@ export const getFullUrl = (domain, path) => {
 };
 
 /**
- * Function that gets a random default text to display in .md
- */
-export const getRandomTextMd = () => {
-	const adjectives = [
-		"beautiful",
-		"creative",
-		"cool",
-		"great",
-		"nice",
-		"intelligent",
-		"awesome",
-	];
-	const adj = adjectives[Math.floor(Math.random() * adjectives.length)];
-	const final = `## Hello ${adj} human 😃\n\nJust type here to see a live preview!`;
-
-	return final;
-};
-
-/**
- * Function that replaces all white spaces from a string.
- */
-export const replaceWhiteSpaces = (str, replace = "") => {
-	if (typeof str !== "string") return str;
-	return str.replace(/^\s+|\s+$|\s+(?=\s)/g, replace);
-};
-
-/**
- * Function that replaces all spaces from a string.
- */
-export const replaceSpaces = (str, replace = "") => {
-	if (typeof str !== "string") return str;
-	return str.replace(/\s/g, replace);
-};
-
-/**
  * Function that returns a random string.
  * @param {arr} length [4, 2] => xxxx-xxxx
  * @param {str} chars posible chars to consider
@@ -87,4 +52,39 @@ export const getRandomAlphanumeric = (
 	}
 
 	return res;
+};
+
+/**
+ * Function that gets a random default text to display in .md
+ */
+export const getRandomTextMd = () => {
+	const adjectives = [
+		"beautiful",
+		"creative",
+		"cool",
+		"great",
+		"nice",
+		"intelligent",
+		"awesome",
+	];
+	const adj = adjectives[Math.floor(Math.random() * adjectives.length)];
+	const final = `## Hello ${adj} human 😃\n\nJust type here to see a live preview!`;
+
+	return final;
+};
+
+/**
+ * Function that replaces all spaces from a string.
+ */
+export const replaceSpaces = (str, replace = "") => {
+	if (typeof str !== "string") return str;
+	return str.replace(/\s/g, replace);
+};
+
+/**
+ * Function that replaces all white spaces from a string.
+ */
+export const replaceWhiteSpaces = (str, replace = "") => {
+	if (typeof str !== "string") return str;
+	return str.replace(/^\s+|\s+$|\s+(?=\s)/g, replace);
 };
