@@ -23,6 +23,7 @@ const Index = () => {
 	const handleCreateRoom = () => {
 		setShouldSaveNow(false);
 		const roomId = getRandomAlphanumeric();
+		// @todo: check if room id is already used!
 		router.push("/room/[roomId]", `/room/${roomId}`);
 	};
 

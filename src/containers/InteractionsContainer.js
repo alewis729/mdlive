@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useRouter } from "next/router";
 import getConfig from "next/config";
-import io from "socket.io-client";
+// import { useSelector } from "react-redux";
 import { Box } from "@material-ui/core";
 
 import {
@@ -14,20 +14,18 @@ import {
 import { InteractionsPanel } from "@/components/organisms";
 
 const { publicRuntimeConfig } = getConfig();
-const { APP_URL, SERVER_URL } = publicRuntimeConfig;
-const socket = io(SERVER_URL);
-const user = { id: "0", name: "alfred" };
+const { APP_URL } = publicRuntimeConfig;
 const initialModals = { leave: false, invite: false };
 
-const InteractionsContainer = ({ room }) => {
+const InteractionsContainer = ({ socket }) => {
 	const router = useRouter();
+	// const { name: username } = useSelector(state => state.user);
 	const [chatMessages, setChatMessages] = useState([]);
 	const [modals, setModals] = useState(initialModals);
 	let url = APP_URL + router.asPath;
 	url = url.substr(url.indexOf("//") + 2);
 
 	useEffect(() => {
-		socket.emit("user-connect", { name: user.name, room });
 		socket.on("message", ({ id, name, message }) => {
 			console.log(message);
 			setChatMessages(chatMessages => [...chatMessages, { id, name, message }]);
@@ -41,12 +39,12 @@ const InteractionsContainer = ({ room }) => {
 	}, []);
 
 	const handleMessageSubmit = message => {
-		const { id, name } = user;
-		socket.emit("message", { id, name, message });
+		// socket.emit("message", { username, message });
 	};
 
 	const handleLeave = () => {
 		setModals(initialModals);
+		socket.disconnect();
 		router.push("/");
 	};
 
@@ -83,7 +81,7 @@ const InteractionsContainer = ({ room }) => {
 };
 
 InteractionsContainer.propTypes = {
-	room: PropTypes.string.isRequired,
+	socket: PropTypes.object.isRequired,
 };
 
 export default InteractionsContainer;
