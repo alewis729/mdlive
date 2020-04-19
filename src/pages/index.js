@@ -21,6 +21,7 @@ const Index = () => {
 	};
 
 	const handleCreateRoom = () => {
+		setShouldSaveNow(false);
 		const roomId = getRandomAlphanumeric();
 		router.push("/room/[roomId]", `/room/${roomId}`);
 	};

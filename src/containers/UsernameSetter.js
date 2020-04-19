@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setUsername } from "@/store/actions";
 import { UsernameCollector } from "@/components/molecules";
 
-const UsernameSetter = ({ shouldSaveNow, onSetUsername, onClose }) => {
+const UsernameSetter = ({ shouldSaveNow, onSetUsername, ...props }) => {
 	const { name: username } = useSelector(state => state.user);
 	const dispatch = useDispatch();
 
@@ -15,10 +15,7 @@ const UsernameSetter = ({ shouldSaveNow, onSetUsername, onClose }) => {
 	}, [shouldSaveNow]);
 
 	const handleSaveUsername = ({ user }) => {
-		if (!username) {
-			dispatch(setUsername(user));
-			onClose();
-		}
+		if (!username) dispatch(setUsername(user));
 		onSetUsername();
 	};
 
@@ -26,7 +23,7 @@ const UsernameSetter = ({ shouldSaveNow, onSetUsername, onClose }) => {
 		<UsernameCollector
 			open={shouldSaveNow && !username}
 			onCommit={handleSaveUsername}
-			onClose={onClose}
+			{...props}
 		/>
 	);
 };
@@ -34,7 +31,6 @@ const UsernameSetter = ({ shouldSaveNow, onSetUsername, onClose }) => {
 UsernameSetter.propTypes = {
 	shouldSaveNow: PropTypes.bool,
 	onSetUsername: PropTypes.func.isRequired,
-	onClose: PropTypes.func,
 };
 
 UsernameSetter.defaultProps = {
