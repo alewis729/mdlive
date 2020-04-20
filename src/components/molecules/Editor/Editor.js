@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { InputBase } from "@material-ui/core";
 
@@ -8,6 +8,8 @@ import { Board } from "@/components/atoms";
 const Editor = ({ defaultText, onChange, ...props }) => {
 	const classes = useStyles();
 	const [text, setText] = useState(defaultText);
+
+	useEffect(() => setText(defaultText), [defaultText]);
 
 	const handleTextChange = e => {
 		const { value } = e.target;

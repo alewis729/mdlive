@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import { Editor, Viewer } from "@/components/molecules";
 import { Button } from "@/components/atoms";
-import { getRandomTextMd, downloadFile } from "@/helpers";
+import { downloadFile } from "@/helpers";
 
 const useStyles = makeStyles(theme => ({
 	saveButton: {
@@ -17,18 +17,13 @@ const useStyles = makeStyles(theme => ({
 		height: "100%",
 	},
 }));
-const defaultText = getRandomTextMd();
 
-const Previewer = ({ role, content, onEdit, ...props }) => {
+const Previewer = ({ userRole, defaultContent, onEdit, ...props }) => {
 	const [canSave, setCanSave] = useState(false);
 	const [text, setText] = useState("");
 	const classes = useStyles({ canSave });
 
-	useEffect(() => setText(defaultText), []);
-
-	useEffect(() => {
-		if (content !== null) setText(content);
-	}, [content]);
+	useEffect(() => setText(defaultContent), [defaultContent]);
 
 	const handleEditorChange = val => {
 		const hasEnoughText = val.length > 5;
@@ -49,13 +44,13 @@ const Previewer = ({ role, content, onEdit, ...props }) => {
 				</div>
 			</Box>
 			<Grid className={classes.mainGrid} container spacing={3} justify="center">
-				{role !== "viewer" ? (
+				{userRole !== "viewer" ? (
 					<>
 						<Grid item xs={6}>
 							<Viewer preview={text} />
 						</Grid>
 						<Grid item xs={6}>
-							<Editor defaultText={defaultText} onChange={handleEditorChange} />
+							<Editor defaultText={text} onChange={handleEditorChange} />
 						</Grid>
 					</>
 				) : (
@@ -69,14 +64,14 @@ const Previewer = ({ role, content, onEdit, ...props }) => {
 };
 
 Previewer.propTypes = {
-	role: PropTypes.oneOf(["author", "editor", "viewer"]).isRequired,
-	content: PropTypes.string,
+	userRole: PropTypes.oneOf(["author", "editor", "viewer"]).isRequired,
+	defaultContent: PropTypes.string.isRequired,
 	onEdit: PropTypes.func,
 };
 
 Previewer.defaultProps = {
-	role: "viewer",
-	content: null,
+	userRole: "viewer",
+	defaultContent: null,
 	onEdit: null,
 	mt: 2,
 	mx: "auto",

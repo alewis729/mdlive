@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Typography } from "@material-ui/core";
 import { useRouter } from "next/router";
 
@@ -6,11 +6,16 @@ import { Previewer, UsernameSetter } from "@/containers";
 import { Default } from "@/components/templates";
 import { Navigation, Footer } from "@/components/molecules";
 import { Button } from "@/components/atoms";
-import { getRandomAlphanumeric } from "@/helpers";
+import { getRandomTextMd, getRandomAlphanumeric } from "@/helpers";
+
+const defaultContent = getRandomTextMd();
 
 const Index = () => {
 	const router = useRouter();
+	const [content, setContent] = useState("");
 	const [shouldSaveNow, setShouldSaveNow] = useState(false);
+
+	useEffect(() => setContent(defaultContent), []);
 
 	const handleNagivation = val => {
 		console.log(val);
@@ -78,7 +83,7 @@ const Index = () => {
 				<Box mt={2}>
 					<Button onClick={() => setShouldSaveNow(true)}>New room</Button>
 				</Box>
-				<Previewer role="author" />
+				<Previewer userRole="author" defaultContent={content} />
 			</Box>
 		</Default>
 	);

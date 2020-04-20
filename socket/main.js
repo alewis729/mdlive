@@ -18,18 +18,22 @@ const initWSConnection = (io, socket) => {
 			message: `${username} joined the room.`,
 		});
 		io.to(room.id).emit("room-users", { users: getRoomUsers(room.id) });
-		if (room.content) io.to(room.id).emit("new-md-change", { content });
+		if (room.users[0].id !== socket.id) {
+			io.to(room.users[0].id).emit("refresh-content");
+		}
 	});
 
 	socket.on("disconnect", () => {
-		const user = removeUserFromRoom(socket.id);
 		const room = getRoomFromUserId(socket.id);
-		if (user && room) {
-			io.to(room.id).emit("message", {
-				...bot,
-				message: `${user.name} left the room.`,
-			});
-			io.to(room.id).emit("room-users", { users: getRoomUsers(room.id) });
+		if (room && room.id) {
+			const user = removeUserFromRoom(room.id, socket.id);
+			if (user) {
+				io.to(room.id).emit("message", {
+					...bot,
+					message: `${user.name} left the room.`,
+				});
+				io.to(room.id).emit("room-users", { users: getRoomUsers(room.id) });
+			}
 		}
 	});
 

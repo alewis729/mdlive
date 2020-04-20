@@ -16,10 +16,11 @@ const defaultContent = getRandomTextMd();
 const RoomHandler = ({ roomId }) => {
 	const { name: username, role } = useSelector(state => state.user);
 	const [shouldSaveNow, setShouldSaveNow] = useState(!username);
-	const [content, setContent] = useState(null);
+	const [content, setContent] = useState("");
 
 	useEffect(() => {
 		if (!shouldSaveNow && username) {
+			setContent(defaultContent);
 			// @todo: fix: client can modify role in devtools
 			socket.emit("room-join", { roomId, username, role, content });
 		}
@@ -27,14 +28,15 @@ const RoomHandler = ({ roomId }) => {
 	}, [username, shouldSaveNow]);
 
 	useEffect(() => {
-		setContent(defaultContent);
+		socket.on("refresh-content", () => socket.emit("md-change", { content }));
 		socket.on("new-md-change", ({ content }) => {
 			setContent(content);
 		});
-	}, []);
+	}, [content]);
 
-	const handleEdit = content => {
-		socket.emit("md-change", { content });
+	const handleEdit = value => {
+		setContent(value);
+		socket.emit("md-change", { content: value });
 	};
 
 	return (
@@ -58,7 +60,11 @@ const RoomHandler = ({ roomId }) => {
 								{roomId}
 							</Box>
 						</Typography>
-						<Previewer role={role} content={content} onEdit={handleEdit} />
+						<Previewer
+							userRole={role}
+							defaultContent={content}
+							onEdit={handleEdit}
+						/>
 					</Box>
 				</>
 			)}
