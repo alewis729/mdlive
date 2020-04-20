@@ -10,7 +10,7 @@ const UsernameSetter = ({ shouldSaveNow, role, onSetUsername, ...props }) => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		if (shouldSaveNow && username) handleSaveUsername();
+		if (shouldSaveNow && username) handleSaveUsername({ user: username });
 		// eslint-disable-next-line
 	}, [shouldSaveNow]);
 
