@@ -19,16 +19,21 @@ const useStyles = makeStyles(theme => ({
 }));
 const defaultText = getRandomTextMd();
 
-const Previewer = ({ role, ...props }) => {
+const Previewer = ({ role, content, onEdit, ...props }) => {
 	const [canSave, setCanSave] = useState(false);
 	const [text, setText] = useState("");
 	const classes = useStyles({ canSave });
 
 	useEffect(() => setText(defaultText), []);
 
+	useEffect(() => {
+		if (content !== null) setText(content);
+	}, [content]);
+
 	const handleEditorChange = val => {
 		const hasEnoughText = val.length > 5;
 		setText(val);
+		if (onEdit) onEdit(val);
 
 		if (!canSave && hasEnoughText) setCanSave(true);
 		else if (canSave && !hasEnoughText) setCanSave(false);
@@ -65,10 +70,14 @@ const Previewer = ({ role, ...props }) => {
 
 Previewer.propTypes = {
 	role: PropTypes.oneOf(["author", "editor", "viewer"]).isRequired,
+	content: PropTypes.string,
+	onEdit: PropTypes.func,
 };
 
 Previewer.defaultProps = {
 	role: "viewer",
+	content: null,
+	onEdit: null,
 	mt: 2,
 	mx: "auto",
 	maxWidth: 1600,
