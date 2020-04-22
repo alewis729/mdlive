@@ -10,7 +10,7 @@ export const useStyles = makeStyles({
 	settings: {
 		height: settingsHeight,
 	},
-	people: {
+	users: {
 		overflowY: "auto",
 		height: `calc(100% - ${settingsHeight}px)`,
 	},

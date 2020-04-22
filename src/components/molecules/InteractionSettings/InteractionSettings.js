@@ -9,7 +9,7 @@ import {
 import { useStyles } from "./style";
 import { Button } from "@/components/atoms";
 
-const InteractionSettings = ({ people, renderPerson, onInvite, onLeave }) => {
+const InteractionSettings = ({ users, renderUser, onInvite, onLeave }) => {
 	const classes = useStyles();
 
 	return (
@@ -38,15 +38,15 @@ const InteractionSettings = ({ people, renderPerson, onInvite, onLeave }) => {
 					<Box py={0.5}>Leave room</Box>
 				</Button>
 			</Box>
-			<Box p={2.5} className={classes.people}>
-				{people.length === 0 ? (
+			<Box p={2.5} className={classes.users}>
+				{users.length === 0 ? (
 					<Box textAlign="center">
 						<Typography>There is no one else in the room.</Typography>
 					</Box>
 				) : (
-					people.map(person => (
-						<Box key={person.id} mb={1}>
-							{renderPerson(person)}
+					users.map(user => (
+						<Box key={user.id} mb={1}>
+							{renderUser(user)}
 						</Box>
 					))
 				)}
@@ -56,8 +56,8 @@ const InteractionSettings = ({ people, renderPerson, onInvite, onLeave }) => {
 };
 
 InteractionSettings.propTypes = {
-	people: PropTypes.array.isRequired,
-	renderPerson: PropTypes.func.isRequired,
+	users: PropTypes.array.isRequired,
+	renderUser: PropTypes.func.isRequired,
 	onInvite: PropTypes.func.isRequired,
 	onLeave: PropTypes.func.isRequired,
 };
