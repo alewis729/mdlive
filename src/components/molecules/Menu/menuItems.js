@@ -1,12 +1,12 @@
+import React from "react";
 import {
-	MoreVert as IconDots,
 	AddCircleOutlineRounded as IconNew,
 	CloudUploadRounded as IconUpload,
 	Brightness4Rounded as IconTheme,
 	LanguageRounded as IconLang,
 	AccountCircleRounded as IconUser,
 	EditRounded as IconEdit,
-	BackspaceRounded as IconEditRemove,
+	VisibilityRounded as IconView,
 	SupervisorAccountRounded as IconAdmin,
 	RemoveCircleRounded as IconRemove,
 } from "@material-ui/icons";
@@ -38,23 +38,23 @@ const items = [
 		icon: <IconUser fontSize="small" />,
 	},
 	{
-		id: "allow-editing",
-		name: "Allow editing",
-		icon: <IconEdit fontSize="small" />,
-	},
-	{
-		id: "disallow-editing",
-		name: "Disallow editing",
-		icon: <IconEditRemove fontSize="small" />,
-	},
-	{
 		id: "make-author",
 		name: "Make author",
 		icon: <IconAdmin fontSize="small" />,
 	},
 	{
-		id: "request-to-leave",
-		name: "Request to leave",
+		id: "make-editor",
+		name: "Make editor",
+		icon: <IconEdit fontSize="small" />,
+	},
+	{
+		id: "make-viewer",
+		name: "Make viewer",
+		icon: <IconView fontSize="small" />,
+	},
+	{
+		id: "kick",
+		name: "Kick from room",
 		icon: <IconRemove fontSize="small" />,
 	},
 ];

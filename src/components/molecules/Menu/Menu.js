@@ -10,9 +10,9 @@ import {
 import { MoreVert as IconDots } from "@material-ui/icons";
 
 import { useStyles } from "./style";
-import items from "./menuItems";
+import menuItems from "./menuItems";
 
-const Menu = ({ activeItems, onItemClick }) => {
+const Menu = ({ items, onItemClick }) => {
 	const classes = useStyles();
 	const [anchorEl, setAnchorEl] = useState(null);
 	const open = Boolean(anchorEl);
@@ -38,13 +38,15 @@ const Menu = ({ activeItems, onItemClick }) => {
 				open={open}
 				onClose={handleClose}
 			>
-				{items.map(
+				{menuItems.map(
 					item =>
-						activeItems.includes(item.id) && (
+						items.includes(item.id) && (
 							<MenuItem key={item.id} onClick={() => handleItemClick(item.id)}>
-								<ListItemIcon className={classes.icon}>
-									{item.icon}
-								</ListItemIcon>
+								{item.icon && (
+									<ListItemIcon className={classes.icon}>
+										{item.icon}
+									</ListItemIcon>
+								)}
 								<Typography variant="inherit" noWrap>
 									{item.name}
 								</Typography>
@@ -57,12 +59,24 @@ const Menu = ({ activeItems, onItemClick }) => {
 };
 
 Menu.propTypes = {
-	activeItems: PropTypes.arrayOf(PropTypes.string.isRequired),
+	items: PropTypes.arrayOf(
+		PropTypes.oneOf([
+			"new-room",
+			"upload-file",
+			"toggle-theme",
+			"change-language",
+			"register",
+			"make-author",
+			"make-editor",
+			"make-viewer",
+			"kick",
+		])
+	),
 	onItemClick: PropTypes.func.isRequired,
 };
 
 Menu.defaultProps = {
-	activeItems: [
+	items: [
 		"new-room",
 		"upload-file",
 		"toggle-theme",
