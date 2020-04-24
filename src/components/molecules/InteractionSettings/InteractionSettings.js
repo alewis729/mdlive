@@ -1,6 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Box, Typography } from "@material-ui/core";
+import {
+	Box,
+	Typography,
+	List,
+	ListItem,
+	ListItemAvatar,
+	ListItemText,
+	ListItemSecondaryAction,
+	Avatar,
+} from "@material-ui/core";
 import {
 	ShareRounded as IconShare,
 	ExitToAppRounded as IconLeave,
@@ -8,8 +17,15 @@ import {
 
 import { useStyles } from "./style";
 import { Button } from "@/components/atoms";
+import { Menu } from "@/components/molecules";
 
-const InteractionSettings = ({ users, renderUser, onInvite, onLeave }) => {
+const InteractionSettings = ({
+	currentUser,
+	users,
+	onUserMenuAction,
+	onInvite,
+	onLeave,
+}) => {
 	const classes = useStyles();
 
 	return (
@@ -44,11 +60,34 @@ const InteractionSettings = ({ users, renderUser, onInvite, onLeave }) => {
 						<Typography>There is no one else in the room.</Typography>
 					</Box>
 				) : (
-					users.map(user => (
-						<Box key={user.id} mb={1}>
-							{renderUser(user)}
-						</Box>
-					))
+					<List>
+						{users.map(
+							user =>
+								currentUser.role === "author" && (
+									<ListItem key={user.id} disableGutters>
+										<ListItemAvatar>
+											<Avatar className={classes.avatar}>{user.name[0]}</Avatar>
+										</ListItemAvatar>
+										<ListItemText primary={user.name} />
+										{currentUser.id !== user.id && (
+											<ListItemSecondaryAction>
+												<Menu
+													items={[
+														"make-author",
+														"make-editor",
+														"make-viewer",
+														"kick",
+													]}
+													onItemClick={item =>
+														onUserMenuAction && onUserMenuAction(user.id, item)
+													}
+												/>
+											</ListItemSecondaryAction>
+										)}
+									</ListItem>
+								)
+						)}
+					</List>
 				)}
 			</Box>
 		</div>
@@ -56,10 +95,24 @@ const InteractionSettings = ({ users, renderUser, onInvite, onLeave }) => {
 };
 
 InteractionSettings.propTypes = {
-	users: PropTypes.array.isRequired,
-	renderUser: PropTypes.func.isRequired,
+	currentUser: PropTypes.shape({
+		id: PropTypes.string.isRequired,
+		role: PropTypes.oneOf(["author", "editor", "viewer"]),
+	}).isRequired,
+	users: PropTypes.arrayOf(
+		PropTypes.shape({
+			id: PropTypes.string.isRequired,
+			name: PropTypes.string.isRequired,
+			role: PropTypes.oneOf(["author", "editor", "viewer"]),
+		})
+	).isRequired,
+	onUserMenuAction: PropTypes.func,
 	onInvite: PropTypes.func.isRequired,
 	onLeave: PropTypes.func.isRequired,
+};
+
+InteractionSettings.defaultProps = {
+	onUserMenuAction: null,
 };
 
 export default InteractionSettings;
