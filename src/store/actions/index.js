@@ -1,1 +1,7 @@
-export { setCurrentUser, addUser, removeUser } from "./actionsUsers";
+export {
+	setCurrentUser,
+	updateCurrentId,
+	updateUsers,
+	addUser,
+	removeUser,
+} from "./actionsUsers";

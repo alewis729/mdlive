@@ -1,4 +1,10 @@
-import { SET_CURRENT_USER, ADD_USER, REMOVE_USER } from "../types";
+import {
+	SET_CURRENT_USER,
+	UPDATE_CURRENT_ID,
+	UPDATE_USERS,
+	ADD_USER,
+	REMOVE_USER,
+} from "../types";
 
 const initialState = {
 	current: null,
@@ -16,6 +22,26 @@ const rootReducer = (state = initialState, action) => {
 			...state,
 			current: user,
 			all: [...state.all, user],
+		};
+	} else if (type === UPDATE_CURRENT_ID) {
+		const { name, role } = state.current;
+		return {
+			...state,
+			current: { id: payload, name, role },
+			all: state.all.map(user =>
+				user.id
+					? user
+					: {
+							id: payload,
+							name: user.name,
+							role: user.role,
+					  }
+			),
+		};
+	} else if (type === UPDATE_USERS) {
+		return {
+			...state,
+			all: payload,
 		};
 	} else if (type === ADD_USER) {
 		const { id, name, role } = payload;

@@ -10,6 +10,7 @@ const {
 const initWSConnection = (io, socket) => {
 	// user connect & disconnect
 	socket.on("room-join", ({ roomId, username, role, content }) => {
+		console.log(socket.id);
 		joinUser(roomId, socket.id, username, role, content);
 		const room = getRoomFromUserId(socket.id);
 		socket.join(room.id);

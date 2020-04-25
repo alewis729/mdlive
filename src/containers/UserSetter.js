@@ -15,7 +15,7 @@ const UserSetter = ({ open, role, onSubmitUsername, ...props }) => {
 	}, [open]);
 
 	const handleSaveUsername = ({ name }) => {
-		dispatch(setCurrentUser("01", name, role));
+		dispatch(setCurrentUser(null, name, role));
 		onSubmitUsername();
 	};
 

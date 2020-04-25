@@ -3,9 +3,10 @@ import PropTypes from "prop-types";
 import { useRouter } from "next/router";
 import getConfig from "next/config";
 import io from "socket.io-client";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Box, Typography } from "@material-ui/core";
 
+import { updateCurrentId } from "@/store/actions";
 import { UserSetter, InteractionsContainer, Previewer } from "@/containers";
 import { getRandomTextMd } from "@/helpers";
 
@@ -19,9 +20,11 @@ const RoomHandler = ({ roomId }) => {
 	const currentUser = useSelector(state => state.users.current);
 	const [open, setOpenModal] = useState(!currentUser);
 	const [content, setContent] = useState("");
+	const dispatch = useDispatch();
 
 	useEffect(() => {
-		if (!open && currentUser) {
+		if (!open && currentUser && currentUser.id !== socket.id) {
+			dispatch(updateCurrentId(socket.id));
 			setContent(defaultContent);
 			// @todo: fix: client can modify role in devtools
 			socket.emit("room-join", {
