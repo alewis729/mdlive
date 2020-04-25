@@ -18,7 +18,7 @@ export const RoundedButton = withStyles(theme => ({
 		transition: theme.helpers.transitionQuick,
 		"&:hover": {
 			boxShadow: ({ displaycolor: color }) =>
-				`0 3px 5px 2px ${rgba(theme.palette[color].light, 0.25)}`,
+				`0 3px 5px 2px ${rgba(theme.palette[color].light, 0.2)}`,
 		},
 		"&:hover::before": {
 			opacity: "1",
