@@ -1,5 +1,8 @@
 const yenv = require("yenv");
 const env = yenv();
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+	enabled: process.env.ANALYZE === "true",
+});
 const path = require("path");
 const pathSrc = path.resolve(__dirname, "src");
 const IconsSrc = path.resolve(__dirname, "src/components/atoms/Icons");
@@ -18,4 +21,4 @@ const nextConfig = {
 	},
 };
 
-module.exports = nextConfig;
+module.exports = withBundleAnalyzer(nextConfig);

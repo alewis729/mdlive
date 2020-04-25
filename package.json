@@ -8,11 +8,14 @@
 		"build": "next build",
 		"start": "next start",
 		"format": "prettier \"src/**/*.{js,jsx,json}\" --write",
-		"lint": "eslint . \"**/*.{js,jsx,ts,tsx}\""
+		"lint": "eslint . \"**/*.{js,jsx,ts,tsx}\"",
+		"analyze": "cross-env ANALYZE=true next build"
 	},
 	"dependencies": {
 		"@material-ui/core": "^4.9.9",
 		"@material-ui/icons": "^4.9.1",
+		"@next/bundle-analyzer": "^9.3.5",
+		"cross-env": "^7.0.2",
 		"express": "^4.17.1",
 		"mongoose": "^5.9.7",
 		"next": "^9.3.4",
