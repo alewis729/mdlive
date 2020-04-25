@@ -61,32 +61,29 @@ const InteractionSettings = ({
 					</Box>
 				) : (
 					<List>
-						{users.map(
-							user =>
-								currentUser.role === "author" && (
-									<ListItem key={user.id} disableGutters>
-										<ListItemAvatar>
-											<Avatar className={classes.avatar}>{user.name[0]}</Avatar>
-										</ListItemAvatar>
-										<ListItemText primary={user.name} />
-										{currentUser.id !== user.id && (
-											<ListItemSecondaryAction>
-												<Menu
-													items={[
-														"make-author",
-														"make-editor",
-														"make-viewer",
-														"kick",
-													]}
-													onItemClick={item =>
-														onUserMenuAction && onUserMenuAction(user.id, item)
-													}
-												/>
-											</ListItemSecondaryAction>
-										)}
-									</ListItem>
-								)
-						)}
+						{users.map(user => (
+							<ListItem key={user.id} disableGutters>
+								<ListItemAvatar>
+									<Avatar className={classes.avatar}>{user.name[0]}</Avatar>
+								</ListItemAvatar>
+								<ListItemText primary={user.name} />
+								{currentUser.role === "author" && currentUser.id !== user.id && (
+									<ListItemSecondaryAction>
+										<Menu
+											items={[
+												"make-author",
+												"make-editor",
+												"make-viewer",
+												"kick",
+											]}
+											onItemClick={item =>
+												onUserMenuAction && onUserMenuAction(user.id, item)
+											}
+										/>
+									</ListItemSecondaryAction>
+								)}
+							</ListItem>
+						))}
 					</List>
 				)}
 			</Box>

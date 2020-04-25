@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { useRouter } from "next/router";
 import getConfig from "next/config";
 import { useSelector, useDispatch } from "react-redux";
-import { Box } from "@material-ui/core";
 
 import { updateUsers } from "@/store/actions";
 import {
@@ -72,7 +71,8 @@ const InteractionsContainer = ({ socket }) => {
 			/>
 			<InteractionsPanel
 				renderSettings={() =>
-					currentUser && (
+					currentUser &&
+					currentUser.id && (
 						<InteractionSettings
 							currentUser={currentUser}
 							users={users}
