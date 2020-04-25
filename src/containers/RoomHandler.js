@@ -5,7 +5,7 @@ import io from "socket.io-client";
 import { useSelector } from "react-redux";
 import { Box, Typography } from "@material-ui/core";
 
-import { UsernameSetter, InteractionsContainer, Previewer } from "@/containers";
+import { UserSetter, InteractionsContainer, Previewer } from "@/containers";
 import { getRandomTextMd } from "@/helpers";
 
 const { publicRuntimeConfig } = getConfig();
@@ -41,7 +41,7 @@ const RoomHandler = ({ roomId }) => {
 
 	return (
 		<>
-			<UsernameSetter
+			<UserSetter
 				shouldSaveNow={shouldSaveNow}
 				onSetUsername={() => setShouldSaveNow(false)}
 				textCommit="Join room"

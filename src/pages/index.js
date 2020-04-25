@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Box, Typography } from "@material-ui/core";
 import { useRouter } from "next/router";
 
-import { Previewer, UsernameSetter } from "@/containers";
+import { Previewer, UserSetter } from "@/containers";
 import { Default } from "@/components/templates";
 import { Navigation, Footer } from "@/components/molecules";
 import { Button } from "@/components/atoms";
@@ -42,7 +42,7 @@ const Index = () => {
 			}
 			footer={<Footer />}
 		>
-			<UsernameSetter
+			<UserSetter
 				shouldSaveNow={shouldSaveNow}
 				role="author"
 				onSetUsername={handleCreateRoom}
