@@ -5,7 +5,7 @@ import { Dialog, Box, Grid, Typography, TextField } from "@material-ui/core";
 import { Button } from "@/components/atoms";
 
 const UsernameCollector = ({ open, textCommit, onCommit, onClose }) => {
-	const [formData, setFormData] = useState({ user: "", error: null });
+	const [formData, setFormData] = useState({ name: "", error: null });
 
 	const handleInputChange = (e, key) => {
 		const { value } = e.target;
@@ -13,7 +13,7 @@ const UsernameCollector = ({ open, textCommit, onCommit, onClose }) => {
 	};
 
 	const handleSubmit = () => {
-		if (formData.user.length < 3) {
+		if (formData.name.length < 3) {
 			setFormData({
 				...formData,
 				error: "Must be at least 3 characters long.",
@@ -54,9 +54,9 @@ const UsernameCollector = ({ open, textCommit, onCommit, onClose }) => {
 						fullWidth
 						autoFocus
 						required
-						value={formData.user}
+						value={formData.name}
 						onKeyDown={e => (e.keyCode === 13 ? handleSubmit() : null)}
-						onChange={e => handleInputChange(e, "user")}
+						onChange={e => handleInputChange(e, "name")}
 					/>
 				</Box>
 				<Grid container justify="center" spacing={2}>

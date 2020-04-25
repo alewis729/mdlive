@@ -1,1 +1,1 @@
-export { setUsername } from "./actionsUser";
+export { setCurrentUser, addUser, removeUser } from "./actionsUsers";

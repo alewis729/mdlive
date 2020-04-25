@@ -14,18 +14,23 @@ const socket = io(APP_URL);
 const defaultContent = getRandomTextMd();
 
 const RoomHandler = ({ roomId }) => {
-	const { name: username, role } = useSelector(state => state.user);
-	const [shouldSaveNow, setShouldSaveNow] = useState(!username);
+	const currentUser = useSelector(state => state.users.current);
+	const [open, setOpenModal] = useState(!currentUser);
 	const [content, setContent] = useState("");
 
 	useEffect(() => {
-		if (!shouldSaveNow && username) {
+		if (!open && currentUser) {
 			setContent(defaultContent);
 			// @todo: fix: client can modify role in devtools
-			socket.emit("room-join", { roomId, username, role, content });
+			socket.emit("room-join", {
+				roomId,
+				username: currentUser.name,
+				role: currentUser.role,
+				content,
+			});
 		}
 		// eslint-disable-next-line
-	}, [username, shouldSaveNow]);
+	}, [currentUser, open]);
 
 	useEffect(() => {
 		socket.on("refresh-content", () => socket.emit("md-change", { content }));
@@ -42,11 +47,11 @@ const RoomHandler = ({ roomId }) => {
 	return (
 		<>
 			<UserSetter
-				shouldSaveNow={shouldSaveNow}
-				onSetUsername={() => setShouldSaveNow(false)}
+				open={open}
+				onSubmitUsername={() => setOpenModal(false)}
 				textCommit="Join room"
 			/>
-			{username && (
+			{currentUser && (
 				<>
 					<InteractionsContainer socket={socket} />
 					<Box textAlign="center">
@@ -61,7 +66,7 @@ const RoomHandler = ({ roomId }) => {
 							</Box>
 						</Typography>
 						<Previewer
-							userRole={role}
+							userRole={currentUser.role}
 							defaultContent={content}
 							onEdit={handleEdit}
 						/>

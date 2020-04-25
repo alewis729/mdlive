@@ -13,7 +13,7 @@ const defaultContent = getRandomTextMd();
 const Index = () => {
 	const router = useRouter();
 	const [content, setContent] = useState("");
-	const [shouldSaveNow, setShouldSaveNow] = useState(false);
+	const [openModal, setOpenModal] = useState(false);
 
 	useEffect(() => setContent(defaultContent), []);
 
@@ -26,7 +26,7 @@ const Index = () => {
 	};
 
 	const handleCreateRoom = () => {
-		setShouldSaveNow(false);
+		setOpenModal(false);
 		const roomId = getRandomAlphanumeric();
 		// @todo: check if room id is already used!
 		router.push("/room/[roomId]", `/room/${roomId}`);
@@ -43,10 +43,10 @@ const Index = () => {
 			footer={<Footer />}
 		>
 			<UserSetter
-				shouldSaveNow={shouldSaveNow}
+				open={openModal}
 				role="author"
-				onSetUsername={handleCreateRoom}
-				onClose={() => setShouldSaveNow(false)}
+				onSubmitUsername={handleCreateRoom}
+				onClose={() => setOpenModal(false)}
 			/>
 			<Box textAlign="center">
 				<Typography variant="h3" gutterBottom>
@@ -81,7 +81,7 @@ const Index = () => {
 					</Box>
 				</Typography>
 				<Box mt={2}>
-					<Button onClick={() => setShouldSaveNow(true)}>New room</Button>
+					<Button onClick={() => setOpenModal(true)}>New room</Button>
 				</Box>
 				<Previewer userRole="author" defaultContent={content} />
 			</Box>

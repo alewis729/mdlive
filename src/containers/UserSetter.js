@@ -2,26 +2,26 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
 
-import { setUsername } from "@/store/actions";
+import { setCurrentUser } from "@/store/actions";
 import { UsernameCollector } from "@/components/molecules";
 
-const UserSetter = ({ shouldSaveNow, role, onSetUsername, ...props }) => {
-	const { name: username } = useSelector(state => state.user);
+const UserSetter = ({ open, role, onSubmitUsername, ...props }) => {
+	const user = useSelector(state => state.users.current);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		if (shouldSaveNow && username) handleSaveUsername({ user: username });
+		if (open && user) onSubmitUsername();
 		// eslint-disable-next-line
-	}, [shouldSaveNow]);
+	}, [open]);
 
-	const handleSaveUsername = ({ user }) => {
-		if (!username) dispatch(setUsername(user, role));
-		onSetUsername();
+	const handleSaveUsername = ({ name }) => {
+		dispatch(setCurrentUser("01", name, role));
+		onSubmitUsername();
 	};
 
 	return (
 		<UsernameCollector
-			open={shouldSaveNow && !username}
+			open={open && !user}
 			onCommit={handleSaveUsername}
 			{...props}
 		/>
@@ -29,13 +29,13 @@ const UserSetter = ({ shouldSaveNow, role, onSetUsername, ...props }) => {
 };
 
 UserSetter.propTypes = {
-	shouldSaveNow: PropTypes.bool,
+	open: PropTypes.bool,
 	role: PropTypes.oneOf(["author", "editor", "viewer"]).isRequired,
-	onSetUsername: PropTypes.func.isRequired,
+	onSubmitUsername: PropTypes.func.isRequired,
 };
 
 UserSetter.defaultProps = {
-	shouldSaveNow: false,
+	open: false,
 	role: "viewer",
 };
 
