@@ -1,13 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Toolbar, Box } from "@material-ui/core";
+import { Toolbar } from "@material-ui/core";
 
 import { useStyles } from "./style";
 import { IconLogo } from "@icons";
-import { Button } from "@/components/atoms";
 import { Menu } from "@/components/molecules";
 
-const Navigation = ({ onNavigate, onMainButtonClick }) => {
+const Navigation = ({ onNavigate }) => {
 	const classes = useStyles();
 
 	return (
@@ -16,16 +15,12 @@ const Navigation = ({ onNavigate, onMainButtonClick }) => {
 				<IconLogo />
 			</div>
 			<Menu onItemClick={onNavigate} />
-			<Box ml={3}>
-				<Button onClick={onMainButtonClick}>Sign in</Button>
-			</Box>
 		</Toolbar>
 	);
 };
 
 Navigation.propTypes = {
 	onNavigate: PropTypes.func.isRequired,
-	onMainButtonClick: PropTypes.func.isRequired,
 };
 
 export default Navigation;

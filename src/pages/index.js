@@ -21,10 +21,6 @@ const Index = () => {
 		console.log(val);
 	};
 
-	const handleMainButtonClick = () => {
-		console.log("sign in");
-	};
-
 	const handleCreateRoom = () => {
 		setOpenModal(false);
 		const roomId = getRandomAlphanumeric();
@@ -34,12 +30,7 @@ const Index = () => {
 
 	return (
 		<Default
-			header={
-				<Navigation
-					onNavigate={handleNagivation}
-					onMainButtonClick={handleMainButtonClick}
-				/>
-			}
+			header={<Navigation onNavigate={handleNagivation} />}
 			footer={<Footer />}
 		>
 			<UserSetter

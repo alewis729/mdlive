@@ -13,18 +13,9 @@ const Room = () => {
 		console.log(val);
 	};
 
-	const handleMainButtonClick = () => {
-		console.log("sign in");
-	};
-
 	return (
 		<Default
-			header={
-				<Navigation
-					onNavigate={handleNagivation}
-					onMainButtonClick={handleMainButtonClick}
-				/>
-			}
+			header={<Navigation onNavigate={handleNagivation} />}
 			footer={<Footer />}
 		>
 			{!roomId ? (

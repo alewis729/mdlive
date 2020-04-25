@@ -76,13 +76,7 @@ Menu.propTypes = {
 };
 
 Menu.defaultProps = {
-	items: [
-		"new-room",
-		"upload-file",
-		"toggle-theme",
-		"change-language",
-		"register",
-	],
+	items: ["new-room", "upload-file", "toggle-theme", "change-language"],
 };
 
 export default Menu;
