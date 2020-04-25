@@ -4,7 +4,13 @@ import { Dialog, Box, Grid, Typography, TextField } from "@material-ui/core";
 
 import { Button } from "@/components/atoms";
 
-const UsernameCollector = ({ open, textCommit, onCommit, onClose }) => {
+const UsernameCollector = ({
+	open,
+	textCommit,
+	onCommit,
+	onClose,
+	onReject,
+}) => {
 	const [formData, setFormData] = useState({ name: "", error: null });
 
 	const handleInputChange = (e, key) => {
@@ -70,6 +76,13 @@ const UsernameCollector = ({ open, textCommit, onCommit, onClose }) => {
 							</Button>
 						</Grid>
 					)}
+					{onReject && (
+						<Grid item>
+							<Button onClick={onReject} color="info">
+								Reject invitation
+							</Button>
+						</Grid>
+					)}
 				</Grid>
 			</Box>
 		</Dialog>
@@ -81,12 +94,14 @@ UsernameCollector.propTypes = {
 	textCommit: PropTypes.string,
 	onCommit: PropTypes.func.isRequired,
 	onClose: PropTypes.func,
+	onReject: PropTypes.func,
 };
 
 UsernameCollector.defaultProps = {
 	textCommit: "Create room",
 	open: false,
 	onClose: null,
+	onReject: null,
 };
 
 export default UsernameCollector;

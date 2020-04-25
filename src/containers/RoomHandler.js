@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import { useRouter } from "next/router";
 import getConfig from "next/config";
 import io from "socket.io-client";
 import { useSelector } from "react-redux";
@@ -14,6 +15,7 @@ const socket = io(APP_URL);
 const defaultContent = getRandomTextMd();
 
 const RoomHandler = ({ roomId }) => {
+	const router = useRouter();
 	const currentUser = useSelector(state => state.users.current);
 	const [open, setOpenModal] = useState(!currentUser);
 	const [content, setContent] = useState("");
@@ -44,12 +46,18 @@ const RoomHandler = ({ roomId }) => {
 		socket.emit("md-change", { content: value });
 	};
 
+	const handleReject = () => {
+		setOpenModal(false);
+		router.push("/");
+	};
+
 	return (
 		<>
 			<UserSetter
 				open={open}
 				onSubmitUsername={() => setOpenModal(false)}
 				textCommit="Join room"
+				onReject={handleReject}
 			/>
 			{currentUser && (
 				<>
