@@ -23,6 +23,10 @@ const RoomHandler = ({ roomId }) => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
+		socket.on("md-change", ({ content }) => setContent(content));
+	}, []);
+
+	useEffect(() => {
 		if (!open && currentUser && currentUser.id !== socket.id) {
 			dispatch(updateCurrentId(socket.id));
 			setContent(defaultContent);
@@ -36,13 +40,6 @@ const RoomHandler = ({ roomId }) => {
 		}
 		// eslint-disable-next-line
 	}, [currentUser, open]);
-
-	useEffect(() => {
-		socket.on("refresh-content", () => socket.emit("md-change", { content }));
-		socket.on("new-md-change", ({ content }) => {
-			setContent(content);
-		});
-	}, [content]);
 
 	const handleEdit = value => {
 		setContent(value);

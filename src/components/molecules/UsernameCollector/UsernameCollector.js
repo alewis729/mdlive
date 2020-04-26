@@ -31,7 +31,7 @@ const UsernameCollector = ({
 		if (name.length < 3 || name.length > 12) {
 			setFormData({
 				...formData,
-				error: "Nmae must be between 3 and 12 characters long.",
+				error: "Name must be between 3 and 12 characters long.",
 			});
 		} else {
 			const data = { name, error: null };

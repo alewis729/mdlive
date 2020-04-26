@@ -9,7 +9,6 @@ const {
 } = require("./utils");
 
 const initWSConnection = (io, socket) => {
-	// user connect & disconnect
 	socket.on("room-join", ({ roomId, username, role, content }) => {
 		joinUser(roomId, socket.id, username, role, content);
 		const room = getRoomFromUserId(socket.id);
@@ -78,7 +77,6 @@ const initWSConnection = (io, socket) => {
 		}
 	});
 
-	// messaging
 	socket.on("message", ({ message }) => {
 		const room = getRoomFromUserId(socket.id);
 		const user = getUser(room.id, socket.id);
@@ -86,10 +84,12 @@ const initWSConnection = (io, socket) => {
 		io.to(room.id).emit("message", { id, name, message });
 	});
 
-	// md preview
 	socket.on("md-change", ({ content }) => {
 		const room = getRoomFromUserId(socket.id);
-		io.to(room.id).emit("new-md-change", { content });
+		const user = getUser(room.id, socket.id);
+		if (user && ["author", "editor"].includes(user.role)) {
+			socket.broadcast.to(room.id).emit("md-change", { content });
+		}
 	});
 };
 
