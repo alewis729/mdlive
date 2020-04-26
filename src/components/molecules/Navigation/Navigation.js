@@ -14,13 +14,17 @@ const Navigation = ({ onNavigate }) => {
 			<div className={classes.logo}>
 				<IconLogo />
 			</div>
-			<Menu onItemClick={onNavigate} />
+			{onNavigate && <Menu onItemClick={onNavigate} />}
 		</Toolbar>
 	);
 };
 
 Navigation.propTypes = {
-	onNavigate: PropTypes.func.isRequired,
+	onNavigate: PropTypes.func,
+};
+
+Navigation.defaultProps = {
+	onNavigate: null,
 };
 
 export default Navigation;

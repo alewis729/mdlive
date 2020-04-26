@@ -25,16 +25,10 @@ const RoomHandler = ({ roomId }) => {
 
 	useEffect(() => {
 		socket.on("md-change", ({ content }) => setContent(content));
-		socket.on("connection", () => console.log(socket.id));
-		return () => {
-			socket.disconnect();
-			console.log("leaving", socket.disconnected);
-		};
 	}, []);
 
 	useEffect(() => {
 		if (!open && !hasJoined && currentUser && currentUser.id !== socket.id) {
-			console.log(socket.id, socket);
 			dispatch(updateCurrentId(socket.id));
 			setContent(defaultContent);
 			socket.emit("room-join", {

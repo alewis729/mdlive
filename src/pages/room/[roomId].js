@@ -9,15 +9,8 @@ const Room = () => {
 	const router = useRouter();
 	const { roomId } = router.query;
 
-	const handleNagivation = val => {
-		console.log(val);
-	};
-
 	return (
-		<Default
-			header={<Navigation onNavigate={handleNagivation} />}
-			footer={<Footer />}
-		>
+		<Default header={<Navigation />} footer={<Footer />}>
 			{!roomId ? (
 				<div>
 					Something is wrong! There is no room id... verify that the url is
