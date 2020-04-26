@@ -42,7 +42,7 @@ const initWSConnection = (io, socket) => {
 		const currentUser = getUser(room.id, socket.id);
 
 		if (
-			currentUser.role === "viewer" &&
+			currentUser.role === "author" &&
 			currentUser &&
 			currentUser.id !== id &&
 			io.sockets.sockets[id]
