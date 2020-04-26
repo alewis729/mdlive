@@ -11,6 +11,7 @@ import {
 	ModalLeaveRoom,
 	ModalShareRoom,
 	ModalKicked,
+	ModalAuthorConfirm,
 } from "@/components/molecules";
 import { InteractionsPanel } from "@/components/organisms";
 import { getFullUrl } from "@/helpers";
@@ -31,6 +32,7 @@ const InteractionsContainer = ({ socket }) => {
 	);
 	const dispatch = useDispatch();
 	const [chatMessages, setChatMessages] = useState([]);
+	const [newAuthor, setNewAuthor] = useState(null);
 	const [modals, setModals] = useState(initialModals);
 	const fullUrl = getFullUrl(APP_URL, router.asPath);
 
@@ -59,6 +61,7 @@ const InteractionsContainer = ({ socket }) => {
 		else if (action === "make-viewer") role = "viewer";
 		else if (action === "make-editor") role = "editor";
 		else if (action === "make-author") {
+			setNewAuthor(userId);
 			setModals({ ...modals, authorConfirm: true });
 		}
 
@@ -80,6 +83,11 @@ const InteractionsContainer = ({ socket }) => {
 		router.push("/");
 	};
 
+	const handleAuthorConfirm = () => {
+		setModals({ ...modals, authorConfirm: false });
+		socket.emit("role-update", { id: newAuthor, role: "author" });
+	};
+
 	return (
 		<>
 			<ModalShareRoom
@@ -96,6 +104,14 @@ const InteractionsContainer = ({ socket }) => {
 				open={modals.kicked}
 				onMainAction={handleKick}
 				onClose={handleKick}
+			/>
+			<ModalAuthorConfirm
+				open={modals.authorConfirm}
+				onMainAction={handleAuthorConfirm}
+				onClose={() => {
+					setNewAuthor(null);
+					setModals({ ...modals, authorConfirm: false });
+				}}
 			/>
 			<InteractionsPanel
 				renderSettings={() =>

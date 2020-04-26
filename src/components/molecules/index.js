@@ -3,6 +3,7 @@ export { default as Footer } from "./Footer";
 export { default as InteractionChat } from "./InteractionChat";
 export { default as InteractionSettings } from "./InteractionSettings";
 export { default as Menu } from "./Menu";
+export { default as ModalAuthorConfirm } from "./ModalAuthorConfirm";
 export { default as ModalKicked } from "./ModalKicked";
 export { default as ModalLeaveRoom } from "./ModalLeaveRoom";
 export { default as ModalShareRoom } from "./ModalShareRoom";

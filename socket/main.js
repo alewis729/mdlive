@@ -4,6 +4,7 @@ const {
 	getUser,
 	getRoomFromUserId,
 	getRoomUsers,
+	updateUser,
 	removeUserFromRoom,
 } = require("./utils");
 
@@ -57,19 +58,24 @@ const initWSConnection = (io, socket) => {
 		}
 	});
 
-	socket.on("role-udate", ({ id, role }) => {
+	socket.on("role-update", ({ id, role }) => {
 		const room = getRoomFromUserId(socket.id);
 		const currentUser = getUser(room.id, socket.id);
 		if (currentUser.role === "author") {
-			console.log("aproved");
 			const user = getUser(room.id, id);
-			if (user && currentUser.id !== user.id) {
-				const newUser = { id, name: user.name, role };
-				// update users
-				// return users
-				// io.to(room.id).emit("room-users", { users: getRoomUsers(room.id) });
+			if (
+				currentUser &&
+				currentUser.id !== id &&
+				currentUser.role === "author" &&
+				user
+			) {
+				updateUser(room.id, id, { role });
+				if (role === "author") {
+					updateUser(room.id, socket.id, { role: "editor" });
+				}
+				io.to(room.id).emit("room-users", { users: getRoomUsers(room.id) });
 			}
-		} else console.log("not aproved");
+		}
 	});
 
 	// messaging

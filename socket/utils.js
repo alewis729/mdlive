@@ -76,11 +76,30 @@ const getUser = (roomId, id) => {
 	return room.users.find(user => user.id === id);
 };
 
+const updateUser = (roomId, id, params) => {
+	const { room, roomIndex } = getRoom(roomId);
+	if (!room) return null;
+
+	const user = room.users.find(user => user.id === id);
+	if (!user) return null;
+	const newUser = {
+		id,
+		name: params.name ? params.name : user.name,
+		role: params.role ? params.role : user.role,
+	};
+	const currentUsers = rooms[roomIndex].users;
+	rooms[roomIndex].users = currentUsers.map(user =>
+		user.id !== newUser.id ? user : newUser
+	);
+	return true;
+};
+
 module.exports = {
 	bot,
 	joinUser,
 	getUser,
 	getRoomFromUserId,
 	getRoomUsers,
+	updateUser,
 	removeUserFromRoom,
 };

@@ -39,8 +39,18 @@ const rootReducer = (state = initialState, action) => {
 			),
 		};
 	} else if (type === UPDATE_USERS) {
+		const newUser = payload.find(user => user.id === state.current.id);
+		let currentStateUpdate = {};
+		if (
+			newUser.id !== state.current.id ||
+			newUser.name !== state.current.name ||
+			newUser.role !== state.current.role
+		) {
+			currentStateUpdate = { current: newUser };
+		}
 		return {
 			...state,
+			...currentStateUpdate,
 			all: payload,
 		};
 	} else if (type === ADD_USER) {
