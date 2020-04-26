@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Dialog, Box, Grid, Typography, TextField } from "@material-ui/core";
 
+import { replaceWhiteSpaces } from "@/helpers";
 import { Button } from "@/components/atoms";
 
 const UsernameCollector = ({
@@ -15,17 +16,25 @@ const UsernameCollector = ({
 
 	const handleInputChange = (e, key) => {
 		const { value } = e.target;
-		setFormData({ ...formData, [key]: value });
+		const regex = /^[a-zA-Z\s]*$/;
+
+		if (regex.test(value)) {
+			setFormData({ ...formData, [key]: value });
+		}
 	};
 
 	const handleSubmit = () => {
-		if (formData.name.length < 3) {
+		const name = replaceWhiteSpaces(
+			formData.name[0].toUpperCase() + formData.name.substr(1)
+		);
+
+		if (name.length < 3 || name.length > 12) {
 			setFormData({
 				...formData,
-				error: "Must be at least 3 characters long.",
+				error: "Nmae must be between 3 and 12 characters long.",
 			});
 		} else {
-			const data = { ...formData, error: null };
+			const data = { name, error: null };
 			setFormData(data);
 			onCommit(data);
 		}
