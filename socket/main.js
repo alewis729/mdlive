@@ -10,7 +10,6 @@ const {
 const initWSConnection = (io, socket) => {
 	// user connect & disconnect
 	socket.on("room-join", ({ roomId, username, role, content }) => {
-		console.log(socket.id);
 		joinUser(roomId, socket.id, username, role, content);
 		const room = getRoomFromUserId(socket.id);
 		socket.join(room.id);
@@ -36,6 +35,42 @@ const initWSConnection = (io, socket) => {
 				io.to(room.id).emit("room-users", { users: getRoomUsers(room.id) });
 			}
 		}
+	});
+
+	socket.on("kick-user", ({ id }) => {
+		const room = getRoomFromUserId(socket.id);
+		const currentUser = getUser(room.id, socket.id);
+
+		if (
+			currentUser.role === "viewer" &&
+			currentUser &&
+			currentUser.id !== id &&
+			io.sockets.sockets[id]
+		) {
+			const user = removeUserFromRoom(room.id, id);
+			io.to(id).emit("kick");
+			io.sockets.sockets[id].disconnect();
+			io.to(room.id).emit("room-users", { users: getRoomUsers(room.id) });
+			io.to(room.id).emit("message", {
+				...bot,
+				message: `${user.name} was kicked by ${currentUser.name}.`,
+			});
+		}
+	});
+
+	socket.on("role-udate", ({ id, role }) => {
+		const room = getRoomFromUserId(socket.id);
+		const currentUser = getUser(room.id, socket.id);
+		if (currentUser.role === "author") {
+			console.log("aproved");
+			const user = getUser(room.id, id);
+			if (user && currentUser.id !== user.id) {
+				const newUser = { id, name: user.name, role };
+				// update users
+				// return users
+				// io.to(room.id).emit("room-users", { users: getRoomUsers(room.id) });
+			}
+		} else console.log("not aproved");
 	});
 
 	// messaging

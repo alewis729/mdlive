@@ -67,7 +67,8 @@ const InteractionSettings = ({
 									<Avatar className={classes.avatar}>{user.name[0]}</Avatar>
 								</ListItemAvatar>
 								<ListItemText primary={user.name} />
-								{currentUser.role === "author" && currentUser.id !== user.id && (
+								{/* {currentUser.role === "author" && currentUser.id !== user.id && ( */}
+								{
 									<ListItemSecondaryAction>
 										<Menu
 											items={[
@@ -81,7 +82,7 @@ const InteractionSettings = ({
 											}
 										/>
 									</ListItemSecondaryAction>
-								)}
+								}
 							</ListItem>
 						))}
 					</List>

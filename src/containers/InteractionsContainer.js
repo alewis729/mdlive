@@ -10,13 +10,19 @@ import {
 	InteractionChat,
 	ModalLeaveRoom,
 	ModalShareRoom,
+	ModalKicked,
 } from "@/components/molecules";
 import { InteractionsPanel } from "@/components/organisms";
 import { getFullUrl } from "@/helpers";
 
 const { publicRuntimeConfig } = getConfig();
 const { APP_URL } = publicRuntimeConfig;
-const initialModals = { leave: false, invite: false };
+const initialModals = {
+	leave: false,
+	invite: false,
+	authorConfirm: false,
+	kicked: false,
+};
 
 const InteractionsContainer = ({ socket }) => {
 	const router = useRouter();
@@ -35,6 +41,9 @@ const InteractionsContainer = ({ socket }) => {
 		socket.on("message", ({ id, name, message }) => {
 			setChatMessages(chatMessages => [...chatMessages, { id, name, message }]);
 		});
+		socket.on("kick", () => {
+			setModals({ ...modals, kicked: true });
+		});
 
 		return () => {
 			setChatMessages([]);
@@ -43,8 +52,17 @@ const InteractionsContainer = ({ socket }) => {
 		// eslint-disable-next-line
 	}, []);
 
-	const handleUserMenuAction = (user, menuItem) => {
-		console.log(user, menuItem);
+	const handleUserMenuAction = (userId, action) => {
+		let role = null;
+
+		if (action === "kick") socket.emit("kick-user", { id: userId });
+		else if (action === "make-viewer") role = "viewer";
+		else if (action === "make-editor") role = "editor";
+		else if (action === "make-author") {
+			setModals({ ...modals, authorConfirm: true });
+		}
+
+		if (role) socket.emit("role-update", { id: userId, role });
 	};
 
 	const handleMessageSubmit = message => {
@@ -54,6 +72,11 @@ const InteractionsContainer = ({ socket }) => {
 	const handleLeave = () => {
 		setModals(initialModals);
 		socket.disconnect();
+		router.push("/");
+	};
+
+	const handleKick = () => {
+		setModals({ ...modals, kicked: false });
 		router.push("/");
 	};
 
@@ -68,6 +91,11 @@ const InteractionsContainer = ({ socket }) => {
 				open={modals.leave}
 				onMainAction={handleLeave}
 				onClose={() => setModals({ ...modals, leave: false })}
+			/>
+			<ModalKicked
+				open={modals.kicked}
+				onMainAction={handleKick}
+				onClose={handleKick}
 			/>
 			<InteractionsPanel
 				renderSettings={() =>
