@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 export const useStyles = makeStyles(theme => ({
 	textArea: {
-		backgroundColor: theme.palette.scale[5],
+		backgroundColor: theme.palette.background.light,
 		padding: theme.spacing(2),
 		color: theme.palette.text.primary,
 		fontSize: 15,

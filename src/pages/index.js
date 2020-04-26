@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { Box, Typography } from "@material-ui/core";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
@@ -11,7 +12,7 @@ import { getRandomTextMd, getRandomAlphanumeric } from "@/helpers";
 
 const defaultContent = getRandomTextMd();
 
-const Index = () => {
+const Index = ({ darkMode }) => {
 	const router = useRouter();
 	const currentUser = useSelector(state => state.users.current);
 	const [content, setContent] = useState("");
@@ -21,6 +22,7 @@ const Index = () => {
 
 	const handleNagivation = action => {
 		if (action === "new-room") handleUserSetter();
+		else if (action === "toggle-theme") darkMode.toggle();
 	};
 
 	const handleUserSetter = () => {
@@ -37,7 +39,12 @@ const Index = () => {
 
 	return (
 		<Default
-			header={<Navigation onNavigate={handleNagivation} />}
+			header={
+				<Navigation
+					onNavigate={handleNagivation}
+					items={["new-room", "toggle-theme"]}
+				/>
+			}
 			footer={<Footer />}
 		>
 			<UserSetter
@@ -54,7 +61,7 @@ const Index = () => {
 						color="text.primary"
 					>
 						Welcome{" "}
-						<Box component="span" color="text.accent">
+						<Box component="span" color="text.hint">
 							friend
 						</Box>
 					</Box>
@@ -64,7 +71,7 @@ const Index = () => {
 						Just start typing in{" "}
 						<Box
 							component="span"
-							color="text.accent"
+							color="text.hint"
 							fontWeight="fontWeightSemibold"
 						>
 							markdown
@@ -85,6 +92,10 @@ const Index = () => {
 			</Box>
 		</Default>
 	);
+};
+
+Index.propTypes = {
+	darkMode: PropTypes.object.isRequired,
 };
 
 Index.displayName = "IndexPage";

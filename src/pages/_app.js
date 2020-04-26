@@ -2,19 +2,23 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import Head from "next/head";
 import { Provider } from "react-redux";
+import useDarkMode from "use-dark-mode";
 import { CssBaseline } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/core/styles";
 
-import theme from "@/components/themes";
+import { ThemeSetter } from "@/containers";
 import withReduxStore from "@/hocs/with-redux-store";
+import { light, dark } from "@/components/themes";
 import "@/markdown.css";
+import "@/markdown-dark.css";
 
 const MyApp = ({ Component, pageProps, store }) => {
+	const darkMode = useDarkMode(false);
+	const theme = darkMode.value ? dark : light;
+
 	useEffect(() => {
 		const jssStyles = document.querySelector("#jss-server-side");
-		if (jssStyles) {
-			jssStyles.parentElement.removeChild(jssStyles);
-		}
+		if (jssStyles) jssStyles.parentElement.removeChild(jssStyles);
 	}, []);
 
 	return (
@@ -30,7 +34,8 @@ const MyApp = ({ Component, pageProps, store }) => {
 			<Provider store={store}>
 				<ThemeProvider theme={theme}>
 					<CssBaseline />
-					<Component {...pageProps} />
+					<ThemeSetter />
+					<Component {...pageProps} darkMode={darkMode} />
 				</ThemeProvider>
 			</Provider>
 		</>

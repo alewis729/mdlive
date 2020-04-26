@@ -24,9 +24,11 @@ const UsernameCollector = ({
 	};
 
 	const handleSubmit = () => {
-		const name = replaceWhiteSpaces(
-			formData.name[0].toUpperCase() + formData.name.substr(1)
-		);
+		const name = !formData.name[0]
+			? ""
+			: replaceWhiteSpaces(
+					formData.name[0].toUpperCase() + formData.name.substr(1)
+			  );
 
 		if (name.length < 3 || name.length > 12) {
 			setFormData({
@@ -80,14 +82,14 @@ const UsernameCollector = ({
 					</Grid>
 					{onClose && (
 						<Grid item>
-							<Button onClick={onClose} color="info">
+							<Button onClick={onClose} color="secondary">
 								Cancel
 							</Button>
 						</Grid>
 					)}
 					{onReject && (
 						<Grid item>
-							<Button onClick={onReject} color="info">
+							<Button onClick={onReject} color="secondary">
 								Reject invitation
 							</Button>
 						</Grid>

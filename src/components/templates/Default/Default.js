@@ -11,7 +11,7 @@ const Default = ({ header, footer, children }) => {
 		<Container className={classes.root}>
 			<div>
 				<Toolbar />
-				<AppBar className={classes.appBar} position="fixed">
+				<AppBar className={classes.appBar} position="fixed" color="inherit">
 					<Container maxWidth="xl">{header}</Container>
 				</AppBar>
 			</div>

@@ -30,7 +30,7 @@ const ModalAuthorConfirm = ({ open, onMainAction, onClose }) => {
 						<Button onClick={onMainAction}>Yes, proceed</Button>
 					</Grid>
 					<Grid item>
-						<Button onClick={onClose} color="info">
+						<Button onClick={onClose} color="secondary">
 							Cancel
 						</Button>
 					</Grid>

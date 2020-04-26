@@ -3,42 +3,37 @@ import { rgba } from "@/helpers";
 
 const theme = createMuiTheme({
 	palette: {
-		black: "#000",
-		white: "#fff",
-		scale: ["#202020", "#393939", "#878787", "#b2b2b2", "#e4e4e4", "#f7f8fb"],
+		type: "light",
 		primary: {
-			darker: "#1e3b71",
 			dark: "#3e63aa",
 			main: "#0f8fef",
 			light: "#0bb2f4",
+			contrastText: "#f7f7f7",
 		},
 		secondary: {
-			main: "#19857b",
-		},
-		background: {
-			default: "#fff",
-			light: "#f7f8fb",
-		},
-		success: {
-			main: "#2bba73",
-			light: "#33e28a",
-		},
-		danger: {
-			main: "#bc4242",
-			light: "#f46969",
-		},
-		warn: {
-			main: "#f8d64f",
-			light: "#f2f24c",
-		},
-		info: {
 			main: "#202020",
 			light: "#393939",
+			contrastText: "#f7f7f7",
+		},
+		success: {
+			light: "#33e28a",
+			main: "#2bba73",
+			dark: "#3E9E42",
+			contrastText: "#f7f7f7",
+		},
+		error: {
+			light: "#f46969",
+			main: "#bc4242",
+			dark: "#B53838",
+			contrastText: "#f7f7f7",
 		},
 		text: {
-			primary: "#303030",
-			secondary: "#393939",
-			accent: "#0f8fef",
+			hint: "#0f8fef",
+		},
+		background: {
+			paper: "#fff",
+			default: "#fafafa",
+			light: "#f2f2f2",
 		},
 	},
 	helpers: {

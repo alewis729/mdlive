@@ -32,7 +32,7 @@ const InteractionSettings = ({
 		<div className={classes.root}>
 			<Box
 				textAlign="center"
-				bgcolor="background.light"
+				bgcolor="background.default"
 				className={classes.settings}
 			>
 				<Button
@@ -47,7 +47,7 @@ const InteractionSettings = ({
 				<Button
 					fullWidth
 					size="large"
-					color="danger"
+					color="error"
 					startIcon={<IconLeave />}
 					onClick={onLeave}
 				>

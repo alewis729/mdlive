@@ -12,15 +12,14 @@ export const useStyles = makeStyles(theme => ({
 		justifyContent: "space-between",
 	},
 	appBar: {
-		backgroundColor: theme.palette.white,
 		boxShadow: "0px 4px 8px 0px rgba(0,0,0,0.1)",
 	},
 	main: {
 		flexGrow: 1,
 	},
 	footer: {
+		backgroundColor: theme.palette.background.paper,
 		boxShadow: "0px 0px 8px 0px rgba(0,0,0,0.1)",
-		backgroundColor: theme.palette.white,
 		padding: theme.spacing(6, 0),
 		width: "100%",
 	},

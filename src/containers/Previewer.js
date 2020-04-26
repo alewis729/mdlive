@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Box, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { useSelector } from "react-redux";
 
 import { Editor, Viewer } from "@/components/molecules";
 import { Button } from "@/components/atoms";
@@ -22,8 +23,17 @@ const Previewer = ({ userRole, defaultContent, onEdit, ...props }) => {
 	const [canSave, setCanSave] = useState(false);
 	const [text, setText] = useState("");
 	const classes = useStyles({ canSave });
+	const theme = useSelector(state => state.settings.theme);
+	const [mdClassName, setMdClassName] = useState("markdown-body");
 
 	useEffect(() => setText(defaultContent), [defaultContent]);
+
+	useEffect(() => {
+		if (theme) {
+			setMdClassName(theme === "dark" ? "markdown-dark-body" : "markdown-body");
+		}
+		// eslint-disable-next-line
+	}, [theme]);
 
 	const handleEditorChange = val => {
 		const hasEnoughText = val.length > 5;
@@ -44,18 +54,16 @@ const Previewer = ({ userRole, defaultContent, onEdit, ...props }) => {
 				</div>
 			</Box>
 			<Grid className={classes.mainGrid} container spacing={3} justify="center">
-				{userRole !== "viewer" ? (
-					<>
-						<Grid item xs={6}>
-							<Viewer preview={text} />
-						</Grid>
-						<Grid item xs={6}>
-							<Editor defaultText={text} onChange={handleEditorChange} />
-						</Grid>
-					</>
-				) : (
-					<Grid item xs={8} md={10}>
-						<Viewer preview={text} />
+				<Grid
+					item
+					xs={userRole !== "viewer" ? 6 : 8}
+					md={userRole !== "viewer" ? false : 10}
+				>
+					<Viewer preview={text} mdClassName={mdClassName} />
+				</Grid>
+				{userRole !== "viewer" && (
+					<Grid item xs={6}>
+						<Editor defaultText={text} onChange={handleEditorChange} />
 					</Grid>
 				)}
 			</Grid>

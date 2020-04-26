@@ -10,7 +10,7 @@ const Button = ({ color, children, ...props }) => (
 );
 
 Button.propTypes = {
-	color: PropTypes.oneOf(["primary", "success", "danger", "info"]),
+	color: PropTypes.oneOf(["primary", "secondary", "success", "error"]),
 	children: PropTypes.node.isRequired,
 };
 

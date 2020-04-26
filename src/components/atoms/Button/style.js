@@ -9,7 +9,7 @@ export const RoundedButton = withStyles(theme => ({
 			${theme.palette[color].light},
 			${theme.palette[color].main}
 		)`,
-		color: theme.palette.white,
+		color: ({ displaycolor: color }) => theme.palette[color].contrastText,
 		textTransform: "capitalize",
 		borderRadius: ({ fullWidth }) => (fullWidth ? 0 : 100),
 		position: "relative",
