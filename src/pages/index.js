@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Box, Typography } from "@material-ui/core";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 
 import { Previewer, UserSetter } from "@/containers";
 import { Default } from "@/components/templates";
@@ -12,13 +13,19 @@ const defaultContent = getRandomTextMd();
 
 const Index = () => {
 	const router = useRouter();
+	const currentUser = useSelector(state => state.users.current);
 	const [content, setContent] = useState("");
 	const [openModal, setOpenModal] = useState(false);
 
 	useEffect(() => setContent(defaultContent), []);
 
-	const handleNagivation = val => {
-		console.log(val);
+	const handleNagivation = action => {
+		if (action === "new-room") handleUserSetter();
+	};
+
+	const handleUserSetter = () => {
+		if (!currentUser) setOpenModal(true);
+		else handleCreateRoom();
 	};
 
 	const handleCreateRoom = () => {
@@ -72,7 +79,7 @@ const Index = () => {
 					</Box>
 				</Typography>
 				<Box mt={2}>
-					<Button onClick={() => setOpenModal(true)}>New room</Button>
+					<Button onClick={handleUserSetter}>New room</Button>
 				</Box>
 				<Previewer userRole="author" defaultContent={content} />
 			</Box>

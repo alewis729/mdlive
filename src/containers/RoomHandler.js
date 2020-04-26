@@ -20,6 +20,7 @@ const RoomHandler = ({ roomId }) => {
 	const currentUser = useSelector(state => state.users.current);
 	const [open, setOpenModal] = useState(!currentUser);
 	const [content, setContent] = useState("");
+	const [hasJoined, setHasJoined] = useState(false);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -27,7 +28,7 @@ const RoomHandler = ({ roomId }) => {
 	}, []);
 
 	useEffect(() => {
-		if (!open && currentUser && currentUser.id !== socket.id) {
+		if (!open && !hasJoined && currentUser && currentUser.id !== socket.id) {
 			dispatch(updateCurrentId(socket.id));
 			setContent(defaultContent);
 			// @todo: fix: client can modify role in devtools
@@ -37,6 +38,7 @@ const RoomHandler = ({ roomId }) => {
 				role: currentUser.role,
 				content,
 			});
+			setHasJoined(true);
 		}
 		// eslint-disable-next-line
 	}, [currentUser, open]);

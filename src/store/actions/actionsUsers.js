@@ -1,8 +1,8 @@
 import {
 	SET_CURRENT_USER,
 	UPDATE_CURRENT_ID,
+	CLEAN_CURRENT_USER,
 	UPDATE_USERS,
-	ADD_USER,
 	REMOVE_USER,
 } from "../types";
 
@@ -14,12 +14,12 @@ export const updateCurrentId = id => dispatch => {
 	dispatch({ type: UPDATE_CURRENT_ID, payload: id });
 };
 
-export const updateUsers = users => dispatch => {
-	dispatch({ type: UPDATE_USERS, payload: users });
+export const cleanCurrentUser = () => dispatch => {
+	dispatch({ type: CLEAN_CURRENT_USER });
 };
 
-export const addUser = (id, name, role) => dispatch => {
-	dispatch({ type: ADD_USER, payload: { id, name, role } });
+export const updateUsers = users => dispatch => {
+	dispatch({ type: UPDATE_USERS, payload: users });
 };
 
 export const removeUser = id => dispatch => {

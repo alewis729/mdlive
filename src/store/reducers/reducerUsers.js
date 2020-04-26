@@ -1,8 +1,8 @@
 import {
 	SET_CURRENT_USER,
 	UPDATE_CURRENT_ID,
+	CLEAN_CURRENT_USER,
 	UPDATE_USERS,
-	ADD_USER,
 	REMOVE_USER,
 } from "../types";
 
@@ -38,6 +38,16 @@ const rootReducer = (state = initialState, action) => {
 					  }
 			),
 		};
+	} else if (type === CLEAN_CURRENT_USER) {
+		return {
+			...state,
+			current: {
+				id: null,
+				name: state.current.name,
+				role: "editor",
+			},
+			all: [],
+		};
 	} else if (type === UPDATE_USERS) {
 		const newUser = payload.find(user => user.id === state.current.id);
 		let currentStateUpdate = {};
@@ -52,13 +62,6 @@ const rootReducer = (state = initialState, action) => {
 			...state,
 			...currentStateUpdate,
 			all: payload,
-		};
-	} else if (type === ADD_USER) {
-		const { id, name, role } = payload;
-
-		return {
-			...state,
-			all: [...state.all, { id, name, role }],
 		};
 	} else if (type === REMOVE_USER) {
 		return {

@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import getConfig from "next/config";
 import { useSelector, useDispatch } from "react-redux";
 
-import { updateUsers } from "@/store/actions";
+import { updateUsers, cleanCurrentUser } from "@/store/actions";
 import {
 	InteractionSettings,
 	InteractionChat,
@@ -72,15 +72,20 @@ const InteractionsContainer = ({ socket }) => {
 		socket.emit("message", { message });
 	};
 
-	const handleLeave = () => {
-		setModals(initialModals);
+	const resetUser = () => {
+		dispatch(cleanCurrentUser());
 		socket.disconnect();
 		router.push("/");
 	};
 
+	const handleLeave = () => {
+		setModals(initialModals);
+		resetUser();
+	};
+
 	const handleKick = () => {
 		setModals({ ...modals, kicked: false });
-		router.push("/");
+		resetUser();
 	};
 
 	const handleAuthorConfirm = () => {

@@ -1,7 +1,7 @@
 export {
 	setCurrentUser,
 	updateCurrentId,
+	cleanCurrentUser,
 	updateUsers,
-	addUser,
 	removeUser,
 } from "./actionsUsers";
