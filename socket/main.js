@@ -40,11 +40,10 @@ const initWSConnection = (io, socket) => {
 	socket.on("kick-user", ({ id }) => {
 		const room = getRoomFromUserId(socket.id);
 		const currentUser = getUser(room.id, socket.id);
-
 		if (
-			currentUser.role === "author" &&
 			currentUser &&
 			currentUser.id !== id &&
+			currentUser.role === "author" &&
 			io.sockets.sockets[id]
 		) {
 			const user = removeUserFromRoom(room.id, id);
