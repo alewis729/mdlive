@@ -20,6 +20,13 @@ rooms: [
 const bot = { id: "0", name: "Bot" };
 let rooms = [];
 
+const findNewAuthor = arr => {
+	let newAuthor = arr.find(user => user.role === "editor");
+	if (!newAuthor) newAuthor = arr.find(user => user.role === "viewer");
+	if (!newAuthor) return null;
+	return newAuthor;
+};
+
 const getRoom = id => {
 	const roomIndex = rooms.findIndex(room => room.id === id);
 	if (roomIndex === -1) return { roomIndex, room: null };
@@ -40,13 +47,11 @@ const getRoomUsers = roomId => {
 	return room.users;
 };
 
-const removeUserFromRoom = (roomId, id) => {
-	const { room, roomIndex } = getRoom(roomId);
+const getUser = (roomId, id) => {
+	const { room } = getRoom(roomId);
 	if (!room) return null;
 
-	const userIndex = room.users.findIndex(user => user.id === id);
-	if (userIndex === -1) return null;
-	return rooms[roomIndex].users.splice(userIndex, 1)[0];
+	return room.users.find(user => user.id === id);
 };
 
 const joinUser = (roomId, id, name, role, content) => {
@@ -69,11 +74,20 @@ const joinUser = (roomId, id, name, role, content) => {
 	return { room: finalRoom, user };
 };
 
-const getUser = (roomId, id) => {
-	const { room } = getRoom(roomId);
+const removeRoom = id => {
+	const { room } = getRoom(id);
+	if (!room) return null;
+	rooms = rooms.filter(room => room.id !== id);
+	return room;
+};
+
+const removeUserFromRoom = (roomId, id) => {
+	const { room, roomIndex } = getRoom(roomId);
 	if (!room) return null;
 
-	return room.users.find(user => user.id === id);
+	const userIndex = room.users.findIndex(user => user.id === id);
+	if (userIndex === -1) return null;
+	return rooms[roomIndex].users.splice(userIndex, 1)[0];
 };
 
 const updateUser = (roomId, id, params) => {
@@ -94,20 +108,6 @@ const updateUser = (roomId, id, params) => {
 	return true;
 };
 
-const removeRoom = id => {
-	const { room } = getRoom(id);
-	if (!room) return null;
-	rooms = rooms.filter(room => room.id !== id);
-	return room;
-};
-
-const findNewAuthor = arr => {
-	let newAuthor = arr.find(user => user.role === "editor");
-	if (!newAuthor) newAuthor = arr.find(user => user.role === "viewer");
-	if (!newAuthor) return null;
-	return newAuthor;
-};
-
 module.exports = {
 	bot,
 	findNewAuthor,
@@ -115,7 +115,7 @@ module.exports = {
 	getRoomFromUserId,
 	getRoomUsers,
 	joinUser,
-	removeUserFromRoom,
 	removeRoom,
+	removeUserFromRoom,
 	updateUser,
 };

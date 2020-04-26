@@ -5,8 +5,8 @@ const {
 	getRoomFromUserId,
 	getRoomUsers,
 	joinUser,
-	removeUserFromRoom,
 	removeRoom,
+	removeUserFromRoom,
 	updateUser,
 } = require("./utils");
 
