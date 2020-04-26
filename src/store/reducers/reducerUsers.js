@@ -11,7 +11,7 @@ const initialState = {
 	all: [],
 };
 
-const rootReducer = (state = initialState, action) => {
+export default (state = initialState, action) => {
 	const { type, payload } = action;
 
 	if (type === SET_CURRENT_USER) {
@@ -70,5 +70,3 @@ const rootReducer = (state = initialState, action) => {
 		};
 	} else return state;
 };
-
-export default rootReducer;

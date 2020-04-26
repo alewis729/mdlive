@@ -1,3 +1,4 @@
+export { changeTheme } from "./actionsSettings";
 export {
 	setCurrentUser,
 	updateCurrentId,
