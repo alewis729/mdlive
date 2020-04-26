@@ -12,7 +12,7 @@ import { getRandomTextMd } from "@/helpers";
 
 const { publicRuntimeConfig } = getConfig();
 const { APP_URL } = publicRuntimeConfig;
-const socket = io(APP_URL);
+const socket = io(APP_URL, { forceNew: true });
 const defaultContent = getRandomTextMd();
 
 const RoomHandler = ({ roomId }) => {
@@ -25,13 +25,18 @@ const RoomHandler = ({ roomId }) => {
 
 	useEffect(() => {
 		socket.on("md-change", ({ content }) => setContent(content));
+		socket.on("connection", () => console.log(socket.id));
+		return () => {
+			socket.disconnect();
+			console.log("leaving", socket.disconnected);
+		};
 	}, []);
 
 	useEffect(() => {
 		if (!open && !hasJoined && currentUser && currentUser.id !== socket.id) {
+			console.log(socket.id, socket);
 			dispatch(updateCurrentId(socket.id));
 			setContent(defaultContent);
-			// @todo: fix: client can modify role in devtools
 			socket.emit("room-join", {
 				roomId,
 				username: currentUser.name,
@@ -40,8 +45,9 @@ const RoomHandler = ({ roomId }) => {
 			});
 			setHasJoined(true);
 		}
+
 		// eslint-disable-next-line
-	}, [currentUser, open]);
+	}, [currentUser, open, socket]);
 
 	const handleEdit = value => {
 		setContent(value);

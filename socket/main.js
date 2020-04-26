@@ -1,11 +1,13 @@
 const {
 	bot,
-	joinUser,
+	findNewAuthor,
 	getUser,
 	getRoomFromUserId,
 	getRoomUsers,
-	updateUser,
+	joinUser,
 	removeUserFromRoom,
+	removeRoom,
+	updateUser,
 } = require("./utils");
 
 const initWSConnection = (io, socket) => {
@@ -26,14 +28,23 @@ const initWSConnection = (io, socket) => {
 	socket.on("disconnect", () => {
 		const room = getRoomFromUserId(socket.id);
 		if (room && room.id) {
-			const user = removeUserFromRoom(room.id, socket.id);
-			if (user) {
+			const user = getUser(room.id, socket.id);
+			const removeAndNotifyClient = () => {
+				if (!user) return null;
+				removeUserFromRoom(room.id, socket.id);
 				io.to(room.id).emit("message", {
 					...bot,
 					message: `${user.name} left the room.`,
 				});
 				io.to(room.id).emit("room-users", { users: getRoomUsers(room.id) });
+			};
+
+			if (user && user.role === "author") {
+				const newAuthor = findNewAuthor(room.users);
+				if (!newAuthor) removeRoom(room.id);
+				else updateUser(room.id, newAuthor.id, { role: "author" });
 			}
+			removeAndNotifyClient();
 		}
 	});
 

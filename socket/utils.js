@@ -18,7 +18,7 @@ rooms: [
  */
 
 const bot = { id: "0", name: "Bot" };
-const rooms = [];
+let rooms = [];
 
 const getRoom = id => {
 	const roomIndex = rooms.findIndex(room => room.id === id);
@@ -94,12 +94,28 @@ const updateUser = (roomId, id, params) => {
 	return true;
 };
 
+const removeRoom = id => {
+	const { room } = getRoom(id);
+	if (!room) return null;
+	rooms = rooms.filter(room => room.id !== id);
+	return room;
+};
+
+const findNewAuthor = arr => {
+	let newAuthor = arr.find(user => user.role === "editor");
+	if (!newAuthor) newAuthor = arr.find(user => user.role === "viewer");
+	if (!newAuthor) return null;
+	return newAuthor;
+};
+
 module.exports = {
 	bot,
-	joinUser,
+	findNewAuthor,
 	getUser,
 	getRoomFromUserId,
 	getRoomUsers,
-	updateUser,
+	joinUser,
 	removeUserFromRoom,
+	removeRoom,
+	updateUser,
 };
