@@ -24,7 +24,7 @@ const InteractionsPanel = ({ renderSettings, renderChat }) => {
 	const classes = useStyles();
 	const theme = useTheme();
 	const [tab, setNewTab] = useState(0);
-	const [open, setOpen] = useState(true);
+	const [open, setOpen] = useState(false);
 
 	const handleChange = (_, newValue) => {
 		setNewTab(newValue);

@@ -31,8 +31,7 @@
 		"redux-thunk": "^2.3.0",
 		"socket.io": "^2.3.0",
 		"socket.io-client": "^2.3.0",
-		"use-dark-mode": "^2.3.1",
-		"yenv": "^2.1.1"
+		"use-dark-mode": "^2.3.1"
 	},
 	"devDependencies": {
 		"babel-plugin-import": "^1.13.0",

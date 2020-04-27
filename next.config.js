@@ -1,5 +1,3 @@
-const yenv = require("yenv");
-const env = yenv();
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
 	enabled: process.env.ANALYZE === "true",
 });
@@ -9,9 +7,8 @@ const IconsSrc = path.resolve(__dirname, "src/components/atoms/Icons");
 
 const nextConfig = {
 	publicRuntimeConfig: {
-		APP_URL: env.APP_URL,
-		SERVER_URL: env.SERVER_URL,
-		DEV_MODE: env.DEV_MODE,
+		APP_URL: process.env.APP_URL,
+		PORT: process.env.PORT,
 	},
 	webpack: config => {
 		config.resolve.alias["@"] = pathSrc;
