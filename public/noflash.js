@@ -15,7 +15,7 @@
 	var localStorageTheme = null;
 	try {
 		localStorageTheme = localStorage.getItem(storageKey);
-	} catch (err) {}
+	} catch (err) {} // eslint-disable-line no-empty
 	var localStorageExists = localStorageTheme !== null;
 	if (localStorageExists) {
 		localStorageTheme = JSON.parse(localStorageTheme);

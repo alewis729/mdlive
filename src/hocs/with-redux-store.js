@@ -33,6 +33,7 @@ export default App => {
 		}
 
 		render() {
+			// eslint-disable-next-line react/prop-types
 			const { initialReduxState } = this.props;
 			return (
 				<App {...this.props} store={getOrCreateStore(initialReduxState)} />
