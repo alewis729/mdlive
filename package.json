@@ -4,7 +4,6 @@
 	"private": true,
 	"scripts": {
 		"dev": "nodemon server.js",
-		"next:dev": "next dev",
 		"build": "next build",
 		"start": "cross-env NODE_ENV=production node server.js",
 		"format": "prettier \"src/**/*.{js,jsx,json}\" --write",
