@@ -13,8 +13,6 @@ const dev = process.env.NODE_ENV !== "production";
 const nextApp = next({ dev });
 const nextHandler = nextApp.getRequestHandler();
 
-io.on("connection", socket => initWSConnection(io, socket));
-
 nextApp.prepare().then(() => {
 	app.all("*", (req, res) => nextHandler(req, res));
 
@@ -24,3 +22,5 @@ nextApp.prepare().then(() => {
 		console.log(`> 🚀 Ready on http://localhost:${port}`);
 	});
 });
+
+io.on("connection", socket => initWSConnection(io, socket));

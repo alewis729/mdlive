@@ -6,7 +6,7 @@
 		"dev": "nodemon server.js",
 		"next:dev": "next dev",
 		"build": "next build",
-		"start": "next start",
+		"start": "cross-env NODE_ENV=production node server.js",
 		"format": "prettier \"src/**/*.{js,jsx,json}\" --write",
 		"lint": "eslint . \"**/*.{js,jsx,ts,tsx}\"",
 		"analyze": "cross-env ANALYZE=true next build"
