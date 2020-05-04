@@ -2,7 +2,7 @@ import React from "react";
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import { ServerStyleSheets } from "@material-ui/core/styles";
 
-class MyDocument extends Document {
+export default class MyDocument extends Document {
 	render() {
 		return (
 			<Html lang="en">
@@ -15,7 +15,6 @@ class MyDocument extends Document {
 					/>
 				</Head>
 				<body>
-					<script src="noflash.js" type="text/javascript" />
 					<Main />
 					<NextScript />
 				</body>
@@ -43,5 +42,3 @@ MyDocument.getInitialProps = async ctx => {
 		],
 	};
 };
-
-export default MyDocument;
