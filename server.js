@@ -5,7 +5,7 @@ const server = http.Server(app);
 const io = require("socket.io")(server);
 const initWSConnection = require("./socket/main");
 
-const port = process.env.PORT || 5000;
+const port = process.env.SERVER_PORT || 5000;
 
 io.on("connection", (socket) => initWSConnection(io, socket));
 

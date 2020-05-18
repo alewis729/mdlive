@@ -9,8 +9,8 @@ import { updateCurrentId } from "@/store/actions";
 import { UserSetter, InteractionsContainer, Previewer } from "@/containers";
 import { getRandomTextMd } from "@/helpers";
 
-const { REACT_APP_URL } = process.env;
-const socket = io(REACT_APP_URL, { forceNew: true });
+const { REACT_APP_SERVER_URL } = process.env;
+const socket = io(REACT_APP_SERVER_URL, { forceNew: true });
 const defaultContent = getRandomTextMd();
 
 const RoomHandler = ({ roomId }) => {
