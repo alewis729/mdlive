@@ -11,6 +11,7 @@ const {
 } = require("./utils");
 
 const initWSConnection = (io, socket) => {
+	socket.on("connection", () => io.emmit("connection")); // test
 	socket.on("room-join", ({ roomId, username, role, content }) => {
 		joinUser(roomId, socket.id, username, role, content);
 		const room = getRoomFromUserId(socket.id);

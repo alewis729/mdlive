@@ -1,46 +1,22 @@
 {
-	"name": "mdlive",
-	"version": "0.1.0",
-	"private": true,
+	"name": "app",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
 	"scripts": {
-		"dev": "nodemon server.js",
-		"build": "next build",
-		"start": "cross-env NODE_ENV=production node server.js",
-		"format": "prettier \"src/**/*.{js,jsx,json}\" --write",
-		"lint": "eslint . \"**/*.{js,jsx,ts,tsx}\"",
-		"analyze": "cross-env ANALYZE=true next build"
+		"server": "nodemon server.js",
+		"client": "npm start --prefix client",
+		"dev": "concurrently \"npm run server\" \"npm run client\""
 	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
 	"dependencies": {
-		"@material-ui/core": "^4.9.12",
-		"@material-ui/icons": "^4.9.1",
-		"@next/bundle-analyzer": "^9.3.6",
-		"cross-env": "^7.0.2",
 		"express": "^4.17.1",
-		"mongoose": "^5.9.11",
-		"next": "^9.3.6",
-		"nodemon": "^2.0.2",
-		"prop-types": "^15.7.2",
-		"react": "^16.13.1",
-		"react-dom": "^16.13.1",
-		"react-markdown": "^4.3.1",
-		"react-redux": "^7.2.0",
-		"react-swipeable-views": "^0.13.9",
-		"redux": "^4.0.5",
-		"redux-devtools-extension": "^2.13.8",
-		"redux-thunk": "^2.3.0",
-		"socket.io": "^2.3.0",
-		"socket.io-client": "^2.3.0",
-		"use-dark-mode": "^2.3.1"
+		"socket.io": "^2.3.0"
 	},
 	"devDependencies": {
-		"babel-plugin-import": "^1.13.0",
-		"eslint": "^6.8.0",
-		"eslint-config-prettier": "^6.11.0",
-		"eslint-plugin-prettier": "^3.1.2",
-		"eslint-plugin-react": "^7.19.0",
-		"eslint-plugin-react-hooks": "^3.0.0",
-		"husky": "^4.2.5",
-		"lint-staged": "^10.2.2",
-		"prettier": "^2.0.5"
+		"concurrently": "^5.2.0",
+		"nodemon": "^2.0.4"
 	}
 }
