@@ -6,7 +6,7 @@ import { setCurrentUser } from "@/store/actions";
 import { UsernameCollector } from "@/components/molecules";
 
 const UserSetter = ({ open, role, onSubmitUsername, ...props }) => {
-	const user = useSelector(state => state.users.current);
+	const user = useSelector((state) => state.users.current);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -31,12 +31,12 @@ const UserSetter = ({ open, role, onSubmitUsername, ...props }) => {
 UserSetter.propTypes = {
 	open: PropTypes.bool,
 	role: PropTypes.oneOf(["author", "editor", "viewer"]).isRequired,
-	onSubmitUsername: PropTypes.func.isRequired,
+	onSubmitUsername: PropTypes.func.isRequired
 };
 
 UserSetter.defaultProps = {
 	open: false,
-	role: "viewer",
+	role: "viewer"
 };
 
 export default UserSetter;

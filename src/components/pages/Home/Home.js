@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
+import { useHistory } from "react-router-dom";
 import { Box, Typography } from "@material-ui/core";
-import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 
 import { Previewer, UserSetter } from "@/containers";
@@ -12,17 +11,16 @@ import { getRandomTextMd, getRandomAlphanumeric } from "@/helpers";
 
 const defaultContent = getRandomTextMd();
 
-const Index = ({ darkMode }) => {
-	const router = useRouter();
-	const currentUser = useSelector(state => state.users.current);
+const Home = () => {
+	const history = useHistory();
+	const currentUser = useSelector((state) => state.users.current);
 	const [content, setContent] = useState("");
 	const [openModal, setOpenModal] = useState(false);
 
 	useEffect(() => setContent(defaultContent), []);
 
-	const handleNagivation = action => {
+	const handleNagivation = (action) => {
 		if (action === "new-room") handleUserSetter();
-		else if (action === "toggle-theme") darkMode.toggle();
 	};
 
 	const handleUserSetter = () => {
@@ -33,8 +31,7 @@ const Index = ({ darkMode }) => {
 	const handleCreateRoom = () => {
 		setOpenModal(false);
 		const roomId = getRandomAlphanumeric();
-		// @todo: check if room id is already used!
-		router.push("/room/[roomId]", `/room/${roomId}`);
+		history.push(`/room/${roomId}`); // @todo: check if room id is already used!
 	};
 
 	return (
@@ -94,10 +91,6 @@ const Index = ({ darkMode }) => {
 	);
 };
 
-Index.propTypes = {
-	darkMode: PropTypes.object.isRequired,
-};
+Home.displayName = "HomePage";
 
-Index.displayName = "IndexPage";
-
-export default Index;
+export default Home;

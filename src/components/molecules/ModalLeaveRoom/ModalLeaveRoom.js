@@ -43,12 +43,12 @@ const ModalLeaveRoom = ({ open, onMainAction, onClose }) => {
 ModalLeaveRoom.propTypes = {
 	open: PropTypes.bool,
 	onMainAction: PropTypes.func.isRequired,
-	onClose: PropTypes.func,
+	onClose: PropTypes.func
 };
 
 ModalLeaveRoom.defaultProps = {
 	open: false,
-	onClose: null,
+	onClose: null
 };
 
 export default ModalLeaveRoom;

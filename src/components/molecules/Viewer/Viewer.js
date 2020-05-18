@@ -22,12 +22,12 @@ const Viewer = ({ preview, mdClassName }) => {
 
 Viewer.propTypes = {
 	preview: PropTypes.string,
-	mdClassName: PropTypes.string,
+	mdClassName: PropTypes.string
 };
 
 Viewer.defaultProps = {
 	preview: "",
-	mdClassName: "markdown-body",
+	mdClassName: "markdown-body"
 };
 
 export default Viewer;

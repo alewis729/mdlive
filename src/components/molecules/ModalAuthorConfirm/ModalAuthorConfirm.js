@@ -43,12 +43,12 @@ const ModalAuthorConfirm = ({ open, onMainAction, onClose }) => {
 ModalAuthorConfirm.propTypes = {
 	open: PropTypes.bool,
 	onMainAction: PropTypes.func.isRequired,
-	onClose: PropTypes.func,
+	onClose: PropTypes.func
 };
 
 ModalAuthorConfirm.defaultProps = {
 	open: false,
-	onClose: null,
+	onClose: null
 };
 
 export default ModalAuthorConfirm;

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { useRouter } from "next/router";
-import getConfig from "next/config";
+import { useHistory } from "react-router-dom";
 import io from "socket.io-client";
 import { useSelector, useDispatch } from "react-redux";
 import { Box, Typography } from "@material-ui/core";
@@ -10,14 +9,13 @@ import { updateCurrentId } from "@/store/actions";
 import { UserSetter, InteractionsContainer, Previewer } from "@/containers";
 import { getRandomTextMd } from "@/helpers";
 
-const { publicRuntimeConfig } = getConfig();
-const { APP_URL } = publicRuntimeConfig;
-const socket = io(APP_URL, { forceNew: true });
+const { REACT_APP_SERVER_URL } = process.env;
+const socket = io(REACT_APP_SERVER_URL, { forceNew: true });
 const defaultContent = getRandomTextMd();
 
 const RoomHandler = ({ roomId }) => {
-	const router = useRouter();
-	const currentUser = useSelector(state => state.users.current);
+	const history = useHistory();
+	const currentUser = useSelector((state) => state.users.current);
 	const [open, setOpenModal] = useState(!currentUser);
 	const [content, setContent] = useState("");
 	const [hasJoined, setHasJoined] = useState(false);
@@ -35,7 +33,7 @@ const RoomHandler = ({ roomId }) => {
 				roomId,
 				username: currentUser.name,
 				role: currentUser.role,
-				content,
+				content
 			});
 			setHasJoined(true);
 		}
@@ -43,14 +41,14 @@ const RoomHandler = ({ roomId }) => {
 		// eslint-disable-next-line
 	}, [currentUser, open, socket]);
 
-	const handleEdit = value => {
+	const handleEdit = (value) => {
 		setContent(value);
 		socket.emit("md-change", { content: value });
 	};
 
 	const handleReject = () => {
 		setOpenModal(false);
-		router.push("/");
+		history.push("/");
 	};
 
 	return (
@@ -88,7 +86,7 @@ const RoomHandler = ({ roomId }) => {
 };
 
 RoomHandler.propTypes = {
-	roomId: PropTypes.string.isRequired,
+	roomId: PropTypes.string.isRequired
 };
 
 export default RoomHandler;

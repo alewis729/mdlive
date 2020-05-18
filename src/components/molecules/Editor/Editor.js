@@ -11,7 +11,7 @@ const Editor = ({ defaultText, onChange, ...props }) => {
 
 	useEffect(() => setText(defaultText), [defaultText]);
 
-	const handleTextChange = e => {
+	const handleTextChange = (e) => {
 		const { value } = e.target;
 		setText(value);
 		onChange && onChange(value);
@@ -34,13 +34,13 @@ const Editor = ({ defaultText, onChange, ...props }) => {
 
 Editor.propTypes = {
 	defaultText: PropTypes.string,
-	onChange: PropTypes.func,
+	onChange: PropTypes.func
 };
 
 Editor.defaultProps = {
 	defaultText: "\n",
 	onChange: null,
-	rowsMin: 2,
+	rowsMin: 2
 };
 
 export default Editor;

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { useRouter } from "next/router";
-import getConfig from "next/config";
+import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import { updateUsers, cleanCurrentUser } from "@/store/actions";
@@ -11,37 +10,36 @@ import {
 	ModalLeaveRoom,
 	ModalShareRoom,
 	ModalKicked,
-	ModalAuthorConfirm,
+	ModalAuthorConfirm
 } from "@/components/molecules";
 import { InteractionsPanel } from "@/components/organisms";
-import { getFullUrl } from "@/helpers";
 
-const { publicRuntimeConfig } = getConfig();
-const { APP_URL } = publicRuntimeConfig;
 const initialModals = {
 	leave: false,
 	invite: false,
 	authorConfirm: false,
-	kicked: false,
+	kicked: false
 };
 
 const InteractionsContainer = ({ socket }) => {
-	const router = useRouter();
+	const history = useHistory();
 	const { current: currentUser, all: users } = useSelector(
-		state => state.users
+		(state) => state.users
 	);
 	const dispatch = useDispatch();
 	const [chatMessages, setChatMessages] = useState([]);
 	const [newAuthor, setNewAuthor] = useState(null);
 	const [modals, setModals] = useState(initialModals);
-	const fullUrl = getFullUrl(APP_URL, router.asPath);
 
 	useEffect(() => {
 		socket.on("room-users", ({ users }) => {
 			dispatch(updateUsers(users));
 		});
 		socket.on("message", ({ id, name, message }) => {
-			setChatMessages(chatMessages => [...chatMessages, { id, name, message }]);
+			setChatMessages((chatMessages) => [
+				...chatMessages,
+				{ id, name, message }
+			]);
 		});
 		socket.on("kick", () => {
 			setModals({ ...modals, kicked: true });
@@ -68,14 +66,14 @@ const InteractionsContainer = ({ socket }) => {
 		if (role) socket.emit("role-update", { id: userId, role });
 	};
 
-	const handleMessageSubmit = message => {
+	const handleMessageSubmit = (message) => {
 		socket.emit("message", { message });
 	};
 
 	const resetUser = () => {
 		dispatch(cleanCurrentUser());
 		socket.disconnect();
-		router.push("/");
+		history.push("/");
 	};
 
 	const handleLeave = () => {
@@ -97,7 +95,7 @@ const InteractionsContainer = ({ socket }) => {
 		<>
 			<ModalShareRoom
 				open={modals.invite}
-				room={fullUrl}
+				room={window.location.href}
 				onClose={() => setModals({ ...modals, invite: false })}
 			/>
 			<ModalLeaveRoom
@@ -143,7 +141,7 @@ const InteractionsContainer = ({ socket }) => {
 };
 
 InteractionsContainer.propTypes = {
-	socket: PropTypes.object.isRequired,
+	socket: PropTypes.object.isRequired
 };
 
 export default InteractionsContainer;

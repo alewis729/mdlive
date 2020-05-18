@@ -8,11 +8,11 @@ import {
 	ListItemAvatar,
 	ListItemText,
 	ListItemSecondaryAction,
-	Avatar,
+	Avatar
 } from "@material-ui/core";
 import {
 	ShareRounded as IconShare,
-	ExitToAppRounded as IconLeave,
+	ExitToAppRounded as IconLeave
 } from "@material-ui/icons";
 
 import { useStyles } from "./style";
@@ -24,7 +24,7 @@ const InteractionSettings = ({
 	users,
 	onUserMenuAction,
 	onInvite,
-	onLeave,
+	onLeave
 }) => {
 	const classes = useStyles();
 
@@ -61,7 +61,7 @@ const InteractionSettings = ({
 					</Box>
 				) : (
 					<List>
-						{users.map(user => (
+						{users.map((user) => (
 							<ListItem key={user.id} disableGutters>
 								<ListItemAvatar>
 									<Avatar className={classes.avatar}>{user.name[0]}</Avatar>
@@ -74,9 +74,9 @@ const InteractionSettings = ({
 												"make-author",
 												"make-editor",
 												"make-viewer",
-												"kick",
+												"kick"
 											]}
-											onItemClick={item =>
+											onItemClick={(item) =>
 												onUserMenuAction && onUserMenuAction(user.id, item)
 											}
 										/>
@@ -94,22 +94,22 @@ const InteractionSettings = ({
 InteractionSettings.propTypes = {
 	currentUser: PropTypes.shape({
 		id: PropTypes.string.isRequired,
-		role: PropTypes.oneOf(["author", "editor", "viewer"]),
+		role: PropTypes.oneOf(["author", "editor", "viewer"])
 	}).isRequired,
 	users: PropTypes.arrayOf(
 		PropTypes.shape({
 			id: PropTypes.string.isRequired,
 			name: PropTypes.string.isRequired,
-			role: PropTypes.oneOf(["author", "editor", "viewer"]),
+			role: PropTypes.oneOf(["author", "editor", "viewer"])
 		})
 	).isRequired,
 	onUserMenuAction: PropTypes.func,
 	onInvite: PropTypes.func.isRequired,
-	onLeave: PropTypes.func.isRequired,
+	onLeave: PropTypes.func.isRequired
 };
 
 InteractionSettings.defaultProps = {
-	onUserMenuAction: null,
+	onUserMenuAction: null
 };
 
 export default InteractionSettings;

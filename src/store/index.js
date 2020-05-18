@@ -4,20 +4,12 @@ import thunkMiddleware from "redux-thunk";
 
 import reducers from "./reducers";
 
-export default initialState => {
-	const store = createStore(
-		reducers,
-		initialState,
-		composeWithDevTools(applyMiddleware(thunkMiddleware))
-	);
+const initialState = {};
+const middleware = [thunkMiddleware];
+const store = createStore(
+	reducers,
+	initialState,
+	composeWithDevTools(applyMiddleware(...middleware))
+);
 
-	if (module.hot) {
-		module.hot.accept("./reducers", () => {
-			const createNextReducer = require("./reducers").default;
-
-			store.replaceReducer(createNextReducer(initialState));
-		});
-	}
-
-	return store;
-};
+export default store;

@@ -10,10 +10,10 @@ import { Menu } from "@/components/molecules";
 
 const Navigation = ({ onNavigate, ...props }) => {
 	const classes = useStyles();
-	const theme = useSelector(state => state.settings.theme);
+	const theme = useSelector((state) => state.settings.theme);
 	const dispatch = useDispatch();
 
-	const handleMenuItemClick = action => {
+	const handleMenuItemClick = (action) => {
 		if (onNavigate) onNavigate(action);
 		if (action === "toggle-theme") dispatch(changeTheme());
 	};
@@ -30,11 +30,11 @@ const Navigation = ({ onNavigate, ...props }) => {
 };
 
 Navigation.propTypes = {
-	onNavigate: PropTypes.func,
+	onNavigate: PropTypes.func
 };
 
 Navigation.defaultProps = {
-	onNavigate: null,
+	onNavigate: null
 };
 
 export default Navigation;

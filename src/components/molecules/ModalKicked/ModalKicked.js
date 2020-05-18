@@ -37,12 +37,12 @@ const ModalKicked = ({ open, onMainAction, onClose }) => {
 ModalKicked.propTypes = {
 	open: PropTypes.bool,
 	onMainAction: PropTypes.func.isRequired,
-	onClose: PropTypes.func,
+	onClose: PropTypes.func
 };
 
 ModalKicked.defaultProps = {
 	open: false,
-	onClose: null,
+	onClose: null
 };
 
 export default ModalKicked;

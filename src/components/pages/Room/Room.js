@@ -1,24 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useRouter } from "next/router";
 
 import { RoomHandler } from "@/containers";
 import { Default } from "@/components/templates";
 import { Navigation, Footer } from "@/components/molecules";
 
-const Room = ({ darkMode }) => {
-	const router = useRouter();
-	const { roomId } = router.query;
-
-	const handleNagivation = action => {
-		if (action === "toggle-theme") darkMode.toggle();
-	};
+const Room = ({ match }) => {
+	const { roomId } = match.params;
 
 	return (
 		<Default
-			header={
-				<Navigation items={["toggle-theme"]} onNavigate={handleNagivation} />
-			}
+			header={<Navigation items={["toggle-theme"]} />}
 			footer={<Footer />}
 		>
 			{!roomId ? (
@@ -34,7 +26,9 @@ const Room = ({ darkMode }) => {
 };
 
 Room.propTypes = {
-	darkMode: PropTypes.object.isRequired,
+	match: PropTypes.shape({
+		params: PropTypes.object.isRequired
+	}).isRequired
 };
 
 Room.displayName = "RoomPage";
