@@ -17,11 +17,11 @@ const Board = ({ children, ...props }) => {
 };
 
 Board.propTypes = {
-	children: PropTypes.node.isRequired,
+	children: PropTypes.node.isRequired
 };
 
 Board.defaultProps = {
-	elevation: 3,
+	elevation: 3
 };
 
 export default Board;

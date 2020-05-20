@@ -1,23 +1,25 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import {
 	Menu as MuiMenu,
 	MenuItem,
 	ListItemIcon,
 	IconButton,
-	Typography,
+	Typography
 } from "@material-ui/core";
 import { MoreVert as IconDots } from "@material-ui/icons";
 
 import { useStyles } from "./style";
-import menuItems from "./menuItems";
+import { menuItems, menuItemIds } from "./menuItems";
 
 const Menu = ({ items, onItemClick }) => {
+	const { t } = useTranslation();
 	const classes = useStyles();
 	const [anchorEl, setAnchorEl] = useState(null);
 	const open = Boolean(anchorEl);
 
-	const handleItemClick = id => {
+	const handleItemClick = (id) => {
 		handleClose();
 		onItemClick(id);
 	};
@@ -28,7 +30,7 @@ const Menu = ({ items, onItemClick }) => {
 
 	return (
 		<div>
-			<IconButton size="small" onClick={e => setAnchorEl(e.currentTarget)}>
+			<IconButton size="small" onClick={(e) => setAnchorEl(e.currentTarget)}>
 				<IconDots />
 			</IconButton>
 			<MuiMenu
@@ -39,16 +41,14 @@ const Menu = ({ items, onItemClick }) => {
 				onClose={handleClose}
 			>
 				{menuItems.map(
-					item =>
-						items.includes(item.id) && (
-							<MenuItem key={item.id} onClick={() => handleItemClick(item.id)}>
-								{item.icon && (
-									<ListItemIcon className={classes.icon}>
-										{item.icon}
-									</ListItemIcon>
+					({ id, icon }) =>
+						items.includes(id) && (
+							<MenuItem key={id} onClick={() => handleItemClick(id)}>
+								{icon && (
+									<ListItemIcon className={classes.icon}>{icon}</ListItemIcon>
 								)}
 								<Typography variant="inherit" noWrap>
-									{item.name}
+									{t(`menu.${id}`)}
 								</Typography>
 							</MenuItem>
 						)
@@ -59,24 +59,12 @@ const Menu = ({ items, onItemClick }) => {
 };
 
 Menu.propTypes = {
-	items: PropTypes.arrayOf(
-		PropTypes.oneOf([
-			"new-room",
-			"upload-file",
-			"toggle-theme",
-			"change-language",
-			"register",
-			"make-author",
-			"make-editor",
-			"make-viewer",
-			"kick",
-		])
-	),
-	onItemClick: PropTypes.func.isRequired,
+	items: PropTypes.arrayOf(PropTypes.oneOf(menuItemIds)),
+	onItemClick: PropTypes.func.isRequired
 };
 
 Menu.defaultProps = {
-	items: ["new-room"],
+	items: ["new-room", "toggle-theme", "change-language"]
 };
 
 export default Menu;

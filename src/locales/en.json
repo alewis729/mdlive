@@ -1,13 +1,33 @@
 {
 	"buttons": {
-		"new-room": "New room"
+		"newRoom": "New room"
+	},
+	"menu": {
+		"new-room": "New room",
+		"upload-file": "Upload a file",
+		"toggle-theme": "Toggle dark theme",
+		"change-language": "Change language",
+		"register": "Register",
+		"make-author": "Make author",
+		"make-editor": "Make editor",
+		"make-viewer": "Make viewer",
+		"kick": "Kick from room"
 	},
 	"home": {
 		"welcome": "Welcome",
 		"friend": "friend",
 		"type": "Just start typing in",
 		"markdown": "markdown",
-		"and-see": "and see a live preview.",
-		"invite-others": "You can also invite others to join and interact live by making a new room."
+		"andSee": "and see a live preview.",
+		"inviteOthers": "You can also invite others to join and interact live by making a new room."
+	},
+	"room": {
+		"errorMessage": "Something is wrong! There is no room id... verify that the url is correct.",
+		"chatPlaceholder": "Send a message to everyone",
+		"settings": {
+			"inviteOthers": "Invite others",
+			"leave": "Leave room",
+			"emptyRoom": "There is no one else in the room."
+		}
 	}
 }

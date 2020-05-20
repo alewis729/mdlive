@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import {
 	Grid,
 	Box,
@@ -13,6 +14,7 @@ import { useStyles } from "./style";
 import { replaceSpaces, replaceWhiteSpaces } from "@/helpers";
 
 const InteractionChat = ({ chatMessages, onMessageSubmit }) => {
+	const { t } = useTranslation();
 	const classes = useStyles();
 	const [text, setText] = useState("");
 	const [shouldScroll, setShouldScroll] = useState(true);
@@ -80,7 +82,7 @@ const InteractionChat = ({ chatMessages, onMessageSubmit }) => {
 				<Grid container justify="space-between">
 					<Grid item xs={10}>
 						<TextField
-							placeholder="Send a message to everyone"
+							placeholder={t("room.chatPlaceholder")}
 							multiline
 							rows="4"
 							value={text}

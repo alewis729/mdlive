@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import {
 	Box,
 	Typography,
@@ -26,6 +27,7 @@ const InteractionSettings = ({
 	onInvite,
 	onLeave
 }) => {
+	const { t } = useTranslation();
 	const classes = useStyles();
 
 	return (
@@ -42,7 +44,7 @@ const InteractionSettings = ({
 					startIcon={<IconShare />}
 					onClick={onInvite}
 				>
-					<Box py={0.5}>Invite others</Box>
+					<Box py={0.5}>{t("room.settings.inviteOthers")}</Box>
 				</Button>
 				<Button
 					fullWidth
@@ -51,13 +53,13 @@ const InteractionSettings = ({
 					startIcon={<IconLeave />}
 					onClick={onLeave}
 				>
-					<Box py={0.5}>Leave room</Box>
+					<Box py={0.5}>{t("room.settings.leave")}</Box>
 				</Button>
 			</Box>
 			<Box p={2.5} className={classes.users}>
 				{users.length === 0 ? (
 					<Box textAlign="center">
-						<Typography>There is no one else in the room.</Typography>
+						<Typography>{t("room.settings.emptyRoom")}</Typography>
 					</Box>
 				) : (
 					<List>

@@ -75,16 +75,16 @@ const Home = () => {
 						>
 							{t("home.markdown")}
 						</Box>{" "}
-						{t("home.and-see")}
+						{t("home.andSee")}
 					</Box>
 				</Typography>
 				<Typography gutterBottom>
 					<Box component="span" color="text.primary">
-						{t("home.invite-others")}
+						{t("home.inviteOthers")}
 					</Box>
 				</Typography>
 				<Box mt={2}>
-					<Button onClick={handleUserSetter}>{t("buttons.new-room")}</Button>
+					<Button onClick={handleUserSetter}>{t("buttons.newRoom")}</Button>
 				</Box>
 				<Previewer userRole="author" defaultContent={content} />
 			</Box>
