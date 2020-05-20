@@ -1,4 +1,3 @@
-const { ESLINT_MODES } = require("@craco/craco");
 const path = require("path");
 
 const pathSrc = path.resolve(__dirname, "src/");
@@ -32,8 +31,5 @@ module.exports = {
         "icons",
       ],
     ],
-  },
-  eslint: {
-    mode: ESLINT_MODES.file,
   },
 };
