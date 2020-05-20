@@ -4,8 +4,9 @@
 	"description": "Markdown live app.",
 	"main": "server.js",
 	"scripts": {
+		"start": "node server.js",
 		"server": "nodemon server.js",
-		"client": "craco start",
+		"client": "set PORT=3000 && craco start",
 		"build": "craco build",
 		"dev": "concurrently \"npm run server\" \"npm run client\""
 	},
