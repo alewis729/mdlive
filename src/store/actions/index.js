@@ -1,8 +1,8 @@
-export { changeTheme } from "./actionsSettings";
+export { changeTheme, changeLang } from "./actionsSettings";
 export {
 	setCurrentUser,
 	updateCurrentId,
 	cleanCurrentUser,
 	updateUsers,
-	removeUser,
+	removeUser
 } from "./actionsUsers";

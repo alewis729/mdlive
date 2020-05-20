@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Box, Typography } from "@material-ui/core";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import { Previewer, UserSetter } from "@/containers";
 import { Default } from "@/components/templates";
@@ -16,6 +17,7 @@ const Home = () => {
 	const currentUser = useSelector((state) => state.users.current);
 	const [content, setContent] = useState("");
 	const [openModal, setOpenModal] = useState(false);
+	const { t } = useTranslation();
 
 	useEffect(() => setContent(defaultContent), []);
 
@@ -39,7 +41,7 @@ const Home = () => {
 			header={
 				<Navigation
 					onNavigate={handleNagivation}
-					items={["new-room", "toggle-theme"]}
+					items={["new-room", "toggle-theme", "change-language"]}
 				/>
 			}
 			footer={<Footer />}
@@ -57,33 +59,32 @@ const Home = () => {
 						component="span"
 						color="text.primary"
 					>
-						Welcome{" "}
+						{t("home.welcome")}{" "}
 						<Box component="span" color="text.hint">
-							friend
+							{t("home.friend")}
 						</Box>
 					</Box>
 				</Typography>
 				<Typography gutterBottom>
 					<Box component="span" color="text.primary">
-						Just start typing in{" "}
+						{t("home.type")}{" "}
 						<Box
 							component="span"
 							color="text.hint"
 							fontWeight="fontWeightSemibold"
 						>
-							markdown
+							{t("home.markdown")}
 						</Box>{" "}
-						and see a live preview.
+						{t("home.and-see")}
 					</Box>
 				</Typography>
 				<Typography gutterBottom>
 					<Box component="span" color="text.primary">
-						You can also invite others to join and interact live by making a new
-						room.
+						{t("home.invite-others")}
 					</Box>
 				</Typography>
 				<Box mt={2}>
-					<Button onClick={handleUserSetter}>New room</Button>
+					<Button onClick={handleUserSetter}>{t("buttons.new-room")}</Button>
 				</Box>
 				<Previewer userRole="author" defaultContent={content} />
 			</Box>

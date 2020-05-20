@@ -1,0 +1,13 @@
+{
+	"buttons": {
+		"new-room": "New room"
+	},
+	"home": {
+		"welcome": "Welcome",
+		"friend": "friend",
+		"type": "Just start typing in",
+		"markdown": "markdown",
+		"and-see": "and see a live preview.",
+		"invite-others": "You can also invite others to join and interact live by making a new room."
+	}
+}

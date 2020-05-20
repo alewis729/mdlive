@@ -1,0 +1,13 @@
+{
+	"buttons": {
+		"new-room": "Nueva sala"
+	},
+	"home": {
+		"welcome": "Bienvenido",
+		"friend": "amigo",
+		"type": "Solo escribe en",
+		"markdown": "markdown",
+		"and-see": "y mira tus anotaciones convertirse en vivo.",
+		"invite-others": "Adicionalmente, puedes invitar a otros a unirse a tus anotaciones e interactuar en vivo creando una nueva sala."
+	}
+}

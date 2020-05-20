@@ -8,6 +8,7 @@ import Routes from "@/routes";
 import { light, dark } from "@/components/themes";
 import "./markdown.css";
 import "./markdown-dark.css";
+import "@/locales/i18n-config";
 
 const App = () => {
 	const currentTheme = useSelector((state) => state.settings.theme);
