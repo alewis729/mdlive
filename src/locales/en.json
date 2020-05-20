@@ -1,6 +1,7 @@
 {
 	"buttons": {
-		"newRoom": "New room"
+		"newRoom": "New room",
+		"save": "Save"
 	},
 	"menu": {
 		"new-room": "New room",
@@ -35,6 +36,20 @@
 			"title": "Invite others",
 			"desc": "Share this link with people you want in the room.",
 			"confirm": "Ok, great"
+		},
+		"username": {
+			"title": "Almost ready...",
+			"desc": "Just tell us how you would like others to call you.",
+			"input": {
+				"label": "Your name",
+				"error": "Name must be between 3 and 12 characters long."
+			},
+			"confirm": {
+				"createRoom": "Create room",
+				"joinRoom": "Join room"
+			},
+			"cancel": "Cancel",
+			"reject": "Reject invitation"
 		}
 	},
 	"home": {
@@ -52,6 +67,7 @@
 			"inviteOthers": "Invite others",
 			"leave": "Leave room",
 			"emptyRoom": "There is no one else in the room."
-		}
+		},
+		"roomCode": "Room code:"
 	}
 }

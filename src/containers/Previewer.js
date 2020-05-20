@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import { Box, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { useSelector } from "react-redux";
 
 import { Editor, Viewer } from "@/components/molecules";
 import { Button } from "@/components/atoms";
@@ -20,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Previewer = ({ userRole, defaultContent, onEdit, ...props }) => {
+	const { t } = useTranslation();
 	const [canSave, setCanSave] = useState(false);
 	const [text, setText] = useState("");
 	const classes = useStyles({ canSave });
@@ -49,7 +51,7 @@ const Previewer = ({ userRole, defaultContent, onEdit, ...props }) => {
 			<Box mb={2} textAlign="left" height={42}>
 				<div className={classes.saveButton}>
 					<Button onClick={() => downloadFile(text)} color="success">
-						Save
+						{t("buttons.save")}
 					</Button>
 				</div>
 			</Box>

@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
 import io from "socket.io-client";
 import { useSelector, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 import { Box, Typography } from "@material-ui/core";
 
 import { updateCurrentId } from "@/store/actions";
@@ -16,6 +17,7 @@ const defaultContent = getRandomTextMd();
 const RoomHandler = ({ roomId }) => {
 	const history = useHistory();
 	const currentUser = useSelector((state) => state.users.current);
+	const { t } = useTranslation();
 	const [open, setOpenModal] = useState(!currentUser);
 	const [content, setContent] = useState("");
 	const [hasJoined, setHasJoined] = useState(false);
@@ -56,7 +58,7 @@ const RoomHandler = ({ roomId }) => {
 			<UserSetter
 				open={open}
 				onSubmitUsername={() => setOpenModal(false)}
-				textCommit="Join room"
+				textCommit="joinRoom"
 				onReject={handleReject}
 			/>
 			{currentUser && (
@@ -64,7 +66,7 @@ const RoomHandler = ({ roomId }) => {
 					<InteractionsContainer socket={socket} />
 					<Box textAlign="center">
 						<Typography variant="h6">
-							Room code:{" "}
+							{`${t("room.roomCode")} `}
 							<Box
 								fontWeight="fontWeightSemibold"
 								component="span"
