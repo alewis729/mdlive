@@ -9,9 +9,6 @@ const resources = {
 const config = {
 	resources,
 	fallbackLng: "en",
-	interpolation: {
-		escapeValue: false,
-	},
 };
 
 export default config;
