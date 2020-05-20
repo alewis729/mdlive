@@ -1,10 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import { Dialog, Box, Grid, Typography } from "@material-ui/core";
 
 import { Button } from "@/components/atoms";
 
 const ModalKicked = ({ open, onMainAction, onClose }) => {
+	const { t } = useTranslation();
+
 	return (
 		<Dialog open={open} onClose={onClose} maxWidth="lg">
 			<Box py={4} px={10} textAlign="center">
@@ -15,18 +18,18 @@ const ModalKicked = ({ open, onMainAction, onClose }) => {
 							component="span"
 							color="text.primary"
 						>
-							You were kicked
+							{t("modals.kicked.title")}
 						</Box>
 					</Typography>
 					<Typography gutterBottom>
 						<Box component="span" color="text.primary">
-							Unfortunately you were kicked out the room.
+							{t("modals.kicked.desc")}
 						</Box>
 					</Typography>
 				</Box>
 				<Grid container justify="center" spacing={2}>
 					<Grid item>
-						<Button onClick={onMainAction}>I understand</Button>
+						<Button onClick={onMainAction}>{t("modals.kicked.confirm")}</Button>
 					</Grid>
 				</Grid>
 			</Box>

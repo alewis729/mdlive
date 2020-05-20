@@ -13,6 +13,30 @@
 		"make-viewer": "Make viewer",
 		"kick": "Kick from room"
 	},
+	"modals": {
+		"author": {
+			"title": "Are you sure?",
+			"desc": "You will lose author privilleges as soon as you make someone else an author.",
+			"confirm": "Yes, proceed",
+			"cancel": "Cancel"
+		},
+		"kicked": {
+			"title": "You were kicked",
+			"desc": "Unfortunately you were kicked out the room.",
+			"confirm": "I understand"
+		},
+		"leave": {
+			"title": "You are about to leave",
+			"desc": "If you leve the room you may never be able to see the md file. Confirm that you want to abandon the room.",
+			"confirm": "Leave room",
+			"cancel": "Cancel"
+		},
+		"invite": {
+			"title": "Invite others",
+			"desc": "Share this link with people you want in the room.",
+			"confirm": "Ok, great"
+		}
+	},
 	"home": {
 		"welcome": "Welcome",
 		"friend": "friend",
