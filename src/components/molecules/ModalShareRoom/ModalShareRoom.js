@@ -1,10 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import { Dialog, Box, Typography } from "@material-ui/core";
 
 import { Button } from "@/components/atoms";
 
 const ModalShareRoom = ({ open, room, onClose }) => {
+	const { t } = useTranslation();
+
 	return (
 		<Dialog open={open} onClose={onClose} maxWidth="lg">
 			<Box py={4} px={10} textAlign="center">
@@ -15,12 +18,12 @@ const ModalShareRoom = ({ open, room, onClose }) => {
 							component="span"
 							color="text.primary"
 						>
-							Invite others
+							{t("modals.invite.title")}
 						</Box>
 					</Typography>
 					<Typography gutterBottom>
 						<Box component="span" color="text.primary">
-							Share this link with people you want in the room.
+							{t("modals.invite.desc")}
 						</Box>
 					</Typography>
 				</Box>
@@ -35,7 +38,7 @@ const ModalShareRoom = ({ open, room, onClose }) => {
 						</Box>
 					</Typography>
 				</Box>
-				<Button onClick={onClose}>Ok, great</Button>
+				<Button onClick={onClose}>{t("modals.invite.confirm")}</Button>
 			</Box>
 		</Dialog>
 	);
@@ -44,12 +47,12 @@ const ModalShareRoom = ({ open, room, onClose }) => {
 ModalShareRoom.propTypes = {
 	open: PropTypes.bool,
 	room: PropTypes.string.isRequired,
-	onClose: PropTypes.func
+	onClose: PropTypes.func,
 };
 
 ModalShareRoom.defaultProps = {
 	open: false,
-	onClose: null
+	onClose: null,
 };
 
 export default ModalShareRoom;

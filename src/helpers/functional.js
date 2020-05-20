@@ -31,7 +31,7 @@ export const getRandomAlphanumeric = (
 	length = [4, 2],
 	chars = "0123456789abcdefghijklmnopqrstuvwxyz"
 ) => {
-	const randomChar = (chars) => chars[Math.floor(Math.random() * chars.length)];
+	const randomChar = chars => chars[Math.floor(Math.random() * chars.length)];
 	let res = "";
 
 	for (let i = 0; i < length[1]; i++) {
@@ -42,25 +42,6 @@ export const getRandomAlphanumeric = (
 	}
 
 	return res;
-};
-
-/**
- * Function that gets a random default text to display in .md
- */
-export const getRandomTextMd = () => {
-	const adjectives = [
-		"beautiful",
-		"creative",
-		"cool",
-		"great",
-		"nice",
-		"intelligent",
-		"awesome"
-	];
-	const adj = adjectives[Math.floor(Math.random() * adjectives.length)];
-	const final = `## Hello ${adj} human 😃\n\nJust type here to see a live preview!`;
-
-	return final;
 };
 
 /**

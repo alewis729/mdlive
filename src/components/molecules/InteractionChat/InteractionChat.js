@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import {
 	Grid,
 	Box,
 	Typography,
 	TextField,
-	IconButton
+	IconButton,
 } from "@material-ui/core";
 import { SendRounded as IconSend } from "@material-ui/icons";
 
@@ -13,6 +14,7 @@ import { useStyles } from "./style";
 import { replaceSpaces, replaceWhiteSpaces } from "@/helpers";
 
 const InteractionChat = ({ chatMessages, onMessageSubmit }) => {
+	const { t } = useTranslation();
 	const classes = useStyles();
 	const [text, setText] = useState("");
 	const [shouldScroll, setShouldScroll] = useState(true);
@@ -38,11 +40,11 @@ const InteractionChat = ({ chatMessages, onMessageSubmit }) => {
 		// eslint-disable-next-line
 	}, [chatMessages]);
 
-	const handleKeyDown = (e) => {
+	const handleKeyDown = e => {
 		if (e.keyCode === 13 && !e.shiftKey) handleSubmit();
 	};
 
-	const handleTextChange = (e) => {
+	const handleTextChange = e => {
 		const { value } = e.target;
 		const cleanValue = value.replace(/[\r\n\v]+/g, "");
 		setText(cleanValue);
@@ -56,7 +58,7 @@ const InteractionChat = ({ chatMessages, onMessageSubmit }) => {
 		}
 	};
 
-	const scrollToBottom = (elm) => elm.scrollTo(0, elm.scrollHeight);
+	const scrollToBottom = elm => elm.scrollTo(0, elm.scrollHeight);
 
 	return (
 		<div className={classes.root}>
@@ -80,7 +82,7 @@ const InteractionChat = ({ chatMessages, onMessageSubmit }) => {
 				<Grid container justify="space-between">
 					<Grid item xs={10}>
 						<TextField
-							placeholder="Send a message to everyone"
+							placeholder={t("room.chatPlaceholder")}
 							multiline
 							rows="4"
 							value={text}
@@ -104,10 +106,10 @@ InteractionChat.propTypes = {
 		PropTypes.shape({
 			id: PropTypes.string.isRequired,
 			name: PropTypes.string.isRequired,
-			message: PropTypes.string.isRequired
+			message: PropTypes.string.isRequired,
 		})
 	).isRequired,
-	onMessageSubmit: PropTypes.func.isRequired
+	onMessageSubmit: PropTypes.func.isRequired,
 };
 
 export default InteractionChat;

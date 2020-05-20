@@ -2,20 +2,29 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
 import { Toolbar } from "@material-ui/core";
+import { useTranslation } from "react-i18next";
 
-import { changeTheme } from "@/store/actions";
+import { changeTheme, changeLang } from "@/store/actions";
 import { useStyles } from "./style";
 import { IconLogo, IconLogoLight } from "@icons";
 import { Menu } from "@/components/molecules";
 
 const Navigation = ({ onNavigate, ...props }) => {
 	const classes = useStyles();
-	const theme = useSelector((state) => state.settings.theme);
+	const { theme, languages, currentLang } = useSelector(
+		state => state.settings
+	);
 	const dispatch = useDispatch();
+	const { i18n } = useTranslation();
 
-	const handleMenuItemClick = (action) => {
+	const handleMenuItemClick = action => {
 		if (onNavigate) onNavigate(action);
 		if (action === "toggle-theme") dispatch(changeTheme());
+		if (action === "change-language") {
+			const newLang = languages[1 - languages.indexOf(currentLang)];
+			i18n.changeLanguage(newLang);
+			dispatch(changeLang(newLang));
+		}
 	};
 
 	return (
@@ -30,11 +39,11 @@ const Navigation = ({ onNavigate, ...props }) => {
 };
 
 Navigation.propTypes = {
-	onNavigate: PropTypes.func
+	onNavigate: PropTypes.func,
 };
 
 Navigation.defaultProps = {
-	onNavigate: null
+	onNavigate: null,
 };
 
 export default Navigation;

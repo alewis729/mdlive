@@ -1,10 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import { Dialog, Box, Grid, Typography } from "@material-ui/core";
 
 import { Button } from "@/components/atoms";
 
 const ModalLeaveRoom = ({ open, onMainAction, onClose }) => {
+	const { t } = useTranslation();
+
 	return (
 		<Dialog open={open} onClose={onClose} maxWidth="lg">
 			<Box py={4} px={10} textAlign="center">
@@ -15,23 +18,22 @@ const ModalLeaveRoom = ({ open, onMainAction, onClose }) => {
 							component="span"
 							color="text.primary"
 						>
-							You are about to leave
+							{t("modals.leave.title")}
 						</Box>
 					</Typography>
 					<Typography gutterBottom>
 						<Box component="span" color="text.primary">
-							If you leve the room you may never be able to see the md file.
-							Confirm that you want to abandon the room.
+							{t("modals.leave.desc")}
 						</Box>
 					</Typography>
 				</Box>
 				<Grid container justify="center" spacing={2}>
 					<Grid item>
-						<Button onClick={onMainAction}>Leave room</Button>
+						<Button onClick={onMainAction}>{t("modals.leave.confirm")}</Button>
 					</Grid>
 					<Grid item>
 						<Button onClick={onClose} color="secondary">
-							Cancel
+							{t("modals.leave.cancel")}
 						</Button>
 					</Grid>
 				</Grid>
@@ -43,12 +45,12 @@ const ModalLeaveRoom = ({ open, onMainAction, onClose }) => {
 ModalLeaveRoom.propTypes = {
 	open: PropTypes.bool,
 	onMainAction: PropTypes.func.isRequired,
-	onClose: PropTypes.func
+	onClose: PropTypes.func,
 };
 
 ModalLeaveRoom.defaultProps = {
 	open: false,
-	onClose: null
+	onClose: null,
 };
 
 export default ModalLeaveRoom;

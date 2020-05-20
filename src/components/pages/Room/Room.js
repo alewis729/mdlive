@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 
 import { RoomHandler } from "@/containers";
 import { Default } from "@/components/templates";
@@ -7,6 +8,7 @@ import { Navigation, Footer } from "@/components/molecules";
 
 const Room = ({ match }) => {
 	const { roomId } = match.params;
+	const { t } = useTranslation();
 
 	return (
 		<Default
@@ -14,10 +16,7 @@ const Room = ({ match }) => {
 			footer={<Footer />}
 		>
 			{!roomId ? (
-				<div>
-					Something is wrong! There is no room id... verify that the url is
-					correct.
-				</div>
+				<div> {t("room.errorMessage")}</div>
 			) : (
 				<RoomHandler roomId={roomId} />
 			)}
@@ -27,8 +26,8 @@ const Room = ({ match }) => {
 
 Room.propTypes = {
 	match: PropTypes.shape({
-		params: PropTypes.object.isRequired
-	}).isRequired
+		params: PropTypes.object.isRequired,
+	}).isRequired,
 };
 
 Room.displayName = "RoomPage";

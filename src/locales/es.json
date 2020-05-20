@@ -1,0 +1,79 @@
+{
+	"buttons": {
+		"newRoom": "Nueva sala",
+		"save": "Guardar"
+	},
+	"menu": {
+		"new-room": "Nueva sala",
+		"upload-file": "Subir un archivo",
+		"toggle-theme": "Alternar tema oscuro",
+		"change-language": "Cambiar idioma",
+		"register": "Registrarse",
+		"make-author": "Convertir a autor",
+		"make-editor": "Convertir a editor",
+		"make-viewer": "Convertir a lector",
+		"kick": "Retirar de la sala"
+	},
+	"modals": {
+		"author": {
+			"title": "¿Estás seguro?",
+			"desc": "Perderas los privilegios de autor al convertir a otra persona en autor.",
+			"confirm": "Sí, proceder",
+			"cancel": "Cancelar"
+		},
+		"kicked": {
+			"title": "Fuiste eliminado de la sala",
+			"desc": "Por alguna razón fuiste eliminado de esta sala.",
+			"confirm": "Comprendo"
+		},
+		"leave": {
+			"title": "Estas a punto de salir",
+			"desc": "Si abandonas la sala perderas el progreso de las anotaciones. Confirmar que deseas abandonar la sala.",
+			"confirm": "Sí, abandonar",
+			"cancel": "Cancelar"
+		},
+		"invite": {
+			"title": "Invita a otros",
+			"desc": "Comparte la url con otras personas para que se unan a esta sala.",
+			"confirm": "Ok, genial"
+		},
+		"username": {
+			"title": "Casi listo...",
+			"desc": "Solo dime como quieres que los demás te llamen.",
+			"input": {
+				"label": "Tu nombre",
+				"error": "El nombre debe tener entre 3 y 12 caracteres."
+			},
+			"confirm": {
+				"createRoom": "Crear sala",
+				"joinRoom": "Unirse"
+			},
+			"cancel": "Cancelar",
+			"reject": "Rechazar invitación"
+		}
+	},
+	"greet": {
+		"adjectives": ["asombroso", "genial", "buen", "inteligente", "estupendo"],
+		"hello": "Hola",
+		"human": "humano",
+		"justType": "Solo comienza a escribir para ver tus anotaciones convertirse a markdown!"
+	},
+	"home": {
+		"welcome": "Bienvenido",
+		"friend": "amigo",
+		"type": "Solo escribe en",
+		"markdown": "markdown",
+		"andSee": "y mira tus anotaciones convertirse en vivo.",
+		"inviteOthers": "Adicionalmente, puedes invitar a otros a unirse a tus anotaciones e interactuar en vivo creando una nueva sala."
+	},
+	"room": {
+		"errorMessage": "¡Algo salió mal! No existe un código de la sala... verifica si la url es correcta.",
+		"chatPlaceholder": "Envía un mensaje a todos",
+		"settings": {
+			"inviteOthers": "Invitar a otros",
+			"leave": "Salir de la sala",
+			"emptyRoom": "No hay nadie mas en esta sala."
+		},
+		"roomCode": "Código de la sala:"
+	}
+}

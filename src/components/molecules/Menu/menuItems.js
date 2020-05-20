@@ -11,52 +11,26 @@ import {
 	RemoveCircleRounded as IconRemove,
 } from "@material-ui/icons";
 
-const items = [
-	{
-		id: "new-room",
-		name: "New room",
-		icon: <IconNew fontSize="small" />,
-	},
-	{
-		id: "upload-file",
-		name: "Upload a file",
-		icon: <IconUpload fontSize="small" />,
-	},
-	{
-		id: "toggle-theme",
-		name: "Toggle dark theme",
-		icon: <IconTheme fontSize="small" />,
-	},
-	{
-		id: "change-language",
-		name: "Change language",
-		icon: <IconLang fontSize="small" />,
-	},
-	{
-		id: "register",
-		name: "Register",
-		icon: <IconUser fontSize="small" />,
-	},
-	{
-		id: "make-author",
-		name: "Make author",
-		icon: <IconAdmin fontSize="small" />,
-	},
-	{
-		id: "make-editor",
-		name: "Make editor",
-		icon: <IconEdit fontSize="small" />,
-	},
-	{
-		id: "make-viewer",
-		name: "Make viewer",
-		icon: <IconView fontSize="small" />,
-	},
-	{
-		id: "kick",
-		name: "Kick from room",
-		icon: <IconRemove fontSize="small" />,
-	},
+export const menuItemIds = [
+	"new-room",
+	"upload-file",
+	"toggle-theme",
+	"change-language",
+	"register",
+	"make-author",
+	"make-editor",
+	"make-viewer",
+	"kick",
 ];
 
-export default items;
+export const menuItems = [
+	{ id: "new-room", icon: <IconNew fontSize="small" /> },
+	{ id: "upload-file", icon: <IconUpload fontSize="small" /> },
+	{ id: "toggle-theme", icon: <IconTheme fontSize="small" /> },
+	{ id: "change-language", icon: <IconLang fontSize="small" /> },
+	{ id: "register", icon: <IconUser fontSize="small" /> },
+	{ id: "make-author", icon: <IconAdmin fontSize="small" /> },
+	{ id: "make-editor", icon: <IconEdit fontSize="small" /> },
+	{ id: "make-viewer", icon: <IconView fontSize="small" /> },
+	{ id: "kick", icon: <IconRemove fontSize="small" /> },
+];

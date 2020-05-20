@@ -1,29 +1,31 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import { Box, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { useSelector } from "react-redux";
 
 import { Editor, Viewer } from "@/components/molecules";
 import { Button } from "@/components/atoms";
 import { downloadFile } from "@/helpers";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
 	saveButton: {
 		visibility: ({ canSave }) => (canSave ? "visible" : "hidden"),
 		opacity: ({ canSave }) => (canSave ? "1" : "0"),
-		transition: theme.helpers.transitionQuick
+		transition: theme.helpers.transitionQuick,
 	},
 	mainGrid: {
-		height: "100%"
-	}
+		height: "100%",
+	},
 }));
 
 const Previewer = ({ userRole, defaultContent, onEdit, ...props }) => {
+	const { t } = useTranslation();
 	const [canSave, setCanSave] = useState(false);
 	const [text, setText] = useState("");
 	const classes = useStyles({ canSave });
-	const theme = useSelector((state) => state.settings.theme);
+	const theme = useSelector(state => state.settings.theme);
 	const [mdClassName, setMdClassName] = useState("markdown-body");
 
 	useEffect(() => setText(defaultContent), [defaultContent]);
@@ -35,7 +37,7 @@ const Previewer = ({ userRole, defaultContent, onEdit, ...props }) => {
 		// eslint-disable-next-line
 	}, [theme]);
 
-	const handleEditorChange = (val) => {
+	const handleEditorChange = val => {
 		const hasEnoughText = val.length > 5;
 		setText(val);
 		if (onEdit) onEdit(val);
@@ -49,7 +51,7 @@ const Previewer = ({ userRole, defaultContent, onEdit, ...props }) => {
 			<Box mb={2} textAlign="left" height={42}>
 				<div className={classes.saveButton}>
 					<Button onClick={() => downloadFile(text)} color="success">
-						Save
+						{t("buttons.save")}
 					</Button>
 				</div>
 			</Box>
@@ -74,7 +76,7 @@ const Previewer = ({ userRole, defaultContent, onEdit, ...props }) => {
 Previewer.propTypes = {
 	userRole: PropTypes.oneOf(["author", "editor", "viewer"]).isRequired,
 	defaultContent: PropTypes.string.isRequired,
-	onEdit: PropTypes.func
+	onEdit: PropTypes.func,
 };
 
 Previewer.defaultProps = {
@@ -83,7 +85,7 @@ Previewer.defaultProps = {
 	onEdit: null,
 	mt: 2,
 	mx: "auto",
-	maxWidth: 1600
+	maxWidth: 1600,
 };
 
 export default Previewer;

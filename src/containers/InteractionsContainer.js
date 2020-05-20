@@ -10,7 +10,7 @@ import {
 	ModalLeaveRoom,
 	ModalShareRoom,
 	ModalKicked,
-	ModalAuthorConfirm
+	ModalAuthorConfirm,
 } from "@/components/molecules";
 import { InteractionsPanel } from "@/components/organisms";
 
@@ -18,13 +18,13 @@ const initialModals = {
 	leave: false,
 	invite: false,
 	authorConfirm: false,
-	kicked: false
+	kicked: false,
 };
 
 const InteractionsContainer = ({ socket }) => {
 	const history = useHistory();
 	const { current: currentUser, all: users } = useSelector(
-		(state) => state.users
+		state => state.users
 	);
 	const dispatch = useDispatch();
 	const [chatMessages, setChatMessages] = useState([]);
@@ -36,10 +36,7 @@ const InteractionsContainer = ({ socket }) => {
 			dispatch(updateUsers(users));
 		});
 		socket.on("message", ({ id, name, message }) => {
-			setChatMessages((chatMessages) => [
-				...chatMessages,
-				{ id, name, message }
-			]);
+			setChatMessages(chatMessages => [...chatMessages, { id, name, message }]);
 		});
 		socket.on("kick", () => {
 			setModals({ ...modals, kicked: true });
@@ -66,7 +63,7 @@ const InteractionsContainer = ({ socket }) => {
 		if (role) socket.emit("role-update", { id: userId, role });
 	};
 
-	const handleMessageSubmit = (message) => {
+	const handleMessageSubmit = message => {
 		socket.emit("message", { message });
 	};
 
@@ -141,7 +138,7 @@ const InteractionsContainer = ({ socket }) => {
 };
 
 InteractionsContainer.propTypes = {
-	socket: PropTypes.object.isRequired
+	socket: PropTypes.object.isRequired,
 };
 
 export default InteractionsContainer;

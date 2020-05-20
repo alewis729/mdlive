@@ -1,0 +1,87 @@
+{
+	"buttons": {
+		"newRoom": "New room",
+		"save": "Save"
+	},
+	"menu": {
+		"new-room": "New room",
+		"upload-file": "Upload a file",
+		"toggle-theme": "Toggle dark theme",
+		"change-language": "Change language",
+		"register": "Register",
+		"make-author": "Make author",
+		"make-editor": "Make editor",
+		"make-viewer": "Make viewer",
+		"kick": "Kick from room"
+	},
+	"modals": {
+		"author": {
+			"title": "Are you sure?",
+			"desc": "You will lose author privilleges as soon as you make someone else an author.",
+			"confirm": "Yes, proceed",
+			"cancel": "Cancel"
+		},
+		"kicked": {
+			"title": "You were kicked",
+			"desc": "Unfortunately you were kicked out the room.",
+			"confirm": "I understand"
+		},
+		"leave": {
+			"title": "You are about to leave",
+			"desc": "If you leve the room you may never be able to see the md file. Confirm that you want to abandon the room.",
+			"confirm": "Leave room",
+			"cancel": "Cancel"
+		},
+		"invite": {
+			"title": "Invite others",
+			"desc": "Share this link with people you want in the room.",
+			"confirm": "Ok, great"
+		},
+		"username": {
+			"title": "Almost ready...",
+			"desc": "Just tell us how you would like others to call you.",
+			"input": {
+				"label": "Your name",
+				"error": "Name must be between 3 and 12 characters long."
+			},
+			"confirm": {
+				"createRoom": "Create room",
+				"joinRoom": "Join room"
+			},
+			"cancel": "Cancel",
+			"reject": "Reject invitation"
+		}
+	},
+	"greet": {
+		"adjectives": [
+			"beautiful",
+			"creative",
+			"cool",
+			"great",
+			"nice",
+			"intelligent",
+			"awesome"
+		],
+		"hello": "Hello",
+		"human": "human",
+		"justType": "Just type here to see a live preview!"
+	},
+	"home": {
+		"welcome": "Welcome",
+		"friend": "friend",
+		"type": "Just start typing in",
+		"markdown": "markdown",
+		"andSee": "and see a live preview.",
+		"inviteOthers": "You can also invite others to join and interact live by making a new room."
+	},
+	"room": {
+		"errorMessage": "Something is wrong! There is no room id... verify that the url is correct.",
+		"chatPlaceholder": "Send a message to everyone",
+		"settings": {
+			"inviteOthers": "Invite others",
+			"leave": "Leave room",
+			"emptyRoom": "There is no one else in the room."
+		},
+		"roomCode": "Room code:"
+	}
+}

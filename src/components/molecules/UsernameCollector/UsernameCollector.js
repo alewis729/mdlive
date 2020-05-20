@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import { Dialog, Box, Grid, Typography, TextField } from "@material-ui/core";
 
 import { replaceWhiteSpaces } from "@/helpers";
@@ -10,8 +11,9 @@ const UsernameCollector = ({
 	textCommit,
 	onCommit,
 	onClose,
-	onReject
+	onReject,
 }) => {
+	const { t } = useTranslation();
 	const [formData, setFormData] = useState({ name: "", error: null });
 
 	const handleInputChange = (e, key) => {
@@ -33,7 +35,7 @@ const UsernameCollector = ({
 		if (name.length < 3 || name.length > 12) {
 			setFormData({
 				...formData,
-				error: "Name must be between 3 and 12 characters long."
+				error: t("modals.username.input.error"),
 			});
 		} else {
 			const data = { name, error: null };
@@ -52,19 +54,19 @@ const UsernameCollector = ({
 							component="span"
 							color="text.primary"
 						>
-							Almost ready...
+							{t("modals.username.title")}
 						</Box>
 					</Typography>
 					<Typography gutterBottom>
 						<Box component="span" color="text.primary">
-							Just tell us how you would like others to call you.
+							{t("modals.username.desc")}
 						</Box>
 					</Typography>
 				</Box>
 				<Box my={4}>
 					<TextField
-						placeholder="Your name"
-						label="Your name"
+						placeholder={t("modals.username.input.label")}
+						label={t("modals.username.input.label")}
 						error={!!formData.error}
 						helperText={formData.error}
 						variant="outlined"
@@ -72,25 +74,27 @@ const UsernameCollector = ({
 						autoFocus
 						required
 						value={formData.name}
-						onKeyDown={(e) => (e.keyCode === 13 ? handleSubmit() : null)}
-						onChange={(e) => handleInputChange(e, "name")}
+						onKeyDown={e => (e.keyCode === 13 ? handleSubmit() : null)}
+						onChange={e => handleInputChange(e, "name")}
 					/>
 				</Box>
 				<Grid container justify="center" spacing={2}>
 					<Grid item>
-						<Button onClick={handleSubmit}>{textCommit}</Button>
+						<Button onClick={handleSubmit}>
+							{t(`modals.username.confirm.${textCommit}`)}
+						</Button>
 					</Grid>
 					{onClose && (
 						<Grid item>
 							<Button onClick={onClose} color="secondary">
-								Cancel
+								{t("modals.username.cancel")}
 							</Button>
 						</Grid>
 					)}
 					{onReject && (
 						<Grid item>
 							<Button onClick={onReject} color="secondary">
-								Reject invitation
+								{t("modals.username.reject")}
 							</Button>
 						</Grid>
 					)}
@@ -102,17 +106,20 @@ const UsernameCollector = ({
 
 UsernameCollector.propTypes = {
 	open: PropTypes.bool,
-	textCommit: PropTypes.string,
+	/**
+	 * The locale identifier.
+	 */
+	textCommit: PropTypes.string.isRequired,
 	onCommit: PropTypes.func.isRequired,
 	onClose: PropTypes.func,
-	onReject: PropTypes.func
+	onReject: PropTypes.func,
 };
 
 UsernameCollector.defaultProps = {
-	textCommit: "Create room",
+	textCommit: "createRoom",
 	open: false,
 	onClose: null,
-	onReject: null
+	onReject: null,
 };
 
 export default UsernameCollector;

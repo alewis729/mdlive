@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Grid, Typography, Tooltip, Link, IconButton } from "@material-ui/core";
 import {
 	GitHub as IconGithub,
-	LinkedIn as IconLinkedIn
+	LinkedIn as IconLinkedIn,
 } from "@material-ui/icons";
 
 import { useStyles } from "./style";
@@ -22,7 +22,7 @@ const Footer = ({ copy, links }) => {
 		<Grid justify="space-between" alignItems="center" container>
 			<Typography>{copy}</Typography>
 			<div className={classes.icons}>
-				{links.map((link) => (
+				{links.map(link => (
 					<div key={link.url}>
 						{!link.title ? (
 							renderLinkIcon(link)
@@ -44,9 +44,9 @@ Footer.propTypes = {
 		PropTypes.shape({
 			url: PropTypes.string.isRequired,
 			title: PropTypes.string,
-			icon: PropTypes.element
+			icon: PropTypes.element,
 		})
-	)
+	),
 };
 
 Footer.defaultProps = {
@@ -55,11 +55,11 @@ Footer.defaultProps = {
 		{
 			url: "https://github.com/alewis729/md-live",
 			title: "Repo",
-			icon: <IconGithub />
+			icon: <IconGithub />,
 		},
 		{ url: "https://github.com/alewis729", title: "Dev", icon: <IconGithub /> },
-		{ url: "https://www.linkedin.com/in/alewis729/", icon: <IconLinkedIn /> }
-	]
+		{ url: "https://www.linkedin.com/in/alewis729/", icon: <IconLinkedIn /> },
+	],
 };
 
 export default Footer;

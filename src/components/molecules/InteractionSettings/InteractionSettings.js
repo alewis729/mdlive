@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import {
 	Box,
 	Typography,
@@ -8,11 +9,11 @@ import {
 	ListItemAvatar,
 	ListItemText,
 	ListItemSecondaryAction,
-	Avatar
+	Avatar,
 } from "@material-ui/core";
 import {
 	ShareRounded as IconShare,
-	ExitToAppRounded as IconLeave
+	ExitToAppRounded as IconLeave,
 } from "@material-ui/icons";
 
 import { useStyles } from "./style";
@@ -24,8 +25,9 @@ const InteractionSettings = ({
 	users,
 	onUserMenuAction,
 	onInvite,
-	onLeave
+	onLeave,
 }) => {
+	const { t } = useTranslation();
 	const classes = useStyles();
 
 	return (
@@ -42,7 +44,7 @@ const InteractionSettings = ({
 					startIcon={<IconShare />}
 					onClick={onInvite}
 				>
-					<Box py={0.5}>Invite others</Box>
+					<Box py={0.5}>{t("room.settings.inviteOthers")}</Box>
 				</Button>
 				<Button
 					fullWidth
@@ -51,17 +53,17 @@ const InteractionSettings = ({
 					startIcon={<IconLeave />}
 					onClick={onLeave}
 				>
-					<Box py={0.5}>Leave room</Box>
+					<Box py={0.5}>{t("room.settings.leave")}</Box>
 				</Button>
 			</Box>
 			<Box p={2.5} className={classes.users}>
 				{users.length === 0 ? (
 					<Box textAlign="center">
-						<Typography>There is no one else in the room.</Typography>
+						<Typography>{t("room.settings.emptyRoom")}</Typography>
 					</Box>
 				) : (
 					<List>
-						{users.map((user) => (
+						{users.map(user => (
 							<ListItem key={user.id} disableGutters>
 								<ListItemAvatar>
 									<Avatar className={classes.avatar}>{user.name[0]}</Avatar>
@@ -74,9 +76,9 @@ const InteractionSettings = ({
 												"make-author",
 												"make-editor",
 												"make-viewer",
-												"kick"
+												"kick",
 											]}
-											onItemClick={(item) =>
+											onItemClick={item =>
 												onUserMenuAction && onUserMenuAction(user.id, item)
 											}
 										/>
@@ -94,22 +96,22 @@ const InteractionSettings = ({
 InteractionSettings.propTypes = {
 	currentUser: PropTypes.shape({
 		id: PropTypes.string.isRequired,
-		role: PropTypes.oneOf(["author", "editor", "viewer"])
+		role: PropTypes.oneOf(["author", "editor", "viewer"]),
 	}).isRequired,
 	users: PropTypes.arrayOf(
 		PropTypes.shape({
 			id: PropTypes.string.isRequired,
 			name: PropTypes.string.isRequired,
-			role: PropTypes.oneOf(["author", "editor", "viewer"])
+			role: PropTypes.oneOf(["author", "editor", "viewer"]),
 		})
 	).isRequired,
 	onUserMenuAction: PropTypes.func,
 	onInvite: PropTypes.func.isRequired,
-	onLeave: PropTypes.func.isRequired
+	onLeave: PropTypes.func.isRequired,
 };
 
 InteractionSettings.defaultProps = {
-	onUserMenuAction: null
+	onUserMenuAction: null,
 };
 
 export default InteractionSettings;

@@ -1,25 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Box, Typography } from "@material-ui/core";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
+import { useRandomPhrase } from "@/hooks";
 import { Previewer, UserSetter } from "@/containers";
 import { Default } from "@/components/templates";
 import { Navigation, Footer } from "@/components/molecules";
 import { Button } from "@/components/atoms";
-import { getRandomTextMd, getRandomAlphanumeric } from "@/helpers";
-
-const defaultContent = getRandomTextMd();
+import { getRandomAlphanumeric } from "@/helpers";
 
 const Home = () => {
 	const history = useHistory();
-	const currentUser = useSelector((state) => state.users.current);
-	const [content, setContent] = useState("");
+	const currentUser = useSelector(state => state.users.current);
+	const { t } = useTranslation();
 	const [openModal, setOpenModal] = useState(false);
+	const greetPhraase = useRandomPhrase();
 
-	useEffect(() => setContent(defaultContent), []);
-
-	const handleNagivation = (action) => {
+	const handleNagivation = action => {
 		if (action === "new-room") handleUserSetter();
 	};
 
@@ -39,7 +38,7 @@ const Home = () => {
 			header={
 				<Navigation
 					onNavigate={handleNagivation}
-					items={["new-room", "toggle-theme"]}
+					items={["new-room", "toggle-theme", "change-language"]}
 				/>
 			}
 			footer={<Footer />}
@@ -57,35 +56,34 @@ const Home = () => {
 						component="span"
 						color="text.primary"
 					>
-						Welcome{" "}
+						{t("home.welcome")}{" "}
 						<Box component="span" color="text.hint">
-							friend
+							{t("home.friend")}
 						</Box>
 					</Box>
 				</Typography>
 				<Typography gutterBottom>
 					<Box component="span" color="text.primary">
-						Just start typing in{" "}
+						{t("home.type")}{" "}
 						<Box
 							component="span"
 							color="text.hint"
 							fontWeight="fontWeightSemibold"
 						>
-							markdown
+							{t("home.markdown")}
 						</Box>{" "}
-						and see a live preview.
+						{t("home.andSee")}
 					</Box>
 				</Typography>
 				<Typography gutterBottom>
 					<Box component="span" color="text.primary">
-						You can also invite others to join and interact live by making a new
-						room.
+						{t("home.inviteOthers")}
 					</Box>
 				</Typography>
 				<Box mt={2}>
-					<Button onClick={handleUserSetter}>New room</Button>
+					<Button onClick={handleUserSetter}>{t("buttons.newRoom")}</Button>
 				</Box>
-				<Previewer userRole="author" defaultContent={content} />
+				<Previewer userRole="author" defaultContent={greetPhraase} />
 			</Box>
 		</Default>
 	);
