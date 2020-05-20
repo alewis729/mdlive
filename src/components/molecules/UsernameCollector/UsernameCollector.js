@@ -11,7 +11,7 @@ const UsernameCollector = ({
 	textCommit,
 	onCommit,
 	onClose,
-	onReject
+	onReject,
 }) => {
 	const { t } = useTranslation();
 	const [formData, setFormData] = useState({ name: "", error: null });
@@ -35,7 +35,7 @@ const UsernameCollector = ({
 		if (name.length < 3 || name.length > 12) {
 			setFormData({
 				...formData,
-				error: t("modals.username.input.error")
+				error: t("modals.username.input.error"),
 			});
 		} else {
 			const data = { name, error: null };
@@ -74,8 +74,8 @@ const UsernameCollector = ({
 						autoFocus
 						required
 						value={formData.name}
-						onKeyDown={(e) => (e.keyCode === 13 ? handleSubmit() : null)}
-						onChange={(e) => handleInputChange(e, "name")}
+						onKeyDown={e => (e.keyCode === 13 ? handleSubmit() : null)}
+						onChange={e => handleInputChange(e, "name")}
 					/>
 				</Box>
 				<Grid container justify="center" spacing={2}>
@@ -112,14 +112,14 @@ UsernameCollector.propTypes = {
 	textCommit: PropTypes.string.isRequired,
 	onCommit: PropTypes.func.isRequired,
 	onClose: PropTypes.func,
-	onReject: PropTypes.func
+	onReject: PropTypes.func,
 };
 
 UsernameCollector.defaultProps = {
 	textCommit: "createRoom",
 	open: false,
 	onClose: null,
-	onReject: null
+	onReject: null,
 };
 
 export default UsernameCollector;

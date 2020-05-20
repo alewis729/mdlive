@@ -16,7 +16,7 @@ const defaultContent = getRandomTextMd();
 
 const RoomHandler = ({ roomId }) => {
 	const history = useHistory();
-	const currentUser = useSelector((state) => state.users.current);
+	const currentUser = useSelector(state => state.users.current);
 	const { t } = useTranslation();
 	const [open, setOpenModal] = useState(!currentUser);
 	const [content, setContent] = useState("");
@@ -35,7 +35,7 @@ const RoomHandler = ({ roomId }) => {
 				roomId,
 				username: currentUser.name,
 				role: currentUser.role,
-				content
+				content,
 			});
 			setHasJoined(true);
 		}
@@ -43,7 +43,7 @@ const RoomHandler = ({ roomId }) => {
 		// eslint-disable-next-line
 	}, [currentUser, open, socket]);
 
-	const handleEdit = (value) => {
+	const handleEdit = value => {
 		setContent(value);
 		socket.emit("md-change", { content: value });
 	};
@@ -88,7 +88,7 @@ const RoomHandler = ({ roomId }) => {
 };
 
 RoomHandler.propTypes = {
-	roomId: PropTypes.string.isRequired
+	roomId: PropTypes.string.isRequired,
 };
 
 export default RoomHandler;

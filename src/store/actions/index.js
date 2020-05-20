@@ -4,5 +4,5 @@ export {
 	updateCurrentId,
 	cleanCurrentUser,
 	updateUsers,
-	removeUser
+	removeUser,
 } from "./actionsUsers";

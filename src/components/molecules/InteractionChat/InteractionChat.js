@@ -6,7 +6,7 @@ import {
 	Box,
 	Typography,
 	TextField,
-	IconButton
+	IconButton,
 } from "@material-ui/core";
 import { SendRounded as IconSend } from "@material-ui/icons";
 
@@ -40,11 +40,11 @@ const InteractionChat = ({ chatMessages, onMessageSubmit }) => {
 		// eslint-disable-next-line
 	}, [chatMessages]);
 
-	const handleKeyDown = (e) => {
+	const handleKeyDown = e => {
 		if (e.keyCode === 13 && !e.shiftKey) handleSubmit();
 	};
 
-	const handleTextChange = (e) => {
+	const handleTextChange = e => {
 		const { value } = e.target;
 		const cleanValue = value.replace(/[\r\n\v]+/g, "");
 		setText(cleanValue);
@@ -58,7 +58,7 @@ const InteractionChat = ({ chatMessages, onMessageSubmit }) => {
 		}
 	};
 
-	const scrollToBottom = (elm) => elm.scrollTo(0, elm.scrollHeight);
+	const scrollToBottom = elm => elm.scrollTo(0, elm.scrollHeight);
 
 	return (
 		<div className={classes.root}>
@@ -106,10 +106,10 @@ InteractionChat.propTypes = {
 		PropTypes.shape({
 			id: PropTypes.string.isRequired,
 			name: PropTypes.string.isRequired,
-			message: PropTypes.string.isRequired
+			message: PropTypes.string.isRequired,
 		})
 	).isRequired,
-	onMessageSubmit: PropTypes.func.isRequired
+	onMessageSubmit: PropTypes.func.isRequired,
 };
 
 export default InteractionChat;

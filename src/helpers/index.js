@@ -3,6 +3,6 @@ export {
 	getRandomAlphanumeric,
 	getRandomTextMd,
 	replaceSpaces,
-	replaceWhiteSpaces
+	replaceWhiteSpaces,
 } from "./functional";
 export { rgba } from "./styleHelpers";

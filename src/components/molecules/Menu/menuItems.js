@@ -8,7 +8,7 @@ import {
 	EditRounded as IconEdit,
 	VisibilityRounded as IconView,
 	SupervisorAccountRounded as IconAdmin,
-	RemoveCircleRounded as IconRemove
+	RemoveCircleRounded as IconRemove,
 } from "@material-ui/icons";
 
 export const menuItemIds = [
@@ -20,7 +20,7 @@ export const menuItemIds = [
 	"make-author",
 	"make-editor",
 	"make-viewer",
-	"kick"
+	"kick",
 ];
 
 export const menuItems = [
@@ -32,5 +32,5 @@ export const menuItems = [
 	{ id: "make-author", icon: <IconAdmin fontSize="small" /> },
 	{ id: "make-editor", icon: <IconEdit fontSize="small" /> },
 	{ id: "make-viewer", icon: <IconView fontSize="small" /> },
-	{ id: "kick", icon: <IconRemove fontSize="small" /> }
+	{ id: "kick", icon: <IconRemove fontSize="small" /> },
 ];

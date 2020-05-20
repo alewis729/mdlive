@@ -5,7 +5,7 @@ const locales = ["en", "es"];
 const initialState = {
 	theme: localStorage.getItem("theme") ?? themes[0],
 	languages: locales,
-	currentLang: localStorage.getItem("locale") ?? "en"
+	currentLang: localStorage.getItem("locale") ?? "en",
 };
 
 export default (state = initialState, action) => {
@@ -19,7 +19,7 @@ export default (state = initialState, action) => {
 
 		return {
 			...state,
-			theme
+			theme,
 		};
 	} else if (type === CHANGE_LANGUAGE) {
 		const currentLang = locales.includes(payload) ? payload : state.currentLang;
@@ -27,7 +27,7 @@ export default (state = initialState, action) => {
 
 		return {
 			...state,
-			currentLang
+			currentLang,
 		};
 	} else return state;
 };

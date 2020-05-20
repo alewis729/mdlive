@@ -3,15 +3,15 @@ import es from "./es.json";
 
 const resources = {
 	en: { translation: en },
-	es: { translation: es }
+	es: { translation: es },
 };
 
 const config = {
 	resources,
 	fallbackLng: "en",
 	interpolation: {
-		escapeValue: false
-	}
+		escapeValue: false,
+	},
 };
 
 export default config;

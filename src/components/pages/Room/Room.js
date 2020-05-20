@@ -26,8 +26,8 @@ const Room = ({ match }) => {
 
 Room.propTypes = {
 	match: PropTypes.shape({
-		params: PropTypes.object.isRequired
-	}).isRequired
+		params: PropTypes.object.isRequired,
+	}).isRequired,
 };
 
 Room.displayName = "RoomPage";

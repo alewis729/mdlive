@@ -14,11 +14,11 @@ import "./markdown-dark.css";
 
 i18n.use(initReactI18next).init({
 	lng: localStorage.getItem("locale") ?? "en",
-	...i18nConfig
+	...i18nConfig,
 });
 
 const App = () => {
-	const currentTheme = useSelector((state) => state.settings.theme);
+	const currentTheme = useSelector(state => state.settings.theme);
 	const themes = { light, dark };
 
 	return (

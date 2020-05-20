@@ -6,7 +6,7 @@ import {
 	MenuItem,
 	ListItemIcon,
 	IconButton,
-	Typography
+	Typography,
 } from "@material-ui/core";
 import { MoreVert as IconDots } from "@material-ui/icons";
 
@@ -19,7 +19,7 @@ const Menu = ({ items, onItemClick }) => {
 	const [anchorEl, setAnchorEl] = useState(null);
 	const open = Boolean(anchorEl);
 
-	const handleItemClick = (id) => {
+	const handleItemClick = id => {
 		handleClose();
 		onItemClick(id);
 	};
@@ -30,7 +30,7 @@ const Menu = ({ items, onItemClick }) => {
 
 	return (
 		<div>
-			<IconButton size="small" onClick={(e) => setAnchorEl(e.currentTarget)}>
+			<IconButton size="small" onClick={e => setAnchorEl(e.currentTarget)}>
 				<IconDots />
 			</IconButton>
 			<MuiMenu
@@ -60,11 +60,11 @@ const Menu = ({ items, onItemClick }) => {
 
 Menu.propTypes = {
 	items: PropTypes.arrayOf(PropTypes.oneOf(menuItemIds)),
-	onItemClick: PropTypes.func.isRequired
+	onItemClick: PropTypes.func.isRequired,
 };
 
 Menu.defaultProps = {
-	items: ["new-room", "toggle-theme", "change-language"]
+	items: ["new-room", "toggle-theme", "change-language"],
 };
 
 export default Menu;

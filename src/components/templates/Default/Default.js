@@ -28,7 +28,7 @@ const Default = ({ header, footer, children }) => {
 Default.propTypes = {
 	header: PropTypes.node.isRequired,
 	footer: PropTypes.node.isRequired,
-	children: PropTypes.any.isRequired
+	children: PropTypes.any.isRequired,
 };
 
 export default Default;

@@ -12,12 +12,12 @@ import { Menu } from "@/components/molecules";
 const Navigation = ({ onNavigate, ...props }) => {
 	const classes = useStyles();
 	const { theme, languages, currentLang } = useSelector(
-		(state) => state.settings
+		state => state.settings
 	);
 	const dispatch = useDispatch();
 	const { i18n } = useTranslation();
 
-	const handleMenuItemClick = (action) => {
+	const handleMenuItemClick = action => {
 		if (onNavigate) onNavigate(action);
 		if (action === "toggle-theme") dispatch(changeTheme());
 		if (action === "change-language") {
@@ -39,11 +39,11 @@ const Navigation = ({ onNavigate, ...props }) => {
 };
 
 Navigation.propTypes = {
-	onNavigate: PropTypes.func
+	onNavigate: PropTypes.func,
 };
 
 Navigation.defaultProps = {
-	onNavigate: null
+	onNavigate: null,
 };
 
 export default Navigation;

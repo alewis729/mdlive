@@ -14,14 +14,14 @@ const defaultContent = getRandomTextMd();
 
 const Home = () => {
 	const history = useHistory();
-	const currentUser = useSelector((state) => state.users.current);
+	const currentUser = useSelector(state => state.users.current);
 	const [content, setContent] = useState("");
 	const [openModal, setOpenModal] = useState(false);
 	const { t } = useTranslation();
 
 	useEffect(() => setContent(defaultContent), []);
 
-	const handleNagivation = (action) => {
+	const handleNagivation = action => {
 		if (action === "new-room") handleUserSetter();
 	};
 

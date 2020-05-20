@@ -47,12 +47,12 @@ const ModalShareRoom = ({ open, room, onClose }) => {
 ModalShareRoom.propTypes = {
 	open: PropTypes.bool,
 	room: PropTypes.string.isRequired,
-	onClose: PropTypes.func
+	onClose: PropTypes.func,
 };
 
 ModalShareRoom.defaultProps = {
 	open: false,
-	onClose: null
+	onClose: null,
 };
 
 export default ModalShareRoom;
