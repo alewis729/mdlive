@@ -52,6 +52,12 @@
 			"reject": "Rechazar invitación"
 		}
 	},
+	"greet": {
+		"adjectives": ["asombroso", "genial", "buen", "inteligente", "estupendo"],
+		"hello": "Hola",
+		"human": "humano",
+		"justType": "Solo comienza a escribir para ver tus anotaciones convertirse a markdown!"
+	},
 	"home": {
 		"welcome": "Bienvenido",
 		"friend": "amigo",

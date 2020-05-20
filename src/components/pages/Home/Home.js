@@ -1,25 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Box, Typography } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
+import { useRandomPhrase } from "@/hooks";
 import { Previewer, UserSetter } from "@/containers";
 import { Default } from "@/components/templates";
 import { Navigation, Footer } from "@/components/molecules";
 import { Button } from "@/components/atoms";
-import { getRandomTextMd, getRandomAlphanumeric } from "@/helpers";
-
-const defaultContent = getRandomTextMd();
+import { getRandomAlphanumeric } from "@/helpers";
 
 const Home = () => {
 	const history = useHistory();
 	const currentUser = useSelector(state => state.users.current);
-	const [content, setContent] = useState("");
-	const [openModal, setOpenModal] = useState(false);
 	const { t } = useTranslation();
-
-	useEffect(() => setContent(defaultContent), []);
+	const [openModal, setOpenModal] = useState(false);
+	const greetPhraase = useRandomPhrase();
 
 	const handleNagivation = action => {
 		if (action === "new-room") handleUserSetter();
@@ -86,7 +83,7 @@ const Home = () => {
 				<Box mt={2}>
 					<Button onClick={handleUserSetter}>{t("buttons.newRoom")}</Button>
 				</Box>
-				<Previewer userRole="author" defaultContent={content} />
+				<Previewer userRole="author" defaultContent={greetPhraase} />
 			</Box>
 		</Default>
 	);

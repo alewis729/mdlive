@@ -52,6 +52,20 @@
 			"reject": "Reject invitation"
 		}
 	},
+	"greet": {
+		"adjectives": [
+			"beautiful",
+			"creative",
+			"cool",
+			"great",
+			"nice",
+			"intelligent",
+			"awesome"
+		],
+		"hello": "Hello",
+		"human": "human",
+		"justType": "Just type here to see a live preview!"
+	},
 	"home": {
 		"welcome": "Welcome",
 		"friend": "friend",

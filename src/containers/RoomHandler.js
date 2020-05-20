@@ -7,21 +7,21 @@ import { useTranslation } from "react-i18next";
 import { Box, Typography } from "@material-ui/core";
 
 import { updateCurrentId } from "@/store/actions";
+import { useRandomPhrase } from "@/hooks";
 import { UserSetter, InteractionsContainer, Previewer } from "@/containers";
-import { getRandomTextMd } from "@/helpers";
 
 const { REACT_APP_SERVER_URL } = process.env;
 const socket = io(REACT_APP_SERVER_URL, { forceNew: true });
-const defaultContent = getRandomTextMd();
 
 const RoomHandler = ({ roomId }) => {
 	const history = useHistory();
 	const currentUser = useSelector(state => state.users.current);
-	const { t } = useTranslation();
-	const [open, setOpenModal] = useState(!currentUser);
-	const [content, setContent] = useState("");
-	const [hasJoined, setHasJoined] = useState(false);
 	const dispatch = useDispatch();
+	const { t } = useTranslation();
+	const greetPhraase = useRandomPhrase();
+	const [open, setOpenModal] = useState(!currentUser);
+	const [content, setContent] = useState(greetPhraase);
+	const [hasJoined, setHasJoined] = useState(false);
 
 	useEffect(() => {
 		socket.on("md-change", ({ content }) => setContent(content));
@@ -30,7 +30,6 @@ const RoomHandler = ({ roomId }) => {
 	useEffect(() => {
 		if (!open && !hasJoined && currentUser && currentUser.id !== socket.id) {
 			dispatch(updateCurrentId(socket.id));
-			setContent(defaultContent);
 			socket.emit("room-join", {
 				roomId,
 				username: currentUser.name,
@@ -39,7 +38,6 @@ const RoomHandler = ({ roomId }) => {
 			});
 			setHasJoined(true);
 		}
-
 		// eslint-disable-next-line
 	}, [currentUser, open, socket]);
 

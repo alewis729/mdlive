@@ -1,7 +1,6 @@
 export {
 	downloadFile,
 	getRandomAlphanumeric,
-	getRandomTextMd,
 	replaceSpaces,
 	replaceWhiteSpaces,
 } from "./functional";
