@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -15,7 +15,7 @@ const InteractionsContainer = ({ socket }) => {
 	);
 	const dispatch = useDispatch();
 	const [chatMessages, setChatMessages] = useState([]);
-	const [newAuthor, setNewAuthor] = useState(null);
+	const newAuthorRef = useRef(null);
 	const {
 		showModalInvite,
 		showModalLeave,
@@ -36,11 +36,11 @@ const InteractionsContainer = ({ socket }) => {
 			resetUser();
 		},
 		onModalAuthorConfirm: () => {
-			socket.emit("role-update", { id: newAuthor, role: "author" });
+			socket.emit("role-update", { id: newAuthorRef.current, role: "author" });
 			hideModalAuthor();
 		},
 		onModalAuthorCancel: () => {
-			setNewAuthor(null);
+			newAuthorRef.current = null;
 			hideModalAuthor();
 		},
 	});
@@ -70,7 +70,7 @@ const InteractionsContainer = ({ socket }) => {
 		else if (action === "make-viewer") role = "viewer";
 		else if (action === "make-editor") role = "editor";
 		else if (action === "make-author") {
-			setNewAuthor(userId);
+			newAuthorRef.current = userId;
 			showModalAuthor();
 		}
 
