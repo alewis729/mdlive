@@ -25,6 +25,9 @@ const RoomHandler = ({ roomId }) => {
 
 	useEffect(() => {
 		socket.on("md-change", ({ content }) => setContent(content));
+		return () => {
+			socket.disconnect();
+		};
 	}, []);
 
 	useEffect(() => {

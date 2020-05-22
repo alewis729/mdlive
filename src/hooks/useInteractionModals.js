@@ -61,7 +61,7 @@ const useInteractionModals = ({
 
 	const [showModalKicked, hideModalKicked] = useModal(({ in: open }) => (
 		<Modal
-			open={!open}
+			open={open}
 			onConfirm={onModalKickedConfirm}
 			onClose={onModalKickedConfirm}
 			title={t("modals.kicked.title")}

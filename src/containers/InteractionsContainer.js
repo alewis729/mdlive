@@ -52,9 +52,7 @@ const InteractionsContainer = ({ socket }) => {
 		socket.on("message", ({ id, name, message }) => {
 			setChatMessages(chatMessages => [...chatMessages, { id, name, message }]);
 		});
-		socket.on("kick", () => {
-			showModalKicked();
-		});
+		socket.on("kick", () => showModalKicked());
 
 		return () => {
 			setChatMessages([]);
