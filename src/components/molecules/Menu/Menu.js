@@ -34,7 +34,6 @@ const Menu = ({ items, onItemClick }) => {
 				<IconDots />
 			</IconButton>
 			<MuiMenu
-				id="long-menu"
 				anchorEl={anchorEl}
 				keepMounted
 				open={open}
