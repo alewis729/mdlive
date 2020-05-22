@@ -30,7 +30,7 @@ const Navigation = ({ onNewRoom }) => {
 	const classes = useStyles();
 	const { theme, languages } = useSelector(state => state.settings);
 	const dispatch = useDispatch();
-	const { i18n } = useTranslation();
+	const { t, i18n } = useTranslation();
 	const [anchorEl, setAnchorEl] = useState(null);
 	const open = Boolean(anchorEl);
 
@@ -51,7 +51,7 @@ const Navigation = ({ onNewRoom }) => {
 	return (
 		<Grid container spacing={1}>
 			<Grid item>
-				<Tooltip title="Change language" placement="bottom">
+				<Tooltip title={t("navigation.changeLang")} placement="bottom">
 					<IconButton onClick={e => setAnchorEl(e.currentTarget)}>
 						<IconLang />
 					</IconButton>
@@ -72,7 +72,7 @@ const Navigation = ({ onNewRoom }) => {
 				</Menu>
 			</Grid>
 			<Grid item>
-				<Tooltip title="Toggle light/dark theme" placement="bottom">
+				<Tooltip title={t("navigation.toggleTheme")} placement="bottom">
 					<IconButton onClick={toggleTheme}>
 						{theme === "light" ? <IconNight /> : <IconDay />}
 					</IconButton>
@@ -80,7 +80,7 @@ const Navigation = ({ onNewRoom }) => {
 			</Grid>
 			{onNewRoom && (
 				<Grid item>
-					<Tooltip title="Create a new room" placement="bottom">
+					<Tooltip title={t("navigation.newRoom")} placement="bottom">
 						<IconButton onClick={onNewRoom}>
 							<IconNew />
 						</IconButton>

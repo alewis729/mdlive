@@ -3,11 +3,13 @@
 		"newRoom": "Nueva sala",
 		"save": "Guardar"
 	},
+	"navigation": {
+		"changeLang": "Cambiar idioma",
+		"toggleTheme": "Alternar tema oscuro/claro",
+		"newRoom": "Crear nueva sala"
+	},
 	"menu": {
-		"new-room": "Nueva sala",
 		"upload-file": "Subir un archivo",
-		"toggle-theme": "Alternar tema oscuro",
-		"change-language": "Cambiar idioma",
 		"register": "Registrarse",
 		"make-author": "Convertir a autor",
 		"make-editor": "Convertir a editor",

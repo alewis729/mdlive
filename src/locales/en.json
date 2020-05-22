@@ -3,11 +3,13 @@
 		"newRoom": "New room",
 		"save": "Save"
 	},
+	"navigation": {
+		"changeLang": "Change language",
+		"toggleTheme": "Toggle light/dark theme",
+		"newRoom": "Create a new room"
+	},
 	"menu": {
-		"new-room": "New room",
 		"upload-file": "Upload a file",
-		"toggle-theme": "Toggle dark theme",
-		"change-language": "Change language",
 		"register": "Register",
 		"make-author": "Make author",
 		"make-editor": "Make editor",
