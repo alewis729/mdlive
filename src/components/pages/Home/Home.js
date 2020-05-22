@@ -7,7 +7,8 @@ import { useTranslation } from "react-i18next";
 import { useRandomPhrase } from "@/hooks";
 import { Previewer, UserSetter } from "@/containers";
 import { Default } from "@/components/templates";
-import { Navigation, Footer } from "@/components/molecules";
+import { Navigation } from "@/components/organisms";
+import { Footer } from "@/components/molecules";
 import { Button } from "@/components/atoms";
 import { getRandomAlphanumeric } from "@/helpers";
 
@@ -17,10 +18,6 @@ const Home = () => {
 	const { t } = useTranslation();
 	const [openModal, setOpenModal] = useState(false);
 	const greetPhraase = useRandomPhrase();
-
-	const handleNagivation = action => {
-		if (action === "new-room") handleUserSetter();
-	};
 
 	const handleUserSetter = () => {
 		if (!currentUser) setOpenModal(true);
@@ -35,12 +32,7 @@ const Home = () => {
 
 	return (
 		<Default
-			header={
-				<Navigation
-					onNavigate={handleNagivation}
-					items={["new-room", "toggle-theme", "change-language"]}
-				/>
-			}
+			header={<Navigation onNewRoom={handleUserSetter} />}
 			footer={<Footer />}
 		>
 			<UserSetter

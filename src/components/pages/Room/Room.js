@@ -4,17 +4,15 @@ import { useTranslation } from "react-i18next";
 
 import { RoomHandler } from "@/containers";
 import { Default } from "@/components/templates";
-import { Navigation, Footer } from "@/components/molecules";
+import { Navigation } from "@/components/organisms";
+import { Footer } from "@/components/molecules";
 
 const Room = ({ match }) => {
 	const { roomId } = match.params;
 	const { t } = useTranslation();
 
 	return (
-		<Default
-			header={<Navigation items={["toggle-theme"]} />}
-			footer={<Footer />}
-		>
+		<Default header={<Navigation />} footer={<Footer />}>
 			{!roomId ? (
 				<div> {t("room.errorMessage")}</div>
 			) : (
