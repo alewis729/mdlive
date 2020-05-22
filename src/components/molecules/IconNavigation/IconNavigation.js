@@ -60,7 +60,6 @@ const Navigation = ({ onNewRoom }) => {
 					{menuLanguages.map(({ locale, label }) => (
 						<MenuItem
 							key={locale}
-							keepMounted
 							className={classes.menuItem}
 							onClick={() => handleLanguageChange(locale)}
 						>

@@ -33,12 +33,7 @@ const Menu = ({ items, onItemClick }) => {
 			<IconButton size="small" onClick={e => setAnchorEl(e.currentTarget)}>
 				<IconDots />
 			</IconButton>
-			<MuiMenu
-				anchorEl={anchorEl}
-				keepMounted
-				open={open}
-				onClose={handleClose}
-			>
+			<MuiMenu anchorEl={anchorEl} open={open} onClose={handleClose}>
 				{menuItems.map(
 					({ id, icon }) =>
 						items.includes(id) && (
