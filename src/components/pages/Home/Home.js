@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
-import { Box, Typography } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { useModal } from "react-modal-hook";
+import { Box, Typography } from "@material-ui/core";
 
 import { useRandomPhrase } from "@/hooks";
 import { Previewer, UserSetter } from "@/containers";
@@ -16,31 +17,33 @@ const Home = () => {
 	const history = useHistory();
 	const currentUser = useSelector(state => state.users.current);
 	const { t } = useTranslation();
-	const [openModal, setOpenModal] = useState(false);
 	const greetPhraase = useRandomPhrase();
 
 	const handleUserSetter = () => {
-		if (!currentUser) setOpenModal(true);
+		if (!currentUser) showUserSetter();
 		else handleCreateRoom();
 	};
 
 	const handleCreateRoom = () => {
-		setOpenModal(false);
+		hideUserSetter();
 		const roomId = getRandomAlphanumeric();
 		history.push(`/room/${roomId}`); // @todo: check if room id is already used!
 	};
+
+	const [showUserSetter, hideUserSetter] = useModal(({ in: open }) => (
+		<UserSetter
+			open={open}
+			role="author"
+			onSubmitUsername={handleCreateRoom}
+			onClose={hideUserSetter}
+		/>
+	));
 
 	return (
 		<Default
 			header={<Navigation onNewRoom={handleUserSetter} />}
 			footer={<Footer />}
 		>
-			<UserSetter
-				open={openModal}
-				role="author"
-				onSubmitUsername={handleCreateRoom}
-				onClose={() => setOpenModal(false)}
-			/>
 			<Box textAlign="center">
 				<Typography variant="h3" gutterBottom>
 					<Box
