@@ -1,8 +1,9 @@
-import { CHANGE_THEME, CHANGE_LANGUAGE } from "../types";
+import { CHANGE_THEME, CHANGE_LANGUAGE, SET_LOADING } from "../types";
 
 const themes = ["light", "dark"];
 const locales = ["en", "es"];
 const initialState = {
+	loading: false,
 	theme: localStorage.getItem("theme") ?? themes[0],
 	languages: locales,
 	currentLang: localStorage.getItem("locale") ?? "en",
@@ -11,7 +12,12 @@ const initialState = {
 export default (state = initialState, action) => {
 	const { type, payload } = action;
 
-	if (type === CHANGE_THEME) {
+	if (type === SET_LOADING) {
+		return {
+			...state,
+			loading: payload,
+		};
+	} else if (type === CHANGE_THEME) {
 		const theme = themes.includes(payload)
 			? payload
 			: themes[1 - themes.indexOf(state.theme)];

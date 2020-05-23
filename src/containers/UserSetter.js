@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -9,11 +9,6 @@ const UserSetter = ({ open, role, onSubmitUsername, ...props }) => {
 	const user = useSelector(state => state.users.current);
 	const dispatch = useDispatch();
 
-	useEffect(() => {
-		if (open && user) onSubmitUsername();
-		// eslint-disable-next-line
-	}, [open]);
-
 	const handleSaveUsername = ({ name }) => {
 		dispatch(setCurrentUser(null, name, role));
 		onSubmitUsername();
@@ -21,7 +16,7 @@ const UserSetter = ({ open, role, onSubmitUsername, ...props }) => {
 
 	return (
 		<UsernameCollector
-			open={open && !user}
+			open={open && !user.name}
 			onCommit={handleSaveUsername}
 			{...props}
 		/>

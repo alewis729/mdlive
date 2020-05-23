@@ -20,8 +20,8 @@ const Home = () => {
 	const greetPhraase = useRandomPhrase();
 
 	const handleUserSetter = () => {
-		if (!currentUser) showUserSetter();
-		else handleCreateRoom();
+		if (currentUser.name) handleCreateRoom();
+		else showUserSetter();
 	};
 
 	const handleCreateRoom = () => {

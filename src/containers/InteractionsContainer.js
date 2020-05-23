@@ -58,7 +58,7 @@ const InteractionsContainer = ({ socket }) => {
 			setChatMessages([]);
 			closeAllModals();
 		};
-		// eslint-disable-next-line
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const handleUserMenuAction = (userId, action) => {
@@ -89,7 +89,7 @@ const InteractionsContainer = ({ socket }) => {
 		<>
 			<InteractionsPanel
 				renderSettings={() =>
-					currentUser &&
+					currentUser.name &&
 					currentUser.id && (
 						<InteractionSettings
 							currentUser={currentUser}

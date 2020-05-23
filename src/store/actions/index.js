@@ -1,4 +1,4 @@
-export { changeTheme, changeLang } from "./actionsSettings";
+export { setLoading, changeTheme, changeLang } from "./actionsSettings";
 export {
 	setCurrentUser,
 	updateCurrentId,

@@ -11,19 +11,20 @@ const {
 } = require("./utils");
 
 const initWSConnection = (io, socket) => {
-	socket.on("connection", () => io.emmit("connection")); // test
 	socket.on("room-join", ({ roomId, username, role, content }) => {
+		// console.log("> new connection:", socket.id);
 		joinUser(roomId, socket.id, username, role, content);
 		const room = getRoomFromUserId(socket.id);
 		socket.join(room.id);
+		io.to(socket.id).emit("room-join-authenticated");
 		socket.broadcast.to(room.id).emit("message", {
 			...bot,
 			message: `${username} joined the room.`,
 		});
 		io.to(room.id).emit("room-users", { users: getRoomUsers(room.id) });
-		if (room.users[0].id !== socket.id) {
-			io.to(room.users[0].id).emit("refresh-content");
-		}
+		// if (room.users[0].id !== socket.id) {
+		// 	io.to(room.users[0].id).emit("refresh-content");
+		// }
 	});
 
 	socket.on("disconnect", () => {
@@ -47,6 +48,7 @@ const initWSConnection = (io, socket) => {
 			}
 			removeAndNotifyClient();
 		}
+		socket.disconnect(true);
 	});
 
 	socket.on("kick-user", ({ id }) => {

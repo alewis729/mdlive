@@ -7,7 +7,11 @@ import {
 } from "../types";
 
 const initialState = {
-	current: null,
+	current: {
+		id: null,
+		name: null,
+		role: null,
+	},
 	all: [],
 };
 
@@ -50,17 +54,9 @@ export default (state = initialState, action) => {
 		};
 	} else if (type === UPDATE_USERS) {
 		const newUser = payload.find(user => user.id === state.current.id);
-		let currentStateUpdate = {};
-		if (
-			newUser.id !== state.current.id ||
-			newUser.name !== state.current.name ||
-			newUser.role !== state.current.role
-		) {
-			currentStateUpdate = { current: newUser };
-		}
 		return {
 			...state,
-			...currentStateUpdate,
+			current: newUser ? newUser : state.current,
 			all: payload,
 		};
 	} else if (type === REMOVE_USER) {

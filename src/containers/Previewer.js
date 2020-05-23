@@ -34,7 +34,7 @@ const Previewer = ({ userRole, defaultContent, onEdit, ...props }) => {
 		if (theme) {
 			setMdClassName(theme === "dark" ? "markdown-dark-body" : "markdown-body");
 		}
-		// eslint-disable-next-line
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [theme]);
 
 	const handleEditorChange = val => {
