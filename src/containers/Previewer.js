@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -27,10 +27,13 @@ const Previewer = ({ userRole, defaultContent, onEdit, ...props }) => {
 	const classes = useStyles({ canSave });
 	const theme = useSelector(state => state.settings.theme);
 
+	useEffect(() => setContent(defaultContent), [defaultContent]);
+
 	const handleEditorChange = val => {
 		const hasEnoughText = val.length > 5;
-		setContent(val);
+
 		if (onEdit) onEdit(val);
+		else setContent(val);
 
 		if (!canSave && hasEnoughText) setCanSave(true);
 		else if (canSave && !hasEnoughText) setCanSave(false);

@@ -16,7 +16,7 @@ const initWSConnection = (io, socket) => {
 		joinUser(roomId, socket.id, username, role, content);
 		const room = getRoomFromUserId(socket.id);
 		socket.join(room.id);
-		io.to(socket.id).emit("room-join-authenticated");
+		io.to(socket.id).emit("room-join-authenticated", { content: room.content });
 		socket.broadcast.to(room.id).emit("message", {
 			...bot,
 			message: `${username} joined the room.`,

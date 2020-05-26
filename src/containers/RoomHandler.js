@@ -27,10 +27,11 @@ const RoomHandler = ({ roomId }) => {
 			role: currentUser.role,
 			content,
 		});
-		socket.on("room-join-authenticated", () => {
+		socket.on("room-join-authenticated", ({ content: newContent }) => {
+			setContent(newContent);
 			dispatch(updateCurrentId(socket.id));
 		});
-		socket.on("md-change", ({ content }) => setContent(content));
+		socket.on("md-change", ({ content: newContent }) => setContent(newContent));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 

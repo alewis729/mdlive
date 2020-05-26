@@ -90,7 +90,7 @@ const Home = () => {
 				</Box>
 				<Previewer
 					userRole="author"
-					defaultContent={greetPhrase}
+					defaultContent={content}
 					onEdit={previewerContent => setContent(previewerContent)}
 				/>
 			</Box>
