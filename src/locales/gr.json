@@ -1,0 +1,89 @@
+{
+	"buttons": {
+		"newRoom": "Νεα αίθουσα",
+		"save": "Aποθήκεuσε"
+	},
+	"navigation": {
+		"changeLang": "Άλαξε γλωσσα",
+		"toggleTheme": "Εναλλαγή ανοιχτού / σκοτεινού θέματος",
+		"newRoom": "Kάνε νεα αίθουσα"
+	},
+	"menu": {
+		"upload-file": "Aνέβασε ένα αρχείο",
+		"register": "Kαταγραφή",
+		"make-author": "Εναλλαγή σε διαχειριστής",
+		"make-editor": "Εναλλαγή σε συντάκτη",
+		"make-viewer": "Εναλλαγή σε θεατής",
+		"kick": "Δυώξε τον απ' την αίθουσα"
+	},
+	"modals": {
+		"author": {
+			"title": "Είσαι σίγουρος;",
+			"desc": "Θα χάσετε τα δικαιώματα του διαχειριστή μόλις κάνετε κάποιον άλλο διαχειριστής.",
+			"confirm": "Ναι, συνέχισε",
+			"cancel": "Ακυρωσέ το"
+		},
+		"kicked": {
+			"title": "Σε διώξανε απ' την αίθουσα",
+			"desc": "Δυστυχώς σε διώξανε απ' την αίθουσα.",
+			"confirm": "Καταλαβαίνω"
+		},
+		"leave": {
+			"title": "Είσαι έτοιμος να φύγεις",
+			"desc": "Εάν φύγετε από την αίθουσα, ενδέχεται να μην μπορείς ποτέ να ξανα δεις το αρχείο md. Επιβεβαίωσε ότι θέλεις να εγκαταλείψεις την αίθουσα.",
+			"confirm": "Εγκατάλειψε την αίθουσα",
+			"cancel": "Ακυρωσέ το"
+		},
+		"invite": {
+			"title": "Invite others",
+			"desc": "Share this link with people you want in the room.",
+			"confirm": "Ok, great"
+		},
+		"username": {
+			"title": "Almost ready...",
+			"desc": "Just tell us how you would like others to call you.",
+			"input": {
+				"label": "Your name",
+				"error": "Name must be between 3 and 12 characters long."
+			},
+			"confirm": {
+				"createRoom": "Create room",
+				"joinRoom": "Join room"
+			},
+			"cancel": "Ακυρωσέ το",
+			"reject": "Reject invitation"
+		}
+	},
+	"greet": {
+		"adjectives": [
+			"beautiful",
+			"creative",
+			"cool",
+			"great",
+			"nice",
+			"intelligent",
+			"awesome"
+		],
+		"hello": "Hello",
+		"human": "human",
+		"justType": "Just type here to see a live preview!"
+	},
+	"home": {
+		"welcome": "Welcome",
+		"friend": "friend",
+		"type": "Just start typing in",
+		"markdown": "markdown",
+		"andSee": "and see a live preview.",
+		"inviteOthers": "You can also invite others to join and interact live by making a new room."
+	},
+	"room": {
+		"errorMessage": "Something is wrong! There is no room id... verify that the url is correct.",
+		"chatPlaceholder": "Send a message to everyone",
+		"settings": {
+			"inviteOthers": "Invite others",
+			"leave": "Leave room",
+			"emptyRoom": "There is no one else in the room."
+		},
+		"roomCode": "Room code:"
+	}
+}

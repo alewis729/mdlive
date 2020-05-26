@@ -1,7 +1,7 @@
 import { CHANGE_THEME, CHANGE_LANGUAGE, SET_LOADING } from "../types";
 
 const themes = ["light", "dark"];
-const locales = ["en", "es"];
+const locales = ["en", "es", "gr"];
 const initialState = {
 	loading: false,
 	theme: localStorage.getItem("theme") ?? themes[0],
