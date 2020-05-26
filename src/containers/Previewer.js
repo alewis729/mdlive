@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -23,23 +23,13 @@ const useStyles = makeStyles(theme => ({
 const Previewer = ({ userRole, defaultContent, onEdit, ...props }) => {
 	const { t } = useTranslation();
 	const [canSave, setCanSave] = useState(false);
-	const [text, setText] = useState("");
+	const [content, setContent] = useState(defaultContent);
 	const classes = useStyles({ canSave });
 	const theme = useSelector(state => state.settings.theme);
-	const [mdClassName, setMdClassName] = useState("markdown-body");
-
-	useEffect(() => setText(defaultContent), [defaultContent]);
-
-	useEffect(() => {
-		if (theme) {
-			setMdClassName(theme === "dark" ? "markdown-dark-body" : "markdown-body");
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [theme]);
 
 	const handleEditorChange = val => {
 		const hasEnoughText = val.length > 5;
-		setText(val);
+		setContent(val);
 		if (onEdit) onEdit(val);
 
 		if (!canSave && hasEnoughText) setCanSave(true);
@@ -50,7 +40,7 @@ const Previewer = ({ userRole, defaultContent, onEdit, ...props }) => {
 		<Box {...props}>
 			<Box mb={2} textAlign="left" height={42}>
 				<div className={classes.saveButton}>
-					<Button onClick={() => downloadFile(text)} color="success">
+					<Button onClick={() => downloadFile(content)} color="success">
 						{t("buttons.save")}
 					</Button>
 				</div>
@@ -61,11 +51,16 @@ const Previewer = ({ userRole, defaultContent, onEdit, ...props }) => {
 					xs={userRole !== "viewer" ? 6 : 8}
 					md={userRole !== "viewer" ? false : 10}
 				>
-					<Viewer preview={text} mdClassName={mdClassName} />
+					<Viewer
+						preview={content}
+						mdClassName={
+							theme === "dark" ? "markdown-dark-body" : "markdown-body"
+						}
+					/>
 				</Grid>
 				{userRole !== "viewer" && (
 					<Grid item xs={6}>
-						<Editor defaultText={text} onChange={handleEditorChange} />
+						<Editor defaultText={content} onChange={handleEditorChange} />
 					</Grid>
 				)}
 			</Grid>
@@ -81,7 +76,7 @@ Previewer.propTypes = {
 
 Previewer.defaultProps = {
 	userRole: "viewer",
-	defaultContent: null,
+	defaultContent: "",
 	onEdit: null,
 	mt: 2,
 	mx: "auto",
