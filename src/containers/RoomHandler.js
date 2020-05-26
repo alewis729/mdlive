@@ -14,10 +14,11 @@ const socket = new io(REACT_APP_SERVER_URL);
 
 const RoomHandler = ({ roomId }) => {
 	const currentUser = useSelector(state => state.users.current);
+	const previewerHomeContent = useSelector(state => state.room.content);
 	const dispatch = useDispatch();
 	const { t } = useTranslation();
 	const greetPhraase = useRandomPhrase();
-	const [content, setContent] = useState(greetPhraase);
+	const [content, setContent] = useState(previewerHomeContent ?? greetPhraase);
 
 	useEffect(() => {
 		socket.emit("room-join", {
