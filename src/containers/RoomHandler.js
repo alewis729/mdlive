@@ -17,7 +17,7 @@ const RoomHandler = ({ roomId }) => {
 	const previewerHomeContent = useSelector(state => state.room.content);
 	const dispatch = useDispatch();
 	const { t } = useTranslation();
-	const greetPhraase = useRandomPhrase();
+	const [greetPhraase] = useRandomPhrase();
 	const [content, setContent] = useState(previewerHomeContent ?? greetPhraase);
 
 	useEffect(() => {

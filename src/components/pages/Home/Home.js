@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -17,10 +17,19 @@ import { getRandomAlphanumeric } from "@/helpers";
 const Home = () => {
 	const history = useHistory();
 	const currentUser = useSelector(state => state.users.current);
+	const currentLang = useSelector(state => state.settings.currentLang);
 	const dispatch = useDispatch();
 	const { t } = useTranslation();
-	const greetPhrase = useRandomPhrase();
+	const [greetPhrase, getNewPhrase] = useRandomPhrase();
 	const [content, setContent] = useState(greetPhrase);
+
+	useEffect(() => {
+		if (content === greetPhrase) {
+			const newPhrase = getNewPhrase();
+			setContent(newPhrase);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [currentLang]);
 
 	const handleUserSetter = () => {
 		if (currentUser.name) handleCreateRoom();
