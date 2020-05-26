@@ -1,4 +1,5 @@
-export { changeTheme, changeLang } from "./actionsSettings";
+export { updatePreviewerContent } from "./actionsRoom";
+export { setLoading, changeTheme, changeLang } from "./actionsSettings";
 export {
 	setCurrentUser,
 	updateCurrentId,

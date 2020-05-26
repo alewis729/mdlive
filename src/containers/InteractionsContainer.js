@@ -1,25 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import { updateUsers, cleanCurrentUser } from "@/store/actions";
-import {
-	InteractionSettings,
-	InteractionChat,
-	ModalLeaveRoom,
-	ModalShareRoom,
-	ModalKicked,
-	ModalAuthorConfirm,
-} from "@/components/molecules";
+import { useInteractionModals } from "@/hooks";
+import { InteractionSettings, InteractionChat } from "@/components/molecules";
 import { InteractionsPanel } from "@/components/organisms";
-
-const initialModals = {
-	leave: false,
-	invite: false,
-	authorConfirm: false,
-	kicked: false,
-};
 
 const InteractionsContainer = ({ socket }) => {
 	const history = useHistory();
@@ -28,8 +15,35 @@ const InteractionsContainer = ({ socket }) => {
 	);
 	const dispatch = useDispatch();
 	const [chatMessages, setChatMessages] = useState([]);
-	const [newAuthor, setNewAuthor] = useState(null);
-	const [modals, setModals] = useState(initialModals);
+	const newAuthorRef = useRef(null);
+	const {
+		showModalInvite,
+		showModalLeave,
+		showModalKicked,
+		showModalAuthor,
+		hideModalLeave,
+		hideModalKicked,
+		hideModalAuthor,
+		closeAllModals,
+	} = useInteractionModals({
+		fullUrl: window.location.href,
+		onModalLeaveConfirm: () => {
+			hideModalLeave();
+			resetUser();
+		},
+		onModalKickedConfirm: () => {
+			hideModalKicked();
+			resetUser();
+		},
+		onModalAuthorConfirm: () => {
+			socket.emit("role-update", { id: newAuthorRef.current, role: "author" });
+			hideModalAuthor();
+		},
+		onModalAuthorCancel: () => {
+			newAuthorRef.current = null;
+			hideModalAuthor();
+		},
+	});
 
 	useEffect(() => {
 		socket.on("room-users", ({ users }) => {
@@ -38,15 +52,13 @@ const InteractionsContainer = ({ socket }) => {
 		socket.on("message", ({ id, name, message }) => {
 			setChatMessages(chatMessages => [...chatMessages, { id, name, message }]);
 		});
-		socket.on("kick", () => {
-			setModals({ ...modals, kicked: true });
-		});
+		socket.on("kick", () => showModalKicked());
 
 		return () => {
 			setChatMessages([]);
-			setModals(initialModals);
+			closeAllModals();
 		};
-		// eslint-disable-next-line
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const handleUserMenuAction = (userId, action) => {
@@ -56,8 +68,8 @@ const InteractionsContainer = ({ socket }) => {
 		else if (action === "make-viewer") role = "viewer";
 		else if (action === "make-editor") role = "editor";
 		else if (action === "make-author") {
-			setNewAuthor(userId);
-			setModals({ ...modals, authorConfirm: true });
+			newAuthorRef.current = userId;
+			showModalAuthor();
 		}
 
 		if (role) socket.emit("role-update", { id: userId, role });
@@ -73,56 +85,18 @@ const InteractionsContainer = ({ socket }) => {
 		history.push("/");
 	};
 
-	const handleLeave = () => {
-		setModals(initialModals);
-		resetUser();
-	};
-
-	const handleKick = () => {
-		setModals({ ...modals, kicked: false });
-		resetUser();
-	};
-
-	const handleAuthorConfirm = () => {
-		setModals({ ...modals, authorConfirm: false });
-		socket.emit("role-update", { id: newAuthor, role: "author" });
-	};
-
 	return (
 		<>
-			<ModalShareRoom
-				open={modals.invite}
-				room={window.location.href}
-				onClose={() => setModals({ ...modals, invite: false })}
-			/>
-			<ModalLeaveRoom
-				open={modals.leave}
-				onMainAction={handleLeave}
-				onClose={() => setModals({ ...modals, leave: false })}
-			/>
-			<ModalKicked
-				open={modals.kicked}
-				onMainAction={handleKick}
-				onClose={handleKick}
-			/>
-			<ModalAuthorConfirm
-				open={modals.authorConfirm}
-				onMainAction={handleAuthorConfirm}
-				onClose={() => {
-					setNewAuthor(null);
-					setModals({ ...modals, authorConfirm: false });
-				}}
-			/>
 			<InteractionsPanel
 				renderSettings={() =>
-					currentUser &&
+					currentUser.name &&
 					currentUser.id && (
 						<InteractionSettings
 							currentUser={currentUser}
 							users={users}
 							onUserMenuAction={handleUserMenuAction}
-							onInvite={() => setModals({ ...modals, invite: true })}
-							onLeave={() => setModals({ ...modals, leave: true })}
+							onInvite={showModalInvite}
+							onLeave={showModalLeave}
 						/>
 					)
 				}

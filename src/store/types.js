@@ -1,3 +1,6 @@
+export const UPDATE_CONTENT = "UPDATE_CONTENT";
+
+export const SET_LOADING = "SET_LOADING";
 export const CHANGE_THEME = "CHANGE_THEME";
 export const CHANGE_LANGUAGE = "CHANGE_LANGUAGE";
 

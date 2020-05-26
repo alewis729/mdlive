@@ -5,6 +5,8 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { CssBaseline } from "@material-ui/core";
+import { ModalProvider } from "react-modal-hook";
+import { TransitionGroup } from "react-transition-group";
 
 import Routes from "@/routes";
 import i18nConfig from "@/locales/i18n-config";
@@ -24,8 +26,10 @@ const App = () => {
 	return (
 		<BrowserRouter>
 			<ThemeProvider theme={themes[currentTheme]}>
-				<CssBaseline />
-				<Route component={Routes} />
+				<ModalProvider rootComponent={TransitionGroup}>
+					<CssBaseline />
+					<Route component={Routes} />
+				</ModalProvider>
 			</ThemeProvider>
 		</BrowserRouter>
 	);

@@ -37,7 +37,7 @@ const InteractionChat = ({ chatMessages, onMessageSubmit }) => {
 		if (chat.scrollHeight > chat.clientHeight && shouldScroll) {
 			scrollToBottom(chat);
 		}
-		// eslint-disable-next-line
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [chatMessages]);
 
 	const handleKeyDown = e => {
