@@ -13,9 +13,10 @@ const Modal = ({
 	children,
 	onConfirm,
 	onClose,
+	onReject,
 }) => (
 	<Dialog open={open} onClose={onClose} maxWidth="lg">
-		<Box py={4} px={10} textAlign="center">
+		<Box py={4} px={10} textAlign="center" id="remove-later">
 			<Box maxWidth={450} mb={3}>
 				<Typography variant="h4" gutterBottom>
 					<Box
@@ -47,6 +48,13 @@ const Modal = ({
 							</Button>
 						</Grid>
 					)}
+					{onReject && textCancel && (
+						<Grid item>
+							<Button onClick={onReject} color="secondary">
+								{textCancel}
+							</Button>
+						</Grid>
+					)}
 				</Grid>
 			)}
 		</Box>
@@ -62,6 +70,7 @@ Modal.propTypes = {
 	children: PropTypes.any,
 	onConfirm: PropTypes.func,
 	onClose: PropTypes.func,
+	onReject: PropTypes.func,
 };
 
 Modal.defaultProps = {
@@ -69,6 +78,7 @@ Modal.defaultProps = {
 	textCancel: null,
 	onConfirm: null,
 	onClose: null,
+	onReject: null,
 };
 
 export default Modal;
