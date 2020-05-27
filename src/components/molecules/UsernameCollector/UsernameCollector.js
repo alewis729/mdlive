@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { Dialog, Box, Grid, Typography, TextField } from "@material-ui/core";
+import { Box, TextField } from "@material-ui/core";
 
 import { replaceWhiteSpaces } from "@/helpers";
-import { Button } from "@/components/atoms";
+import { Modal } from "@/components/molecules";
 
 const UsernameCollector = ({
 	open,
@@ -45,62 +45,34 @@ const UsernameCollector = ({
 	};
 
 	return (
-		<Dialog open={open} onClose={onClose} maxWidth="lg">
-			<Box py={4} px={10} textAlign="center">
-				<Box maxWidth={450}>
-					<Typography variant="h4" gutterBottom>
-						<Box
-							fontWeight="fontWeightSemibold"
-							component="span"
-							color="text.primary"
-						>
-							{t("modals.username.title")}
-						</Box>
-					</Typography>
-					<Typography gutterBottom>
-						<Box component="span" color="text.primary">
-							{t("modals.username.desc")}
-						</Box>
-					</Typography>
-				</Box>
-				<Box my={4}>
-					<TextField
-						placeholder={t("modals.username.input.label")}
-						label={t("modals.username.input.label")}
-						error={!!formData.error}
-						helperText={formData.error}
-						variant="outlined"
-						fullWidth
-						autoFocus
-						required
-						value={formData.name}
-						onKeyDown={e => (e.keyCode === 13 ? handleSubmit() : null)}
-						onChange={e => handleInputChange(e, "name")}
-					/>
-				</Box>
-				<Grid container justify="center" spacing={2}>
-					<Grid item>
-						<Button onClick={handleSubmit}>
-							{t(`modals.username.confirm.${textCommit}`)}
-						</Button>
-					</Grid>
-					{onClose && (
-						<Grid item>
-							<Button onClick={onClose} color="secondary">
-								{t("modals.username.cancel")}
-							</Button>
-						</Grid>
-					)}
-					{onReject && (
-						<Grid item>
-							<Button onClick={onReject} color="secondary">
-								{t("modals.username.reject")}
-							</Button>
-						</Grid>
-					)}
-				</Grid>
+		<Modal
+			open={open}
+			onConfirm={handleSubmit}
+			onClose={onClose}
+			onReject={onReject}
+			title={t("modals.username.title")}
+			desc={t("modals.username.desc")}
+			textConfirm={t(`modals.username.confirm.${textCommit}`)}
+			textCancel={
+				onReject ? t("modals.username.reject") : t("modals.leave.cancel")
+			}
+		>
+			<Box my={4}>
+				<TextField
+					placeholder={t("modals.username.input.label")}
+					label={t("modals.username.input.label")}
+					error={!!formData.error}
+					helperText={formData.error}
+					variant="outlined"
+					fullWidth
+					autoFocus
+					required
+					value={formData.name}
+					onKeyDown={e => (e.keyCode === 13 ? handleSubmit() : null)}
+					onChange={e => handleInputChange(e, "name")}
+				/>
 			</Box>
-		</Dialog>
+		</Modal>
 	);
 };
 

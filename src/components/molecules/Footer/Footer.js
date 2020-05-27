@@ -19,7 +19,7 @@ const Footer = ({ copy, links }) => {
 	);
 
 	return (
-		<Grid justify="space-between" alignItems="center" container>
+		<Grid className={classes.root} container>
 			<Typography>{copy}</Typography>
 			<div className={classes.icons}>
 				{links.map(link => (

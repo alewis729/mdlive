@@ -17,6 +17,17 @@ const useStyles = makeStyles(theme => ({
 	},
 	mainGrid: {
 		height: "100%",
+		justifyContent: "center",
+		flexDirection: "column-reverse",
+		[theme.breakpoints.up("md")]: {
+			flexDirection: "row",
+		},
+	},
+	editor: {
+		height: 350,
+		[theme.breakpoints.up("md")]: {
+			height: "auto",
+		},
 	},
 }));
 
@@ -24,10 +35,17 @@ const Previewer = ({ userRole, defaultContent, onEdit, ...props }) => {
 	const { t } = useTranslation();
 	const [canSave, setCanSave] = useState(false);
 	const [content, setContent] = useState(defaultContent);
+	const [shouldShowEditor, setShouldShowEditor] = useState(
+		userRole !== "viewer"
+	);
 	const classes = useStyles({ canSave });
 	const theme = useSelector(state => state.settings.theme);
 
 	useEffect(() => setContent(defaultContent), [defaultContent]);
+
+	useEffect(() => {
+		setShouldShowEditor(userRole !== "viewer");
+	}, [userRole]);
 
 	const handleEditorChange = val => {
 		const hasEnoughText = val.length > 5;
@@ -48,12 +66,8 @@ const Previewer = ({ userRole, defaultContent, onEdit, ...props }) => {
 					</Button>
 				</div>
 			</Box>
-			<Grid className={classes.mainGrid} container spacing={3} justify="center">
-				<Grid
-					item
-					xs={userRole !== "viewer" ? 6 : 8}
-					md={userRole !== "viewer" ? false : 10}
-				>
+			<Grid className={classes.mainGrid} container spacing={3}>
+				<Grid item xs={12} md={shouldShowEditor ? 6 : false}>
 					<Viewer
 						preview={content}
 						mdClassName={
@@ -61,8 +75,8 @@ const Previewer = ({ userRole, defaultContent, onEdit, ...props }) => {
 						}
 					/>
 				</Grid>
-				{userRole !== "viewer" && (
-					<Grid item xs={6}>
+				{shouldShowEditor && (
+					<Grid item xs={12} md={6} className={classes.editor}>
 						<Editor defaultText={content} onChange={handleEditorChange} />
 					</Grid>
 				)}
