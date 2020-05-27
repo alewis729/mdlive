@@ -1,7 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Dialog, Box, Grid, Typography } from "@material-ui/core";
+import {
+	Dialog,
+	Box,
+	Grid,
+	Typography,
+	useMediaQuery,
+} from "@material-ui/core";
 
+import { useStyles } from "./style";
 import { Button } from "@/components/atoms";
 
 const Modal = ({
@@ -14,52 +21,63 @@ const Modal = ({
 	onConfirm,
 	onClose,
 	onReject,
-}) => (
-	<Dialog open={open} onClose={onClose} maxWidth="lg">
-		<Box py={4} px={10} textAlign="center" id="remove-later">
-			<Box maxWidth={450} mb={3}>
-				<Typography variant="h4" gutterBottom>
-					<Box
-						fontWeight="fontWeightSemibold"
-						component="span"
-						color="text.primary"
-					>
-						{title}
-					</Box>
-				</Typography>
-				<Typography gutterBottom>
-					<Box component="span" color="text.primary">
-						{desc}
-					</Box>
-				</Typography>
+}) => {
+	const classes = useStyles();
+	const isSmUp = useMediaQuery(theme => theme.breakpoints.up("sm"));
+
+	return (
+		<Dialog
+			open={open}
+			onClose={onClose}
+			fullScreen={!isSmUp}
+			maxWidth="lg"
+			PaperProps={{ className: classes.paper }}
+		>
+			<Box py={4} px={{ xs: 3, sm: 10 }} textAlign="center">
+				<Box maxWidth={450} mb={3}>
+					<Typography variant="h4" gutterBottom>
+						<Box
+							fontWeight="fontWeightSemibold"
+							component="span"
+							color="text.primary"
+						>
+							{title}
+						</Box>
+					</Typography>
+					<Typography gutterBottom>
+						<Box component="span" color="text.primary">
+							{desc}
+						</Box>
+					</Typography>
+				</Box>
+				{children}
+				{(textConfirm || textCancel) && (
+					<Grid container justify="center" spacing={2}>
+						{onConfirm && textConfirm && (
+							<Grid item>
+								<Button onClick={onConfirm}>{textConfirm}</Button>
+							</Grid>
+						)}
+						{onClose && textCancel && (
+							<Grid item>
+								<Button onClick={onClose} color="secondary">
+									{textCancel}
+								</Button>
+							</Grid>
+						)}
+						{onReject && textCancel && (
+							<Grid item>
+								<Button onClick={onReject} color="secondary">
+									{textCancel}
+								</Button>
+							</Grid>
+						)}
+					</Grid>
+				)}
 			</Box>
-			{children}
-			{(textConfirm || textCancel) && (
-				<Grid container justify="center" spacing={2}>
-					{onConfirm && textConfirm && (
-						<Grid item>
-							<Button onClick={onConfirm}>{textConfirm}</Button>
-						</Grid>
-					)}
-					{onClose && textCancel && (
-						<Grid item>
-							<Button onClick={onClose} color="secondary">
-								{textCancel}
-							</Button>
-						</Grid>
-					)}
-					{onReject && textCancel && (
-						<Grid item>
-							<Button onClick={onReject} color="secondary">
-								{textCancel}
-							</Button>
-						</Grid>
-					)}
-				</Grid>
-			)}
-		</Box>
-	</Dialog>
-);
+		</Dialog>
+	);
+};
 
 Modal.propTypes = {
 	open: PropTypes.bool,
