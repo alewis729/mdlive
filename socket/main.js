@@ -12,7 +12,6 @@ const {
 
 const initWSConnection = (io, socket) => {
 	socket.on("room-join", ({ roomId, username, role, content }) => {
-		// console.log("> new connection:", socket.id);
 		joinUser(roomId, socket.id, username, role, content);
 		const room = getRoomFromUserId(socket.id);
 		socket.join(room.id);
@@ -20,11 +19,9 @@ const initWSConnection = (io, socket) => {
 		socket.broadcast.to(room.id).emit("message", {
 			...bot,
 			message: `${username} joined the room.`,
+			alert: { type: "connect", user: username },
 		});
 		io.to(room.id).emit("room-users", { users: getRoomUsers(room.id) });
-		// if (room.users[0].id !== socket.id) {
-		// 	io.to(room.users[0].id).emit("refresh-content");
-		// }
 	});
 
 	socket.on("disconnect", () => {
@@ -37,6 +34,7 @@ const initWSConnection = (io, socket) => {
 				io.to(room.id).emit("message", {
 					...bot,
 					message: `${user.name} left the room.`,
+					alert: { type: "disconnect", user: user.name },
 				});
 				io.to(room.id).emit("room-users", { users: getRoomUsers(room.id) });
 			};

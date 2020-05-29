@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { Box, Typography } from "@material-ui/core";
 
 import { updateCurrentId } from "@/store/actions";
-import { useRandomPhrase } from "@/hooks";
+import { useRandomPhrase, useNotifications } from "@/hooks";
 import { InteractionsContainer, Previewer } from "@/containers";
 
 const { REACT_APP_SERVER_URL } = process.env;
@@ -19,6 +19,7 @@ const RoomHandler = ({ roomId }) => {
 	const { t } = useTranslation();
 	const [greetPhraase] = useRandomPhrase();
 	const [content, setContent] = useState(previewerHomeContent ?? greetPhraase);
+	const { showSnackbarRoleUpdate, closeAllSnackbars } = useNotifications();
 
 	useEffect(() => {
 		socket.emit("room-join", {
@@ -32,8 +33,19 @@ const RoomHandler = ({ roomId }) => {
 			dispatch(updateCurrentId(socket.id));
 		});
 		socket.on("md-change", ({ content: newContent }) => setContent(newContent));
+
+		return () => {
+			closeAllSnackbars();
+		};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
+	useEffect(() => {
+		if (currentUser.id) {
+			showSnackbarRoleUpdate();
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [currentUser.role]);
 
 	const handleEdit = value => {
 		setContent(value);
@@ -42,7 +54,10 @@ const RoomHandler = ({ roomId }) => {
 
 	return (
 		<>
-			<InteractionsContainer socket={socket} />
+			<InteractionsContainer
+				socket={socket}
+				showSnackbarRoleUpdate={showSnackbarRoleUpdate}
+			/>
 			<Box textAlign="center">
 				<Typography variant="h6">
 					{`${t("room.roomCode")} `}

@@ -1,5 +1,11 @@
 export { updatePreviewerContent } from "./actionsRoom";
-export { setLoading, changeTheme, changeLang } from "./actionsSettings";
+export {
+	setLoading,
+	changeTheme,
+	changeLang,
+	setAlert,
+	clearAlert,
+} from "./actionsSettings";
 export {
 	setCurrentUser,
 	updateCurrentId,

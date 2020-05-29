@@ -1,4 +1,10 @@
-import { CHANGE_THEME, CHANGE_LANGUAGE, SET_LOADING } from "../types";
+import {
+	CHANGE_THEME,
+	CHANGE_LANGUAGE,
+	SET_LOADING,
+	SET_ALERT,
+	CLEAR_ALERT,
+} from "../types";
 
 const themes = ["light", "dark"];
 const locales = ["en", "es", "gr"];
@@ -7,6 +13,7 @@ const initialState = {
 	theme: localStorage.getItem("theme") ?? themes[0],
 	languages: locales,
 	currentLang: localStorage.getItem("locale") ?? "en",
+	alert: { type: null, user: null },
 };
 
 export default (state = initialState, action) => {
@@ -34,6 +41,17 @@ export default (state = initialState, action) => {
 		return {
 			...state,
 			currentLang,
+		};
+	} else if (type === SET_ALERT) {
+		const { type, user } = payload;
+		return {
+			...state,
+			alert: { type, user },
+		};
+	} else if (type === CLEAR_ALERT) {
+		return {
+			...state,
+			alert: { type: null, user: null },
 		};
 	} else return state;
 };

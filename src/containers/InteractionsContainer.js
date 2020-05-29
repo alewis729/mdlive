@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import { updateUsers, cleanCurrentUser } from "@/store/actions";
+import { updateUsers, cleanCurrentUser, setAlert } from "@/store/actions";
 import { useInteractionModals } from "@/hooks";
 import { InteractionSettings, InteractionChat } from "@/components/molecules";
 import { InteractionsPanel } from "@/components/organisms";
@@ -49,8 +49,13 @@ const InteractionsContainer = ({ socket }) => {
 		socket.on("room-users", ({ users }) => {
 			dispatch(updateUsers(users));
 		});
-		socket.on("message", ({ id, name, message }) => {
+		socket.on("message", ({ id, name, message, alert }) => {
 			setChatMessages(chatMessages => [...chatMessages, { id, name, message }]);
+
+			if (alert && alert.type) {
+				const { type, user } = alert;
+				dispatch(setAlert({ type, user }));
+			}
 		});
 		socket.on("kick", () => showModalKicked());
 

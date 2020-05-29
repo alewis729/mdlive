@@ -3,6 +3,8 @@ export const UPDATE_CONTENT = "UPDATE_CONTENT";
 export const SET_LOADING = "SET_LOADING";
 export const CHANGE_THEME = "CHANGE_THEME";
 export const CHANGE_LANGUAGE = "CHANGE_LANGUAGE";
+export const SET_ALERT = "SET_ALERT";
+export const CLEAR_ALERT = "CLEAR_ALERT";
 
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
 export const UPDATE_CURRENT_ID = "UPDATE_CURRENT_ID";
