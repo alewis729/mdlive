@@ -7,6 +7,10 @@
 
 <h4 align="center">A markdown editor with live preview and interactions with other users.</h4>
 
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/51219653/83337498-77a4ee80-a281-11ea-8055-94a32f9d8ce6.gif">
+</p>
+
 ## Description
 
 Markdown live was made using [react](https://github.com/facebook/react#react-----), [redux](https://github.com/reduxjs/redux#) and [material ui](https://github.com/mui-org/material-ui#material-ui) amongst other libraries on the frontend and [express](https://github.com/expressjs/express) with [socket.io](https://github.com/socketio/socket.io#socketio) on the backend.
