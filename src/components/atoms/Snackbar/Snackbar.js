@@ -22,7 +22,7 @@ const Snackbar = ({ open, message, onClose, ...props }) => (
 
 Snackbar.propTypes = {
 	open: PropTypes.bool.isRequired,
-	message: PropTypes.oneOf([PropTypes.node, PropTypes.string]).isRequired,
+	message: PropTypes.any,
 	onClose: PropTypes.func.isRequired,
 };
 
