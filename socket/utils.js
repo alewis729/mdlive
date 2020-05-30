@@ -65,6 +65,7 @@ const joinUser = (roomId, id, name, role, content) => {
 	} else {
 		finalRoom = {
 			id: roomId,
+			// content: role === "author" ? content : "",
 			content,
 			users: [user],
 		};
@@ -88,6 +89,16 @@ const removeUserFromRoom = (roomId, id) => {
 	const userIndex = room.users.findIndex(user => user.id === id);
 	if (userIndex === -1) return null;
 	return rooms[roomIndex].users.splice(userIndex, 1)[0];
+};
+
+const updateRoomContent = (roomId, content) => {
+	const { room, roomIndex } = getRoom(roomId);
+
+	if (room) {
+		rooms[roomIndex].content = content;
+	}
+
+	return content;
 };
 
 const updateUser = (roomId, id, params) => {
@@ -117,5 +128,6 @@ module.exports = {
 	joinUser,
 	removeRoom,
 	removeUserFromRoom,
+	updateRoomContent,
 	updateUser,
 };

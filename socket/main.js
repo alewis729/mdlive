@@ -7,6 +7,7 @@ const {
 	joinUser,
 	removeRoom,
 	removeUserFromRoom,
+	updateRoomContent,
 	updateUser,
 } = require("./utils");
 
@@ -100,6 +101,7 @@ const initWSConnection = (io, socket) => {
 		const room = getRoomFromUserId(socket.id);
 		const user = getUser(room.id, socket.id);
 		if (user && ["author", "editor"].includes(user.role)) {
+			updateRoomContent(room.id, content);
 			socket.broadcast.to(room.id).emit("md-change", { content });
 		}
 	});
